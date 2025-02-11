@@ -29,12 +29,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Debug SECRET_TIME_MASTER
+        run: |
+          echo "SECRET_TIME_MASTER: ${{ secrets.SECRET_TIME_MASTER }}"
+
       - name: Set Git config
         run: |
           git config --global user.email "mohmedi.m.reza@gmail.com"
           git config --global user.name "mohmedi-reza"
           git config --global credential.helper "cache --timeout=3600"
-          git config --global url."https://${{ secrets.SECRET_TIME_MASTER }}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://${{ secrets.SECRET_TIME_MASTER }}@github.com".insteadOf "https://github.com"
 
       - name: Build project
         run: pnpm run build
