@@ -27,6 +27,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Set Git config
+        run: |
+          git config --global user.email "mohmedi.m.reza@gmail.com"
+          git config --global user.name "mohmedi-reza"
+
       - name: Build project
         run: pnpm run build
 
