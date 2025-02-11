@@ -13,14 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install pnpm
+        run: |
+          curl -fsSL https://get.pnpm.io/install.sh | bash -
+          export PATH=$HOME/.local/share/pnpm:$PATH
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'pnpm'
-
-      - name: Install pnpm
-        run: npm install -g pnpm 
 
       - name: Install dependencies
         run: pnpm install
