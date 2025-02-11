@@ -29,13 +29,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
       - name: Set Git config
         run: |
           git config --global user.email "mohmedi.m.reza@gmail.com"
