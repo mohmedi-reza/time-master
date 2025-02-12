@@ -1,1 +1,0 @@
-import{j as e,O as r}from"./index-Blkt9O8m.js";const t=()=>e.jsxs("div",{children:[e.jsx("header",{children:"Public Header"}),e.jsx("main",{children:e.jsx(r,{})}),e.jsx("footer",{children:"Public Footer"})]});export{t as default};
