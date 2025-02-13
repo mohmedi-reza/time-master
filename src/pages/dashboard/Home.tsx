@@ -1,7 +1,11 @@
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
-    <div className="flex flex-col space-y-6">
-
+    <div className="">
+      <p className="text-3xl font-black">Home Page</p>
+      <p className="text-gray-400">
+        Magna esse in sint labore culpa reprehenderit deserunt ea aliqua
+        consequat duis.
+      </p>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import SpinnerLoading from "../components/common/SpinnerLoading";
 
 const ProtectedRoute: React.FC<{ children?: React.ReactNode }> = ({
   children,
@@ -8,7 +9,11 @@ const ProtectedRoute: React.FC<{ children?: React.ReactNode }> = ({
   const { isAuthenticated } = useAuth();
 
   if (isAuthenticated === undefined) {
-    return <div>Loading authentication...</div>;
+    return (
+      <div className="flex flex-1 w-screen h-screen justify-center items-center">
+        <SpinnerLoading />
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
@@ -16,7 +21,13 @@ const ProtectedRoute: React.FC<{ children?: React.ReactNode }> = ({
   }
 
   return (
-    <Suspense fallback={<div>Loading protected content...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex flex-1 w-screen h-screen justify-center items-center">
+          <SpinnerLoading />
+        </div>
+      }
+    >
       {children ? <>{children}</> : <Outlet />}
     </Suspense>
   );
