@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import Icon from "../../../components/common/icon/icon.component";
 import { generateUserImages } from "../../../utils/GenerateUserImages";
@@ -15,40 +15,46 @@ const LandingPage = () => {
   gsap.registerPlugin(ScrollTrigger);
   const { t } = useTranslation();
   const usersSponsor = generateUserImages(0);
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth();
+
+  // Refs
   const heroRef = useRef<HTMLDivElement>(null);
   const leftColumnRef = useRef<HTMLDivElement>(null);
   const rightColumnRef = useRef<HTMLDivElement>(null);
   const mockupWindowRef = useRef<HTMLDivElement>(null);
+  const rotateAnimation = useRef<gsap.core.Animation | null>(null);
+  const lastScrollTop = useRef(0);
+
+  // State
   const [scrollYProgress, setScrollYProgress] = useState(0);
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const [isSection5End, setIsSection5End] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
-  const rotateAnimation = useRef<gsap.core.Animation | null>(null);
-  const lastScrollTop = useRef(0);
-  const scrollTl = useRef<gsap.core.Timeline | null>(null);
-  const navigate = useNavigate();
-  const { setIsAuthenticated } = useAuth();
 
-  const scaleValue = (value: number, from: number[], to: number[]) => {
+  const scaleValue = useCallback((value: number, from: number[], to: number[]) => {
     const scale = (to[1] - to[0]) / (from[1] - from[0]);
     const capped = Math.min(from[1], Math.max(from[0], value)) - from[0];
     return capped * scale + to[0];
-  };
+  }, []);
 
-  const handleLiveDemo = () => {
+  const handleLiveDemo = useCallback(() => {
     loginUser();
     setIsAuthenticated(true);
     navigate("/me");
-  };
+  }, [navigate, setIsAuthenticated]);
 
-  // Smooth scroll handler with debounce
+  // Scroll handler with debounce
   useLayoutEffect(() => {
     let timeoutId: number;
+    
     const handleScroll = () => {
       if (timeoutId) clearTimeout(timeoutId);
       
       timeoutId = setTimeout(() => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if (!heroRef.current) return;
+
+        const scrollTop = window.scrollY;
         const newIsScrollingUp = scrollTop < lastScrollTop.current;
         
         if (newIsScrollingUp !== isScrollingUp) {
@@ -57,12 +63,10 @@ const LandingPage = () => {
         
         lastScrollTop.current = scrollTop;
 
-        if (heroRef.current) {
-          const { offsetTop, clientHeight } = heroRef.current;
-          const progress = (scrollTop - offsetTop) / clientHeight;
-          setScrollYProgress(Math.max(0, Math.min(100, progress * 100)));
-        }
-      }, 16); // Roughly 60fps
+        const { offsetTop, clientHeight } = heroRef.current;
+        const progress = (scrollTop - offsetTop) / clientHeight;
+        setScrollYProgress(Math.max(0, Math.min(100, progress * 100)));
+      }, 16);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -72,32 +76,39 @@ const LandingPage = () => {
     };
   }, [isScrollingUp]);
 
-  // Main scroll animations setup
+  // Animation setup
   useLayoutEffect(() => {
     const mockupWindow = mockupWindowRef.current;
     if (!mockupWindow) return;
 
-    // Reset any existing animations
-    if (scrollTl.current) {
-      scrollTl.current.kill();
-    }
+    // Cleanup previous animations
     if (rotateAnimation.current) {
       rotateAnimation.current.kill();
     }
 
-    // Create main timeline
-    scrollTl.current = gsap.timeline({
-      smoothChildTiming: true,
-      defaults: { ease: "none" }
-    });
-
-    // Set initial state
+    // Initial state
     gsap.set(mockupWindow, {
       rotateX: 20,
       rotateZ: -20,
       skewY: 8,
       transformPerspective: 1000,
       immediateRender: true
+    });
+
+    const createRotationAnimation = (target: HTMLElement) => gsap.to(target, {
+      rotateX: 0,
+      rotateZ: 0,
+      skewY: 0,
+      duration: 0.5,
+      ease: "power2.out"
+    });
+
+    const createReverseRotationAnimation = (target: HTMLElement) => gsap.to(target, {
+      rotateX: 20,
+      rotateZ: -20,
+      skewY: 8,
+      duration: 0.5,
+      ease: "power2.in"
     });
 
     // Initial rotation animation
@@ -112,107 +123,61 @@ const LandingPage = () => {
         end: "bottom center",
         scrub: 0.5,
         toggleActions: "play reverse play reverse",
-        onEnter: () => {
-          gsap.to(mockupWindow, {
-            rotateX: 0,
-            rotateZ: 0,
-            skewY: 0,
-            duration: 0.5,
-            ease: "power2.out"
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(mockupWindow, {
-            rotateX: 20,
-            rotateZ: -20,
-            skewY: 8,
-            duration: 0.5,
-            ease: "power2.in"
-          });
-        }
+        onEnter: () => createRotationAnimation(mockupWindow),
+        onLeaveBack: () => createReverseRotationAnimation(mockupWindow)
       }
     });
 
-    // Section triggers with improved timing
-    const sectionTriggers = sections.map((_, index) => {
-      return ScrollTrigger.create({
+    // Section triggers
+    const sectionTriggers = sections.map((_, index) => 
+      ScrollTrigger.create({
         trigger: `.section-${index}`,
         start: "top center",
         end: "bottom center",
         onEnter: () => {
           setActiveSectionIndex(index);
           if (index === 1) {
-            gsap.to(mockupWindow, {
-              rotateX: 0,
-              rotateZ: 0,
-              skewY: 0,
-              duration: 0.5,
-              ease: "power2.out"
-            });
+            createRotationAnimation(mockupWindow);
           } else if (index === 4) {
-            // For the last section, remove all transformations immediately
-            if (rotateAnimation.current?.scrollTrigger) {
-              rotateAnimation.current.scrollTrigger.kill();
-            }
-            gsap.set(mockupWindow, {
-              rotateX: 0,
-              rotateZ: 0,
-              skewY: 0,
-              clearProps: "all"
-            });
+            rotateAnimation.current?.scrollTrigger?.kill();
+            gsap.set(mockupWindow, { clearProps: "all" });
           }
         },
         onEnterBack: () => {
           setActiveSectionIndex(index);
           if (index === 0) {
-            gsap.to(mockupWindow, {
-              rotateX: 20,
-              rotateZ: -20,
-              skewY: 8,
-              duration: 0.5,
-              ease: "power2.in"
-            });
+            createReverseRotationAnimation(mockupWindow);
           } else if (index === 3) {
-            if (rotateAnimation.current?.scrollTrigger) {
-              rotateAnimation.current.scrollTrigger.enable();
-            }
+            rotateAnimation.current?.scrollTrigger?.enable();
           }
         }
-      });
-    });
+      })
+    );
 
-    // Final section trigger with improved behavior
+    // Final section trigger
     const section5Trigger = ScrollTrigger.create({
       trigger: ".section-4",
       start: "top 25%",
       end: "bottom bottom",
-      onUpdate: (self) => {
-        const progress = self.progress;
-        if (progress > 0.75) {
-          if (!isSection5End) {
-            setIsSection5End(true);
-            setActiveSectionIndex(4);
-          }
-        } else {
-          if (isSection5End) {
-            setIsSection5End(false);
-          }
+      onUpdate: ({ progress }) => {
+        if (progress > 0.75 && !isSection5End) {
+          setIsSection5End(true);
+          setActiveSectionIndex(4);
+        } else if (progress <= 0.75 && isSection5End) {
+          setIsSection5End(false);
         }
       }
     });
 
-    // Add a trigger for the sponsors section
-    ScrollTrigger.create({
+    // Sponsors section trigger
+    const sponsorsTrigger = ScrollTrigger.create({
       trigger: ".sponsors-section",
       start: "top 75%",
       end: "top top",
       onEnter: () => {
         setIsSection5End(true);
         setActiveSectionIndex(4);
-        // Ensure all transformations are cleared
-        gsap.set(mockupWindow, {
-          clearProps: "all"
-        });
+        gsap.set(mockupWindow, { clearProps: "all" });
       },
       onLeaveBack: () => {
         setIsSection5End(false);
@@ -222,15 +187,12 @@ const LandingPage = () => {
 
     // Cleanup
     return () => {
-      if (scrollTl.current) scrollTl.current.kill();
-      if (rotateAnimation.current) rotateAnimation.current.kill();
-      sectionTriggers.forEach((st) => st.kill());
-      section5Trigger.kill();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      rotateAnimation.current?.kill();
+      [...sectionTriggers, section5Trigger, sponsorsTrigger].forEach(trigger => trigger.kill());
     };
-  }, [isScrollingUp, sections.length]);
+  }, [isScrollingUp, sections.length, isSection5End]);
 
-  // Height adjustment effect
+  // Height adjustment
   useEffect(() => {
     if (heroRef.current) {
       gsap.to(heroRef.current, {
@@ -241,32 +203,30 @@ const LandingPage = () => {
     }
   }, [isSection5End]);
 
-  // Improved right column style calculation
-  const getRightColumnStyle = () => {
+  const getRightColumnStyle = useCallback(() => {
+    const baseStyle = {
+      transition: 'all 0.3s ease-out',
+      willChange: 'transform, opacity'
+    };
+
     if (isSection5End) {
       return {
+        ...baseStyle,
         transform: 'none',
         opacity: isScrollingUp ? 1 : scaleValue(scrollYProgress, [75, 85], [1, 0]),
-        transition: 'all 0.3s ease-out',
         pointerEvents: scrollYProgress > 85 ? 'none' as const : 'auto' as const,
-        position: 'relative' as const,
-        willChange: 'transform, opacity'
+        position: 'relative' as const
       };
     }
     
     return {
-      transform: `translateY(${scaleValue(
-        scrollYProgress,
-        [17, 35],
-        [120, 0]
-      )}%)`,
+      ...baseStyle,
+      transform: `translateY(${scaleValue(scrollYProgress, [17, 35], [120, 0])}%)`,
       opacity: 1,
-      transition: 'all 0.3s ease-out',
       pointerEvents: 'auto' as const,
-      position: 'fixed' as const,
-      willChange: 'transform, opacity'
+      position: 'fixed' as const
     };
-  };
+  }, [isSection5End, isScrollingUp, scrollYProgress, scaleValue]);
 
   return (
     <div className="w-full">
