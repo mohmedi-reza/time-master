@@ -1,0 +1,12 @@
+.app-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+}
+
+.app-icon > svg {
+  width: 1em;
+  height: 1em;
+  max-width: 100%;
+  max-height: 100%;
+}
