@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ProjectCardProps {
   name: string;
@@ -21,13 +22,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   users,
   allowedWorkHours,
 }) => {
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    navigate("/me/project");
+  };
+  
   return (
-    <div className="card bg-base-100 w-96 border border-gray-500/20 hover:border-gray-500/50 cursor-pointer">
-      <div className="card-body">
+    <button
+      className="card bg-base-100 w-96 border border-gray-500/20 hover:border-gray-500/50 cursor-pointer"
+      onClick={handleCardClick}
+    >
+      <div className="card-body text-start">
         <div className=" rounded-lg">
           <h2 className="text-2xl font-bold">{name}</h2>
           <p className="text-sm text-gray-500">Created By: {owner}</p>
         </div>
+
         <div className="divider my-1"></div>
 
         <div className=" flex flex-col gap-2 flex-1">
@@ -49,7 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
 
-        <div className=" w-full">
+        <div className="w-full">
           <span className="font-semibold">Groups:</span>
           <div className="flex gap-2 mt-1 flex-wrap">
             {groups.map((group, index) => (
@@ -60,7 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
 
-        <div className=" w-full">
+        <div className="w-full">
           <span className="font-semibold">Users:</span>
           <div className="avatar-group -space-x-6">
             {users.map((user, index) => (
@@ -75,7 +85,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             ))}
           </div>
         </div>
+
         <div className="divider my-1"></div>
+
         <div className=" flex flex-1">
           <span className="font-semibold">Total Time:</span>
           <div className="badge badge-primary ms-auto">
@@ -95,7 +107,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import Icon from "./icon/icon.component";
+import { logoutUser } from "../../services/mock-services/LoginService";
+import { useNavigate } from "react-router-dom";
 
 const Toolbar: React.FC = () => {
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const handleLogout = () => {
+    logoutUser();
+    navigate("");
+  };
+  
   return (
     <div className="navbar bg-base-100 shadow-sm shadow-gray-700/50 p-4 z-40">
       <div className="flex flex-1 gap-4 justify-between">
@@ -47,18 +55,21 @@ const Toolbar: React.FC = () => {
               </p>
               <div className="divider my-1"></div>
               <ul className="">
-                <li className="p-2 flex items-center gap-1 hover:bg-gray-700 cursor-pointer rounded-lg">
+                <button className="p-2 flex w-full items-center gap-1 hover:bg-gray-700 cursor-pointer rounded-lg">
                   <Icon name={"user"} className="text-xl text-gray-400" />{" "}
                   Profile
-                </li>
-                <li className="p-2 flex items-center gap-1 hover:bg-gray-700 cursor-pointer rounded-lg">
+                </button>
+                <button className="p-2 flex w-full items-center gap-1 hover:bg-gray-700 cursor-pointer rounded-lg">
                   <Icon name={"setting"} className="text-xl text-gray-400" />{" "}
                   Settings
-                </li>
-                <li className="p-2 flex items-center gap-1 hover:bg-gray-700 cursor-pointer rounded-lg">
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="p-2 flex w-full items-center gap-1 hover:bg-gray-700 cursor-pointer rounded-lg"
+                >
                   <Icon name={"logout"} className="text-xl text-gray-400" />
                   Logout
-                </li>
+                </button>
               </ul>
             </div>
           )}

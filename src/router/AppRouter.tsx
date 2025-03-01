@@ -12,6 +12,8 @@ import SettingPage from "../pages/dashboard/Setting";
 import CalenderPage from "../pages/dashboard/Calender";
 import FinancialPage from "../pages/dashboard/Financial";
 import TaskPage from "../pages/dashboard/Tasks";
+import ProjectDetailsPage from "../pages/projects/ProjectDetails";
+import LandingPage from "../pages/public/Landing/LandngPage";
 
 const DashboardLayout = React.lazy(() => import("../layouts/DashboardLayout"));
 const PublicLayout = React.lazy(() => import("../layouts/PublicLayout"));
@@ -41,16 +43,16 @@ const AppRouter = () => {
     <Routes>
       {isAuthenticated ? (
         <>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<Navigate to="/me" replace />} />
           <Route
-            path="/dashboard"
+            path="/me"
             element={
               <ProtectedRoute>
                 <DashboardLayout />
               </ProtectedRoute>
             }
           >
-            <Route index element={<Navigate to="home" replace />} />
+            {/* <Route index element={<Navigate to="/dashboard/not-found-page" replace />} /> */}
             <Route path="home" element={<HomePage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="time-tracker" element={<TimeTrackerPage />} />
@@ -65,16 +67,18 @@ const AppRouter = () => {
             <Route path="setting" element={<SettingPage />} />
             <Route path="calendar" element={<CalenderPage />} />
             <Route path="tasks" element={<TaskPage />} />
+            <Route path="not-found-page" element={<NotFoundPage />} />
+            <Route path="project" element={<ProjectDetailsPage />} />
           </Route>
-          <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+          <Route path="*" element={<Navigate to="/dashboard/not-found-page" replace />} />
         </>
       ) : (
         <>
           <Route path="/" element={<PublicLayout />}>
-            <Route index element={<HomePage />} />
+            <Route index element={<LandingPage />} />
             <Route path="login" element={<LoginPage />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </>
       )}
     </Routes>

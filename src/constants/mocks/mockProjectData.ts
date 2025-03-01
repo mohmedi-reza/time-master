@@ -23,6 +23,6 @@ export const mockProjects = [
     tasks: [],
     totalTrackedTime: 220,
     billableAmount: 12000,
-    allowedWorkHours: { start: "09:00", end: "17:00" },
+    allowedWorkHours: { start: "08:00", end: "18:00" },
   },
 ];
