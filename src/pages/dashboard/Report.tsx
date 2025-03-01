@@ -121,7 +121,7 @@ const ReportPage: React.FC = () => {
     fill: { opacity: 1 },
     tooltip: {
       theme: "dark",
-      y: { formatter: (val) => `${val} hours` },
+      y: { formatter: (val: number) => `${val} hours` },
     },
     colors: ["hsl(var(--p))", "hsl(var(--n))"],
   };

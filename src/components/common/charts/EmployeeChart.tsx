@@ -1,67 +1,68 @@
-import React, { useState } from "react";
-import CalendarHeatmap from "react-calendar-heatmap";
-import "react-calendar-heatmap/dist/styles.css";
 import {
-  format,
-  startOfWeek,
-  endOfWeek,
-  startOfMonth,
-  endOfMonth,
-  startOfYear,
-  endOfYear,
   addDays,
   subDays,
   subMonths,
-  subYears,
+  subYears
 } from "date-fns";
+import * as React from "react";
+import { useState } from "react";
+import "react-calendar-heatmap/dist/styles.css";
 
-const generateHeatmapData = () => {
-  const today = new Date();
-  const startDate = new Date(today);
-  startDate.setFullYear(today.getFullYear() - 1); // یک سال اخیر
+// interface HeatmapData {
+//   date: string;
+//   count: number;
+// }
 
-  const data: { date: Date; count: number }[] = [];
+// const generateHeatmapData = (): HeatmapData[] => {
+//   const today = new Date();
+//   const startDate = new Date(today);
+//   startDate.setFullYear(today.getFullYear() - 1); // یک سال اخیر
 
-  for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) {
-    data.push({
-      date: new Date(d),
-      count: Math.floor(Math.random() * 5), // مقدار تصادفی بین 0 تا 5
-    });
-  }
+//   const data: { date: Date; count: number }[] = [];
 
-  return data;
-};
+//   for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) {
+//     data.push({
+//       date: new Date(d),
+//       count: Math.floor(Math.random() * 5), // مقدار تصادفی بین 0 تا 5
+//     });
+//   }
+
+//   return data.map(item => ({
+//     date: format(item.date, 'yyyy-MM-dd'),
+//     count: item.count
+//   }));
+// };
 
 const ActivityHeatmap: React.FC = () => {
-  const [heatmapData] = useState(generateHeatmapData());
+  // const [heatmapData] = useState(generateHeatmapData());
   const [filterType, setFilterType] = useState<"week" | "month" | "year">(
     "week"
   ); // حالت فیلتر
   const [selectedDate, setSelectedDate] = useState(new Date()); // تاریخ انتخاب شده
 
   // فیلتر کردن داده‌ها بر اساس نوع فیلتر
-  const filteredData = heatmapData.filter((item) => {
-    const itemDate = new Date(item.date);
-    switch (filterType) {
-      case "week":
-        return (
-          itemDate >= startOfWeek(selectedDate) &&
-          itemDate <= endOfWeek(selectedDate)
-        );
-      case "month":
-        return (
-          itemDate >= startOfMonth(selectedDate) &&
-          itemDate <= endOfMonth(selectedDate)
-        );
-      case "year":
-        return (
-          itemDate >= startOfYear(selectedDate) &&
-          itemDate <= endOfYear(selectedDate)
-        );
-      default:
-        return true;
-    }
-  });
+  // const filteredData = heatmapData.filter((item) => {
+  //   const itemDate = new Date(item.date);
+  //   switch (filterType) {
+  //     case "week":
+  //       return (
+  //         itemDate >= startOfWeek(selectedDate) &&
+  //         itemDate <= endOfWeek(selectedDate)
+  //       );
+  //     case "month":
+  //       return (
+  //         itemDate >= startOfMonth(selectedDate) &&
+  //         itemDate <= endOfMonth(selectedDate)
+  //       );
+  //     case "year":
+  //       return (
+  //         itemDate >= startOfYear(selectedDate) &&
+  //         itemDate <= endOfYear(selectedDate)
+  //       );
+  //     default:
+  //       return true;
+  //   }
+  // });
 
   // تغییر فیلتر به هفته، ماه یا سال
   const handleFilterChange = (type: "week" | "month" | "year") => {
@@ -162,42 +163,31 @@ const ActivityHeatmap: React.FC = () => {
       {/* Heatmap */}
       <div className="flex justify-center overflow-x-auto">
         <div style={{ width: getHeatmapWidth() }}>
-          <CalendarHeatmap
-            startDate={
-              filterType === "week"
-                ? startOfWeek(selectedDate)
-                : filterType === "month"
-                ? startOfMonth(selectedDate)
-                : startOfYear(selectedDate)
-            }
-            endDate={
-              filterType === "week"
-                ? endOfWeek(selectedDate)
-                : filterType === "month"
-                ? endOfMonth(selectedDate)
-                : endOfYear(selectedDate)
-            }
+          {/* <CalendarHeatmap
+            startDate={filterType === "week"
+              ? startOfWeek(selectedDate)
+              : filterType === "month"
+              ? startOfMonth(selectedDate)
+              : startOfYear(selectedDate)}
+            endDate={filterType === "week"
+              ? endOfWeek(selectedDate)
+              : filterType === "month"
+              ? endOfMonth(selectedDate)
+              : endOfYear(selectedDate)}
             values={filteredData}
-            classForValue={(value) => {
+            classForValue={value => {
               if (!value || !value.date) return "color-empty";
               return `color-scale-${value.count}`;
             }}
-            tooltipDataAttrs={(value) => ({
+            tooltipDataAttrs={value => ({
               "data-tip": value
-                ? `${format(new Date(value.date), "yyyy-MM-dd")}: ${
-                    value.count
-                  } contributions`
-                : "No contributions",
-              "aria-label": value
-                ? `${format(new Date(value.date), "yyyy-MM-dd")}: ${
-                    value.count
-                  } contributions`
-                : "No contributions",
+                ? `${value.date}: ${value.count} contributions`
+                : "No contributions"
             })}
             showWeekdayLabels
             horizontal
             gutterSize={2}
-          />
+          /> */}
         </div>
       </div>
 
