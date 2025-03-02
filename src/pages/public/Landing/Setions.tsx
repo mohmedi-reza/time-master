@@ -14,7 +14,7 @@ const sections = [
     id: 1,
     leftContent: (
       <div>
-        <span className=" text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none text-warning">
+        <span className=" text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none text-primary">
           <span className="font-black">
             {" "}
             <div className="status status-error animate-ping translate-x-15 -translate-y-7 z-50"></div>
@@ -37,11 +37,11 @@ const sections = [
           </div>
         </div>
         <div className="mt-3 flex gap-3">
-          <button className="btn btn-soft  text-white">
+          <button className="btn btn-primary">
             <Icon name="github" className="text-3xl" />
             Login with GitHub
           </button>
-          <button className="btn btn-soft  text-white">
+          <button className="btn btn-primary btn-outline">
             <Icon name="coffee" className="text-3xl" />
             Donate a coffee
           </button>

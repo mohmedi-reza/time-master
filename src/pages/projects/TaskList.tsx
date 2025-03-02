@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Task } from "../../constants/mocks/mockTaskData";
 import Icon from "../../components/common/icon/icon.component";
+import { IconName } from "../../components/common/icon/iconPack";
+
+// Extend the Task interface to include billableAmount
+interface ExtendedTask extends Task {
+  billableAmount?: number;
+}
 
 interface TaskListProps {
-  tasks: Task[];
+  tasks: ExtendedTask[];
 }
 
 const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
@@ -43,115 +49,132 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
   }, [running]);
 
   return (
-    <div className="rounded-lg">
-      {/* Section title */}
-      <h3 className="text-lg font-bold mb-4">On Hold</h3>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Tasks
+        </h3>
+        <div className="join bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl">
+          <button className="btn btn-ghost btn-sm join-item">All</button>
+          <button className="btn btn-ghost btn-sm join-item">Active</button>
+          <button className="btn btn-ghost btn-sm join-item">Completed</button>
+        </div>
+      </div>
 
-      <div className="">
+      <div className="space-y-4">
         {tasks.map((task) => (
           <div
             key={task.id}
-            className="grid grid-cols-1 justify-end sm:grid-cols-2 lg:grid-cols-6 p-4 hover:bg-gray-700 rounded-lg"
+            className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm"
           >
-            {/* Task information */}
-            <div className="flex flex-col items-start justify-start gap-2">
-              <p className="font-medium">{task.title}</p>
-            </div>
+            <div className="card-body p-4">
+              <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 items-center">
+                <div className="lg:col-span-2">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <Icon name="square" className="text-xl text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-base-content">{task.title}</h4>
+                      <span className={`badge mt-1 ${
+                        task.status === "Pending"
+                          ? "badge-warning text-warning-content"
+                          : task.status === "In Progress"
+                          ? "badge-info text-info-content"
+                          : "badge-success text-success-content"
+                      }`}>
+                        {task.status}
+                      </span>
+                    </div>
+                  </div>
+                </div>
 
-            {/* Task status */}
-            <div className="flex items-center justify-end">
-              <span
-                className={`badge badge-soft ${
-                  task.status === "Pending"
-                    ? "badge-warning"
-                    : task.status === "In Progress"
-                    ? "badge-info"
-                    : "badge-success"
-                }`}
-              >
-                {task.status}
-              </span>
-            </div>
+                <div>
+                  {(() => {
+                    let priorityColor = "text-info";
+                    let bgColor = "bg-info/10";
+                    let icon = "infoCircle";
 
-            {/* Task priority */}
-            <div className="flex items-center justify-end">
-              {(() => {
-                let priorityColor = "text-info";
-                let statusClass = "status-info";
+                    switch (task.priority) {
+                      case "Critical":
+                        priorityColor = "text-warning";
+                        bgColor = "bg-warning/10";
+                        icon = "timer";
+                        break;
+                      case "High":
+                        priorityColor = "text-error";
+                        bgColor = "bg-error/10";
+                        icon = "timer";
+                        break;
+                      case "Minor":
+                        priorityColor = "text-success";
+                        bgColor = "bg-success/10";
+                        icon = "timer";
+                        break;
+                    }
 
-                switch (task.priority) {
-                  case "Critical":
-                    priorityColor = "text-warning";
-                    statusClass = "status-warning ";
-                    break;
-                  case "High":
-                    priorityColor = "text-error";
-                    statusClass = "status-error animate-ping";
-                    break;
-                  case "Minor":
-                    priorityColor = "text-success";
-                    statusClass = "status-success";
-                    break;
-                }
+                    return (
+                      <div className={`flex items-center gap-2 ${priorityColor}`}>
+                        <div className={`p-2 rounded-lg ${bgColor}`}>
+                          <Icon name={icon as IconName} className="text-base" />
+                        </div>
+                        <span className="font-medium">{task.priority}</span>
+                      </div>
+                    );
+                  })()}
+                </div>
 
-                return (
-                  <span className="badge badge-soft text-xs font-medium">
-                    <div className={`status ${statusClass}`}></div>
-                    <span className={` ${priorityColor}`}>{task.priority}</span>
-                  </span>
-                );
-              })()}
-            </div>
+                <div className="flex items-center gap-2">
+                  <div className="avatar-group -space-x-4 rtl:space-x-reverse">
+                    {task.assignedUsers.slice(0, 4).map((user, index) => (
+                      <div key={index} className="avatar">
+                        <div className="w-8 h-8">
+                          <img
+                            src={user.avatar}
+                            alt={user.name}
+                            className="rounded-xl grayscale hover:grayscale-0 transition-all duration-300 ring-2 ring-primary/20 ring-offset-2 ring-offset-base-100"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    {task.assignedUsers.length > 4 && (
+                      <div className="avatar placeholder">
+                        <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary">
+                          <span className="text-xs">+{task.assignedUsers.length - 4}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
 
-            {/* Assigned users avatars */}
-            <div className="flex items-center justify-end -space-x-2">
-              {task.assignedUsers.slice(0, 4).map((user, index) => (
-                <img
-                  key={index}
-                  src={user.avatar}
-                  alt={user.name}
-                  className="w-8 h-8 rounded-full border-2 border-white"
-                />
-              ))}
+                <div className="flex items-center gap-3">
+                  <div className="badge badge-primary badge-lg font-medium">
+                    ${task.billableAmount || 0}
+                  </div>
+                  <div className="badge badge-secondary badge-lg font-medium font-mono">
+                    {new Date((timers[task.id] || 0) * 1000)
+                      .toISOString()
+                      .substr(11, 8)}
+                  </div>
+                </div>
 
-              {/* Display "+X" if there are more than 4 users */}
-              {task.assignedUsers.length > 4 && (
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-xs font-medium border-2 border-white">
-                  +{task.assignedUsers.length - 4}
-                </span>
-              )}
-            </div>
-
-            {/* Timer display with fix */}
-            <div className="flex items-center gap-2 justify-end">
-              <span className="badge badge-soft badge-accent font-semibold">
-                $245
-              </span>
-              <div className="badge badge-soft badge-accent font-bold ">
-                <span className="text-white">
-                  {new Date((timers[task.id] || 0) * 1000)
-                    .toISOString()
-                    .substr(11, 8)}
-                </span>
+                <div className="flex items-center justify-end gap-2">
+                  <button
+                    className={`btn btn-circle btn-ghost hover:bg-primary/10 transition-colors ${
+                      running[task.id] ? "text-error" : "text-primary"
+                    }`}
+                    onClick={() => toggleTimer(task.id)}
+                  >
+                    <Icon
+                      name={running[task.id] ? "stop" : "play"}
+                      className="text-2xl"
+                    />
+                  </button>
+                  <button className="btn btn-circle btn-ghost hover:bg-primary/10 transition-colors">
+                    <Icon name="more" className="text-2xl text-primary" />
+                  </button>
+                </div>
               </div>
-            </div>
-
-            {/* Play/Stop button */}
-            <div className="flex items-center gap-2 justify-between ps-3">
-              <button
-                className={`btn shadow-0 btn-circle ${
-                  running[task.id] ? " bg-pink-800" : " hover:[bg-accent]"
-                }`}
-                onClick={() => toggleTimer(task.id)}
-              >
-                <Icon
-                  name={running[task.id] ? "stop" : "play"}
-                  className="text-2xl"
-                />
-              </button>
-              <button className="text-gray-500">
-                <Icon name={"more"} className="text-3xl" />
-              </button>
             </div>
           </div>
         ))}
