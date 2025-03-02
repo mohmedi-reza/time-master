@@ -170,7 +170,7 @@ const WorkLogForm: React.FC = () => {
         )}
       </div>
 
-      <button className="btn btn-primary hover:scale-105 transition-all duration-300 shadow-lg rounded-xl gap-2 w-full lg:w-auto">
+      <button className="btn btn-primary hover:scale-105 transition-all duration-300   rounded-xl gap-2 w-full lg:w-auto">
         <Icon name="addCircle" className="text-lg" />
         Add Entry
       </button>

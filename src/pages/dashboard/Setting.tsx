@@ -45,7 +45,7 @@ const SettingPage: React.FC = () => {
         {settingSections.map((section, index) => (
           <div
             key={index}
-            className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+            className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
           >
             <div className="card-body">
               <div className="flex items-center gap-3 mb-4">
@@ -75,7 +75,7 @@ const SettingPage: React.FC = () => {
       </div>
 
       {/* Additional Info */}
-      <div className="card bg-base-100/50 border border-accent/20 shadow-lg backdrop-blur-sm animate-fade-in">
+      <div className="card bg-base-100/50 border border-accent/20   backdrop-blur-sm animate-fade-in">
         <div className="card-body">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 rounded-xl bg-primary/10">

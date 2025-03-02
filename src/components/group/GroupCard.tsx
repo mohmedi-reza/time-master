@@ -15,7 +15,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
   projects,
 }) => {
   return (
-    <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+    <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
       <div className="card-body p-4">
         <div className="flex items-center gap-2">
           <Icon name="people" className="text-lg text-primary" />

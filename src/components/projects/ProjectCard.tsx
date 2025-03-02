@@ -30,7 +30,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   
   return (
     <button
-      className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm w-full group"
+      className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm w-full group"
       onClick={handleCardClick}
     >
       <div className="card-body text-start p-4">

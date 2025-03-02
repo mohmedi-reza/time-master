@@ -30,7 +30,7 @@ const ProjectDetailsPage: React.FC = () => {
         </button>
       </nav>
 
-      <div className="card bg-base-100/50 border border-accent/20 shadow-lg backdrop-blur-sm p-6 animate-fade-in">
+      <div className="card bg-base-100/50 border border-accent/20   backdrop-blur-sm p-6 animate-fade-in">
         <div className="flex flex-col md:flex-row gap-6 items-start">
           <div className="avatar">
             <div className="w-24 h-24 rounded-xl ring ring-primary/20 ring-offset-base-100 ring-offset-2">
@@ -74,7 +74,7 @@ const ProjectDetailsPage: React.FC = () => {
         {stats.map((stat, index) => (
           <div 
             key={index}
-            className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+            className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
           >
             <div className="card-body">
               <div className="flex justify-between items-start">
@@ -101,7 +101,7 @@ const ProjectDetailsPage: React.FC = () => {
               role="tab"
               className={`tab text-lg transition-all duration-300 rounded-lg ${
                 activeTab === tab 
-                ? "tab-active bg-primary text-primary-content shadow-lg font-medium" 
+                ? "tab-active bg-primary text-primary-content   font-medium" 
                 : "hover:bg-base-200"
               }`}
               onClick={() => setActiveTab(tab)}
@@ -111,7 +111,7 @@ const ProjectDetailsPage: React.FC = () => {
           ))}
         </div>
 
-        <div className="card bg-base-100/50 border border-accent/20 shadow-lg backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20   backdrop-blur-sm">
           <div className="card-body p-6">
             {activeTab === "Tasks" && <TaskList tasks={mockTasks} />}
             {activeTab === "Access" && (

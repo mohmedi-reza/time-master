@@ -27,7 +27,7 @@ const Toolbar: React.FC = () => {
   };
 
   return (
-    <div className="navbar bg-gradient-to-r from-base-100 to-base-200 border-b border-accent/20 shadow-sm p-4 backdrop-blur-sm z-40">
+    <div className="navbar bg-gradient-to-r from-base-100 to-base-200 border-b border-accent/20   p-4 backdrop-blur-sm z-40">
       <div className="flex flex-1 gap-4 justify-between">
         <button className="hidden">
           <Icon name={"menu"} className="text-3xl text-primary" />
@@ -63,7 +63,7 @@ const Toolbar: React.FC = () => {
           </button>
 
           {isDropdownOpen && (
-            <div ref={dropdownRef} className="absolute right-0 mt-3 w-56 border border-accent/20 bg-gradient-to-b from-base-200 to-base-100 rounded-box p-3 shadow-lg backdrop-blur-sm z-10 animate-fade-in">
+            <div ref={dropdownRef} className="absolute right-0 mt-3 w-56 border border-accent/20 bg-gradient-to-b from-base-200 to-base-100 rounded-box p-3   backdrop-blur-sm z-10 animate-fade-in">
               <p className="text-sm font-light text-base-content/70">
                 👋Hey{" "}
                 <span className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Sarah</span>

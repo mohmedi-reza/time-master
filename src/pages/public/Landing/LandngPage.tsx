@@ -233,7 +233,7 @@ const LandingPage = () => {
       <div className="flex w-full h-fit justify-center items-center py-4 fixed bg-base-100 z-50">
         <div className="flex justify-between items-center max-w-8/10 w-full">
           <div className="flex items-center gap-2">
-            <Icon name={"logo"} className="text-warning text-5xl" />
+            <Icon name={"logo"} className="text-primary text-5xl" />
             <div className="hidden md:block">
               <h1 className="text-2xl font-bold">Time Master</h1>
               <span className="text-gray-500 font-light">
@@ -327,7 +327,7 @@ const LandingPage = () => {
         )}
 
         <button className="btn btn-primary rounded-lg mt-6">
-          <Icon name="heart" className="text-warning me-2" /> Become a Sponsor
+          <Icon name="heart" className="text-primary me-2" /> Become a Sponsor
         </button>
       </div>
 

@@ -14,7 +14,7 @@ const sections = [
     id: 1,
     leftContent: (
       <div>
-        <span className=" text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none text-warning">
+        <span className=" text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none text-primary">
           <span className="font-black">
             {" "}
             <div className="status status-error animate-ping translate-x-15 -translate-y-7 z-50"></div>

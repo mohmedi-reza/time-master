@@ -27,7 +27,7 @@ const MultiSelect = () => {
       </button>
 
       {isOpen && (
-        <ul className="absolute mt-3 bg-gradient-to-b from-base-200 to-base-100 border border-accent/20 shadow-lg rounded-box p-3 z-10 w-auto min-w-[180px] left-0 right-auto backdrop-blur-sm animate-fade-in">
+        <ul className="absolute mt-3 bg-gradient-to-b from-base-200 to-base-100 border border-accent/20   rounded-box p-3 z-10 w-auto min-w-[180px] left-0 right-auto backdrop-blur-sm animate-fade-in">
           {users.map((user) => (
             <label
               key={user.id}

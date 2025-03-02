@@ -298,7 +298,7 @@ const ReportPage: React.FC = () => {
               key={range}
               className={`join-item btn btn-sm rounded-lg hover:scale-105 transition-all duration-300 ${
                 dateRange === range 
-                ? "btn-primary shadow-lg" 
+                ? "btn-primary  " 
                 : "bg-base-100/50 hover:bg-base-100"
               }`}
               onClick={() => setDateRange(range)}
@@ -307,7 +307,7 @@ const ReportPage: React.FC = () => {
             </button>
           ))}
         </div>
-        <button className="btn btn-primary btn-sm gap-2 hover:scale-105 transition-all duration-300 shadow-lg rounded-lg">
+        <button className="btn btn-primary btn-sm gap-2 hover:scale-105 transition-all duration-300   rounded-lg">
           <Icon name="documentDownload" className="text-base" />
           Export Report
         </button>
@@ -318,7 +318,7 @@ const ReportPage: React.FC = () => {
         {stats.map((stat, index) => (
           <div 
             key={index} 
-            className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+            className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="card-body p-4">
@@ -352,7 +352,7 @@ const ReportPage: React.FC = () => {
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
           <div className="card-body p-4">
             <h2 className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent flex items-center gap-2">
               <Icon name="chart" className="text-primary text-base" />
@@ -369,7 +369,7 @@ const ReportPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
           <div className="card-body p-4">
             <h2 className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent flex items-center gap-2">
               <Icon name="chart2" className="text-primary text-base" />
@@ -388,7 +388,7 @@ const ReportPage: React.FC = () => {
       </div>
 
       {/* Groups Section */}
-      <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+      <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
         <div className="card-body p-4">
           <div className="flex items-center justify-between mb-4">
             <div className="space-y-1">
@@ -447,7 +447,7 @@ const ReportPage: React.FC = () => {
       </div>
 
       {/* Individual Contributors Section */}
-      <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+      <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
         <div className="card-body p-4">
           <div className="flex items-center justify-between mb-4">
             <div className="space-y-1">

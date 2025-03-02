@@ -62,7 +62,7 @@ const MeetingPage: React.FC = () => {
   };
 
   const MeetingCard: React.FC<{ meeting: Meeting }> = ({ meeting }) => (
-    <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+    <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
       <div className="card-body p-4">
         <div className="flex justify-between items-start gap-4">
           <div className="space-y-1">
@@ -144,7 +144,7 @@ const MeetingPage: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        <div className="card bg-base-100/50 border border-accent/20 shadow-xl backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20    backdrop-blur-sm">
           <div className="card-body p-6">
             <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
               <Icon name="calendar" className="text-primary" />
@@ -164,7 +164,7 @@ const MeetingPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="card bg-base-100/50 border border-accent/20 shadow-xl backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20    backdrop-blur-sm">
           <div className="card-body p-6">
             <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
               <Icon name="timer" className="text-primary" />

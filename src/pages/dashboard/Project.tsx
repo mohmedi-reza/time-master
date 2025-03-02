@@ -29,7 +29,7 @@ const ProjectPage: React.FC = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+          <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
             <div className="card-body p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="p-2 rounded-lg bg-primary/10">
@@ -45,7 +45,7 @@ const ProjectPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+          <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
             <div className="card-body p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="p-2 rounded-lg bg-secondary/10">
@@ -61,7 +61,7 @@ const ProjectPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+          <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
             <div className="card-body p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="p-2 rounded-lg bg-success/10">
@@ -77,7 +77,7 @@ const ProjectPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+          <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
             <div className="card-body p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="p-2 rounded-lg bg-warning/10">
@@ -105,7 +105,7 @@ const ProjectPage: React.FC = () => {
             </h2>
             <p className="text-xs text-base-content/60">View and manage your ongoing projects</p>
           </div>
-          <div className="join bg-base-100/50 border border-accent/20 rounded-lg shadow-lg">
+          <div className="join bg-base-100/50 border border-accent/20 rounded-lg  ">
             <button className="join-item btn btn-ghost btn-xs px-3 text-primary">All</button>
             <button className="join-item btn btn-ghost btn-xs px-3">Active</button>
             <button className="join-item btn btn-ghost btn-xs px-3">Completed</button>

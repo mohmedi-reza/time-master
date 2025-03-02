@@ -2,7 +2,7 @@ import WorkLogForm from "./WorkLogForm";
 
 const WorkLogList = () => {
   return (
-    <div className="card bg-base-100/50 border border-accent/20 shadow-lg backdrop-blur-sm">
+    <div className="card bg-base-100/50 border border-accent/20   backdrop-blur-sm">
       <div className="card-body p-6">
         <div className="flex items-center justify-between mb-6">
           <h2 className="card-title text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">

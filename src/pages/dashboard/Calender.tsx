@@ -45,7 +45,7 @@ const CalenderPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Today's Overview */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="card bg-base-100 border border-accent/40 shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-sm bg-opacity-80">
+          <div className="card bg-base-100 border border-accent/40    hover:    transition-all duration-300 backdrop-blur-sm bg-opacity-80">
             <div className="card-body p-8">
               <h2 className="text-2xl font-bold flex items-center gap-2">
                 <Icon name="calendar" className="text-primary text-2xl" />
@@ -114,13 +114,13 @@ const CalenderPage: React.FC = () => {
 
         {/* Calendar View */}
         <div className="lg:col-span-3">
-          <div className="card bg-base-100/50 border border-accent/20 shadow-xl backdrop-blur-sm hover:shadow-2xl transition-all duration-300">
+          <div className="card bg-base-100/50 border border-accent/20    backdrop-blur-sm hover:    transition-all duration-300">
             <div className="card-body p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                   {format(selectedDate, 'MMMM yyyy')}
                 </h2>
-                <div className="join shadow-lg">
+                <div className="join  ">
                   <button className="join-item btn btn-sm hover:bg-primary/10 transition-colors"
                     onClick={() => setSelectedDate(new Date(selectedDate.setMonth(selectedDate.getMonth() - 1)))}>
                     <Icon name="arrowLeft2" className="text-lg text-primary" />
@@ -157,8 +157,8 @@ const CalenderPage: React.FC = () => {
                         flex flex-col items-center justify-center rounded-lg cursor-pointer
                         hover:bg-primary/10 transition-all duration-200
                         border border-accent/10 hover:border-primary/30
-                        ${isToday(day) ? 'bg-primary/20 text-primary font-medium shadow-sm' : ''}
-                        ${isSelected ? 'bg-primary text-primary-content shadow-lg scale-105 hover:bg-primary hover:text-primary-content' : ''}
+                        ${isToday(day) ? 'bg-primary/20 text-primary font-medium  ' : ''}
+                        ${isSelected ? 'bg-primary text-primary-content   scale-105 hover:bg-primary hover:text-primary-content' : ''}
                         ${!isSameMonth(day, selectedDate) ? 'text-base-content/30' : ''}
                       `}
                       onClick={() => setSelectedDate(day)}

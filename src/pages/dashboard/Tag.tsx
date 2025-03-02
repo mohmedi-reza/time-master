@@ -116,7 +116,7 @@ const TagPage: React.FC = () => {
       {/* Categories and Tags Grid */}
       <div className="grid gap-4">
         {categories.map(category => (
-          <div key={category.id} className="card bg-base-100 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-opacity-80">
+          <div key={category.id} className="card bg-base-100 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm bg-opacity-80">
             <div className="card-body p-4">
               <div className="flex justify-between items-start mb-3">
                 <div>

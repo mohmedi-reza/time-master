@@ -42,7 +42,7 @@ const ConnectionPage: React.FC = () => {
           </h1>
           <p className="text-gray-400 mt-2">Connect and manage your integrations with various services.</p>
         </div>
-        <div className="card bg-base-100 border border-accent/40 shadow-lg backdrop-blur-sm bg-opacity-80 p-4">
+        <div className="card bg-base-100 border border-accent/40   backdrop-blur-sm bg-opacity-80 p-4">
           <div className="flex items-center gap-4">
             <div className="flex flex-col">
               <span className="text-sm text-base-content/60">Connected Services</span>
@@ -62,7 +62,7 @@ const ConnectionPage: React.FC = () => {
         {services.map((service) => (
           <div
             key={service.id}
-            className="card bg-base-100 border border-accent/40 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-opacity-80"
+            className="card bg-base-100 border border-accent/40   hover:   transition-all duration-300 backdrop-blur-sm bg-opacity-80"
           >
             <div className="card-body p-6">
               <div className="flex items-start justify-between">

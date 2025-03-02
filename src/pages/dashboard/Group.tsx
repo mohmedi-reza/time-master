@@ -162,7 +162,7 @@ const GroupPage: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {isLoading ? (
           Array(4).fill(0).map((_, i) => (
-            <div key={i} className="card bg-base-100/50 border border-accent/20 shadow-lg animate-pulse h-48" />
+            <div key={i} className="card bg-base-100/50 border border-accent/20   animate-pulse h-48" />
           ))
         ) : filteredUsers.length === 0 ? (
           <div className="col-span-full text-center py-12">
@@ -204,7 +204,7 @@ const GroupPage: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {isLoading ? (
           Array(4).fill(0).map((_, i) => (
-            <div key={i} className="card bg-base-100/50 border border-accent/20 shadow-lg animate-pulse h-48" />
+            <div key={i} className="card bg-base-100/50 border border-accent/20   animate-pulse h-48" />
           ))
         ) : filteredGroups.length === 0 ? (
           <div className="col-span-full text-center py-12">

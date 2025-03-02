@@ -39,7 +39,7 @@ const FinancialPage: React.FC = () => {
       </div>
 
       {/* Wallet Card */}
-      <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm animate-fade-in">
+      <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm animate-fade-in">
         <div className="card-body p-4">
           <div className="flex justify-between items-start">
             <div className="space-y-2">
@@ -90,7 +90,7 @@ const FinancialPage: React.FC = () => {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 animate-fade-in">
-        <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
           <div className="card-body p-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="p-2 rounded-lg bg-success/10">
@@ -106,7 +106,7 @@ const FinancialPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
           <div className="card-body p-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="p-2 rounded-lg bg-error/10">
@@ -122,7 +122,7 @@ const FinancialPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
           <div className="card-body p-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="p-2 rounded-lg bg-primary/10">
@@ -138,7 +138,7 @@ const FinancialPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+        <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm">
           <div className="card-body p-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="p-2 rounded-lg bg-warning/10">
@@ -156,7 +156,7 @@ const FinancialPage: React.FC = () => {
       </div>
 
       {/* Transactions Section */}
-      <div className="card bg-base-100/50 border border-accent/20 shadow-lg backdrop-blur-sm animate-fade-in">
+      <div className="card bg-base-100/50 border border-accent/20   backdrop-blur-sm animate-fade-in">
         <div className="card-body p-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
             <div className="space-y-1">
@@ -256,7 +256,7 @@ const FinancialPage: React.FC = () => {
           {/* Pagination */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
             <p className="text-xs text-base-content/60">Showing 1-3 of 24 transactions</p>
-            <div className="join shadow-lg">
+            <div className="join  ">
               <button className="join-item btn btn-xs hover:bg-primary/10 transition-colors">
                 <Icon name="arrowLeft2" className="text-base text-primary" />
               </button>

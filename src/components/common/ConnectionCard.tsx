@@ -20,7 +20,7 @@ const ConnectionCard: React.FC<ConnectionCardProps> = ({
   onToggleConnection,
 }) => {
   return (
-    <div className="card bg-gradient-to-br from-base-100 to-base-200 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+    <div className="card bg-gradient-to-br from-base-100 to-base-200 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
       <div className="card-body">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">

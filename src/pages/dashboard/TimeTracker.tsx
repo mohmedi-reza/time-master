@@ -22,7 +22,7 @@ const TimeTrackerPage: React.FC = () => {
             </h1>
             <p className="text-base-content/60">Track and manage your working hours efficiently</p>
           </div>
-          <button className="btn btn-primary gap-2 hover:scale-105 transition-all duration-300 shadow-lg rounded-xl">
+          <button className="btn btn-primary gap-2 hover:scale-105 transition-all duration-300   rounded-xl">
             <Icon name="play" className="text-lg" />
             Start Timer
           </button>
@@ -32,7 +32,7 @@ const TimeTrackerPage: React.FC = () => {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+              className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="card-body">

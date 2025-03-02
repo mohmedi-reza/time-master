@@ -65,7 +65,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
         {tasks.map((task) => (
           <div
             key={task.id}
-            className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
+            className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 backdrop-blur-sm"
           >
             <div className="card-body p-4">
               <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 items-center">

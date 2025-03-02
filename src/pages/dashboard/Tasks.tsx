@@ -100,7 +100,7 @@ const TaskPage: React.FC = () => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="card bg-base-100/50 border border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+            className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
           >
             <div className="card-body p-4">
               <div className="flex justify-between items-start">
@@ -122,7 +122,7 @@ const TaskPage: React.FC = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="card bg-base-100/50 border border-accent/20 shadow-lg backdrop-blur-sm animate-fade-in">
+      <div className="card bg-base-100/50 border border-accent/20   backdrop-blur-sm animate-fade-in">
         <div className="card-body p-4">
           <div className="flex items-center justify-between mb-4">
             <div className="space-y-1">
@@ -188,7 +188,7 @@ const TaskPage: React.FC = () => {
           {/* Pagination */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
             <p className="text-xs text-base-content/60">Showing 1-4 of 24 tasks</p>
-            <div className="join shadow-lg">
+            <div className="join  ">
               <button className="join-item btn btn-xs hover:bg-primary/10 transition-colors">
                 <Icon name="arrowLeft2" className="text-base text-primary" />
               </button>
