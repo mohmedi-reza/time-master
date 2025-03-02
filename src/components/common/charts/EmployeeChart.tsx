@@ -115,7 +115,7 @@ const ActivityHeatmap: React.FC = () => {
     }
   };
   return (
-    <div className="p-4 rounded-lg border border-gray-700 text-white w-full max-w-4xl">
+    <div className="p-4 rounded-lg border  border-accent/40 -gray-700 text-white w-full max-w-4xl">
       <h2 className="text-lg font-bold text-center mb-4">Contribution Graph</h2>
 
       {/* کنترل‌های فیلتر و تاریخ */}

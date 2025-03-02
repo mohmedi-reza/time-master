@@ -57,7 +57,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <div
-      className={`relative flex flex-col shadow-sm shadow-gray-700/50 z-50 h-full bg-base-200 p-4 transition-all ease-in-out duration-300 ${
+      className={`relative flex flex-col z-50 h-full bg-gradient-to-b from-base-100 to-base-200 border-r border-accent/20 shadow-lg p-4 transition-all ease-in-out duration-300 backdrop-blur-sm ${
         isExpanded ? "w-64" : "w-fit"
       }`}
     >
@@ -67,18 +67,18 @@ const Sidebar: React.FC = () => {
         }`}
       >
         <div className="flex gap-3 items-center">
-          <Icon name={"logo"} className="text-5xl scale-[0.9]" />
+          <Icon name={"logo"} className="text-5xl scale-[0.9] text-primary" />
           {isExpanded && (
             <div>
-              <p className="text-nowrap text-xl font-black">Time Master</p>
-              <p className="text-nowrap text-xs text-gray-500">
+              <p className="text-nowrap text-xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Time Master</p>
+              <p className="text-nowrap text-xs text-base-content/60 font-medium">
                 PROJECT MANAGEMENT
               </p>
             </div>
           )}
         </div>
         <button
-          className={`h-7 w-7 text-base cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-700 rounded-full justify-items-center items-center ${
+          className={`btn btn-circle btn-ghost btn-sm hover:bg-primary/10 transition-all duration-300 ${
             isExpanded ? "" : "rotate-180"
           }`}
           onClick={() => setIsExpanded(!isExpanded)}
@@ -86,7 +86,7 @@ const Sidebar: React.FC = () => {
         >
           <Icon
             name={"arrowCircleLeft"}
-            className="text-2xl text-base-content"
+            className="text-2xl text-primary"
           />
         </button>
       </div>
@@ -100,7 +100,7 @@ const Sidebar: React.FC = () => {
           items={sidebarItems.map((item) => item.name)}
           strategy={verticalListSortingStrategy}
         >
-          <ul className="space-y-2 mt-7 divide divide-base-100 py-6">
+          <ul className="menu menu-vertical gap-2 mt-7 py-6 w-full">
             {sidebarItems.map((item) => (
               <SidebarItem
                 key={item.name}
@@ -113,18 +113,16 @@ const Sidebar: React.FC = () => {
           </ul>
         </SortableContext>
       </DndContext>
-      <div className="rounded-md mt-auto">
+      <div className="mt-auto">
         <button
-          className={`flex items-center space-x-2 p-2 rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 ease-in-out ${
-            isExpanded
-              ? "w-full"
-              : "w-12 h-12 justify-center items-center flex rounded-lg"
+          className={`btn btn-ghost hover:bg-primary/10 w-full justify-start gap-2 transition-all duration-300 ${
+            !isExpanded && "btn-square"
           }`}
           onClick={() => console.log("logout")}
           tabIndex={0}
         >
-          <Icon name={"logout"} className="text-2xl" />
-          {isExpanded && <span>{"Logout"}</span>}
+          <Icon name={"logout"} className="text-2xl text-primary" />
+          {isExpanded && <span className="text-base-content">Logout</span>}
         </button>
       </div>
     </div>

@@ -79,73 +79,101 @@ const WorkLogForm: React.FC = () => {
   };
 
   return (
-    <div className="flex p-4 bg-gray-800 rounded-md gap-2 shadow">
-      <input
-        type="text"
-        className="input input-bordered w-full max-w-xl"
-        placeholder="What have you worked on?"
-      />
+    <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center bg-base-200/50 p-4 rounded-xl backdrop-blur-sm">
+      <div className="join bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl flex-1 min-w-[200px]">
+        <div className="join-item flex items-center pl-3">
+          <Icon name="edit" className="text-base-content/60" />
+        </div>
+        <input
+          type="text"
+          className="input join-item bg-transparent border-0 focus:outline-none w-full"
+          placeholder="What have you worked on?"
+        />
+      </div>
 
-      <div className="flex gap-1">
-        <select className="select select-bordered w-fit focus-visible:outline-0 focus:outline-0 focus:border-gray-600">
+      <div className="flex gap-2 w-full lg:w-auto">
+        <select className="select bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl w-full lg:w-auto">
           {projects.map((p) => (
             <option key={p} value={p}>
               {p}
             </option>
           ))}
         </select>
-        <button className="btn btn-soft btn-square hover:text-accent hover:bg-gray-700 rounded-xl">
-          <Icon name={"addSquare"} className="text-2xl" />
+        <button className="btn btn-square btn-ghost hover:bg-primary/10 transition-colors">
+          <Icon name="addSquare" className="text-2xl text-primary" />
         </button>
       </div>
 
-      <div className="ms-auto">
+      <div className="w-full lg:w-auto">
         <MultiSelect />
       </div>
 
-      <button className="btn btn-circle bg-gray-700 border-0 hover:text-accent hover:bg-accent/5">
-        <Icon name={"dollarCircle"} className="text-2xl" />
+      <button className="btn btn-circle btn-ghost hover:bg-primary/10 transition-colors">
+        <Icon name="dollarCircle" className="text-2xl text-primary" />
       </button>
 
-      <div className="grid grid-cols-2 gap-2">
-        <input
-          type="time"
-          className="input w-fit input-bordered focus-visible:outline-0 focus:outline-0 focus:border-gray-600"
-          value={startTime}
-          onChange={handleStartTimeChange}
-        />
-        <input
-          type="time"
-          className="input w-fit input-bordered outline-0 focus-visible:outline-0 focus:outline-0 focus:border-gray-600"
-          value={endTime}
-          onChange={handleEndTimeChange}
+      <div className="grid grid-cols-2 gap-2 w-full lg:w-auto">
+        <div className="join bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl">
+          <div className="join-item flex items-center pl-3">
+            <Icon name="timer" className="text-base-content/60" />
+          </div>
+          <input
+            type="time"
+            className="input join-item bg-transparent border-0 focus:outline-none w-full lg:w-32"
+            value={startTime}
+            onChange={handleStartTimeChange}
+          />
+        </div>
+        <div className="join bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl">
+          <div className="join-item flex items-center pl-3">
+            <Icon name="timer" className="text-base-content/60" />
+          </div>
+          <input
+            type="time"
+            className="input join-item bg-transparent border-0 focus:outline-none w-full lg:w-32"
+            value={endTime}
+            onChange={handleEndTimeChange}
+          />
+        </div>
+      </div>
+
+      <div className="join bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl">
+        <div className="join-item flex items-center pl-3">
+          <Icon name="calendar" className="text-base-content/60" />
+        </div>
+        <input 
+          type="date" 
+          className="input join-item bg-transparent border-0 focus:outline-none w-full lg:w-auto" 
         />
       </div>
 
-      <input type="date" className="input w-fit input-bordered" />
-
-      <div
-        className={`bg-gray-700 flex items-center px-2 rounded-lg w-fit ${
-          isDurationEditable ? "border border-accent" : ""
-        } focus-within:border-gray-600`}
-      >
+      <div className={`join bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl w-full lg:w-auto ${isDurationEditable ? 'border-primary' : ''}`}>
+        <div className="join-item flex items-center pl-3">
+          <Icon name="timer" className="text-base-content/60" />
+        </div>
         {isDurationEditable ? (
           <input
             type="text"
-            className="bg-transparent w-fit outline-none focus-visible:outline-0 focus:outline-0 border-0"
+            className="input join-item bg-transparent border-0 focus:outline-none w-full lg:w-32"
             value={duration}
             onChange={handleDurationChange}
             onBlur={() => setIsDurationEditable(false)}
             placeholder="HH:MM:SS"
           />
         ) : (
-          <button onClick={() => setIsDurationEditable(true)}>
+          <button 
+            onClick={() => setIsDurationEditable(true)}
+            className="btn btn-ghost join-item w-full lg:w-32"
+          >
             {duration}
           </button>
         )}
       </div>
 
-      <button className="btn btn-accent rounded-lg ms-6">ADD</button>
+      <button className="btn btn-primary hover:scale-105 transition-all duration-300 shadow-lg rounded-xl gap-2 w-full lg:w-auto">
+        <Icon name="addCircle" className="text-lg" />
+        Add Entry
+      </button>
     </div>
   );
 };

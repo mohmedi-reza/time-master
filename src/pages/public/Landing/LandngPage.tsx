@@ -315,7 +315,7 @@ const LandingPage = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center p-6 bg-base-200 rounded-lg shadow-md w-full max-w-md">
+          <div className="text-center p-6 rounded-lg  w-full max-w-md">
             <Icon name="happyemoji" className="text-3xl" />
             <p className="text-lg font-medium text-gray-400">
               Unfortunately, no one has supported me on this journey yet. 💔
@@ -326,7 +326,7 @@ const LandingPage = () => {
           </div>
         )}
 
-        <button className="btn btn-soft rounded-lg mt-6">
+        <button className="btn btn-primary rounded-lg mt-6">
           <Icon name="heart" className="text-warning me-2" /> Become a Sponsor
         </button>
       </div>

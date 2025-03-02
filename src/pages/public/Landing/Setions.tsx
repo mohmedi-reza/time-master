@@ -37,11 +37,11 @@ const sections = [
           </div>
         </div>
         <div className="mt-3 flex gap-3">
-          <button className="btn btn-soft  text-white">
+          <button className="btn btn-primary">
             <Icon name="github" className="text-3xl" />
             Login with GitHub
           </button>
-          <button className="btn btn-soft  text-white">
+          <button className="btn btn-primary btn-outline">
             <Icon name="coffee" className="text-3xl" />
             Donate a coffee
           </button>
