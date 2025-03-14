@@ -1,6 +1,7 @@
 import React from "react";
 import Icon from "../icon/icon.component";
 import { MenuItem, UserData } from "./types";
+import { IconName } from "../icon/iconPack";
 
 interface UserProfileMenuProps {
   userData: UserData;
@@ -32,7 +33,7 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
               onClick={item.onClick}
               className="flex items-center gap-2 hover:bg-primary/10 rounded-lg transition-all duration-300"
             >
-              <Icon name={item.icon} className="text-xl text-primary" />
+              <Icon name={item.icon as IconName} className="text-xl text-primary" />
               {item.label}
             </button>
           </li>

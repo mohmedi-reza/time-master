@@ -1,12 +1,13 @@
 import React from "react";
 import Icon from "../common/icon/icon.component";
+import { IconName } from "../common/icon/iconPack";
 
 const FinancialStats: React.FC = () => {
   const stats = [
     {
       title: "Total Income",
       value: "$1,250.00",
-      icon: "moneyRecive",
+      icon: "moneyRecive" as IconName,
       iconBg: "bg-success/10",
       iconColor: "text-success",
       change: 12,
@@ -51,7 +52,7 @@ const FinancialStats: React.FC = () => {
           <div className="card-body p-4">
             <div className="flex items-center gap-2 mb-2">
               <div className={`p-2 rounded-lg ${stat.iconBg}`}>
-                <Icon name={stat.icon} className={`text-lg ${stat.iconColor}`} />
+                <Icon name={stat.icon as IconName} className={`text-lg ${stat.iconColor}`} />
               </div>
               <p className="text-sm text-base-content/60">{stat.title}</p>
             </div>
