@@ -1,93 +1,102 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Icon from "./icon/icon.component";
-import { logoutUser } from "../../services/mock-services/LoginService";
-import { useNavigate } from "react-router-dom";
+import WorkspaceSelector from "./toolbar/WorkspaceSelector";
+import UserProfile from "./toolbar/UserProfile";
+import ErrorBoundary from "./ErrorBoundary";
+import ThemeSelector from "./toolbar/ThemeSelector";
+import { Workspace, UserData } from "./toolbar/types";
 
-const Toolbar: React.FC = () => {
-  const navigate = useNavigate();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+interface ToolbarProps {
+  workspaces?: Workspace[];
+  selectedWorkspace?: string;
+  onWorkspaceChange: (workspaceId: string) => void;
+  onAddWorkspace: () => void;
+  userData?: UserData;
+  onProfileClick?: () => void;
+  onSettingsClick?: () => void;
+  onLogoutClick?: () => void;
+  showMenuButton?: boolean;
+  onMenuClick?: () => void;
+  isLoading?: boolean;
+}
+
+const Toolbar: React.FC<ToolbarProps> = ({
+  workspaces,
+  selectedWorkspace,
+  onWorkspaceChange,
+  onAddWorkspace,
+  userData,
+  onProfileClick,
+  onSettingsClick,
+  onLogoutClick,
+  showMenuButton = false,
+  onMenuClick,
+  isLoading = false,
+}) => {
+  const [theme, setTheme] = useState<string>(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return savedTheme || (prefersDark ? 'dark' : 'light');
+  });
+
+  const handleThemeChange = (newTheme: string) => {
+    document.documentElement.setAttribute('data-theme', newTheme);
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem('theme')) {
+        handleThemeChange(e.matches ? 'dark' : 'light');
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  const handleLogout = () => {
-    logoutUser();
-    navigate("");
-  };
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   return (
-    <div className="navbar bg-gradient-to-r from-base-100 to-base-200 border-b border-accent/20   p-4 backdrop-blur-sm z-40">
+    <div className="navbar bg-gradient-to-r from-base-100 to-base-200 border-b border-accent/20 p-4 backdrop-blur-sm z-40 sticky top-0">
       <div className="flex flex-1 gap-4 justify-between">
-        <button className="hidden">
-          <Icon name={"menu"} className="text-3xl text-primary" />
-        </button>
-
-        <div className="flex flex-1 items-center w-fit gap-2">
-          <select
-            defaultValue="Pick a color"
-            className="select select-sm select-bordered w-fit focus:outline-none focus:border-primary bg-base-100/50 backdrop-blur-sm transition-all duration-300"
-          >
-            <option disabled={true}>Workspace</option>
-            <option>Personal</option>
-            <option>BeStudio</option>
-            <option>Hermes</option>
-          </select>
-          <button className="btn btn-square btn-ghost rounded-xl hover:bg-primary/10 transition-all duration-300">
-            <Icon name={"addSquare"} className="text-2xl text-primary" />
+        <div className="flex items-center gap-4">
+          <button className={showMenuButton ? "block" : "hidden"} onClick={onMenuClick}>
+            <Icon name="menu" className="text-3xl text-primary" />
           </button>
+          
+          <ErrorBoundary>
+            <WorkspaceSelector
+              workspaces={workspaces}
+              selectedWorkspace={selectedWorkspace}
+              onWorkspaceChange={onWorkspaceChange}
+              onAddWorkspace={onAddWorkspace}
+              isLoading={isLoading}
+            />
+          </ErrorBoundary>
         </div>
 
-        <div className="relative">
-          <button
-            className="avatar online cursor-pointer transform hover:scale-105 transition-all duration-300"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          >
-            <div className="w-10 rounded-full ring ring-primary/40 ring-offset-base-100 ring-offset-2 transition-all duration-300 hover:ring-primary">
-              <img
-                src="https://avatar.iran.liara.run/username?username=rezamohmedi"
-                alt="User Avatar"
-                className="grayscale hover:grayscale-0 transition-all duration-300"
-              />
-            </div>
-          </button>
+        <div className="flex items-center gap-4">
+          <ErrorBoundary>
+            <ThemeSelector
+              currentTheme={theme}
+              onThemeChange={handleThemeChange}
+            />
+          </ErrorBoundary>
 
-          {isDropdownOpen && (
-            <div ref={dropdownRef} className="absolute right-0 mt-3 w-56 border border-accent/20 bg-gradient-to-b from-base-200 to-base-100 rounded-box p-3   backdrop-blur-sm z-10 animate-fade-in">
-              <p className="text-sm font-light text-base-content/70">
-                👋Hey{" "}
-                <span className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Sarah</span>
-              </p>
-              <div className="divider my-2"></div>
-              <ul className="menu menu-sm w-full space-y-1 p-0">
-                <li>
-                  <button className="flex items-center gap-2 hover:bg-primary/10 rounded-lg transition-all duration-300">
-                    <Icon name={"user"} className="text-xl text-primary" /> Profile
-                  </button>
-                </li>
-                <li>
-                  <button className="flex items-center gap-2 hover:bg-primary/10 rounded-lg transition-all duration-300">
-                    <Icon name={"setting"} className="text-xl text-primary" /> Settings
-                  </button>
-                </li>
-                <li>
-                  <button onClick={handleLogout} className="flex items-center gap-2 hover:bg-primary/10 rounded-lg transition-all duration-300">
-                    <Icon name={"logout"} className="text-xl text-primary" /> Logout
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
+          <ErrorBoundary>
+            <UserProfile
+              userData={userData}
+              onProfileClick={onProfileClick}
+              onSettingsClick={onSettingsClick}
+              onLogoutClick={onLogoutClick}
+              isLoading={isLoading}
+            />
+          </ErrorBoundary>
         </div>
       </div>
     </div>

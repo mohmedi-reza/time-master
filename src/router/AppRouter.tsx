@@ -24,7 +24,8 @@ const TimeTrackerPage = React.lazy(
   () => import("../pages/dashboard/TimeTracker")
 );
 const GroupPage = React.lazy(() => import("../pages/dashboard/Group"));
-const ClientPage = React.lazy(() => import("../pages/dashboard/Client"));
+const ClientsPage = React.lazy(() => import("../pages/clients"));
+const ClientDetailPage = React.lazy(() => import("../pages/clients/[id]"));
 const TagPage = React.lazy(() => import("../pages/dashboard/Tag"));
 const ProjectPage = React.lazy(() => import("../pages/dashboard/Project"));
 
@@ -58,7 +59,8 @@ const AppRouter = () => {
             <Route path="time-tracker" element={<TimeTrackerPage />} />
             <Route path="reports" element={<ReportPage />} />
             <Route path="groups" element={<GroupPage />} />
-            <Route path="clients" element={<ClientPage />} />
+            <Route path="clients" element={<ClientsPage />} />
+            <Route path="clients/:id" element={<ClientDetailPage />} />
             <Route path="financial" element={<FinancialPage />} />
             <Route path="tags" element={<TagPage />} />
             <Route path="projects" element={<ProjectPage />} />
