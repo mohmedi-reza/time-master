@@ -3,9 +3,9 @@ import Icon from '../icon/icon.component';
 
 // Theme categories for better organization
 const themeCategories = {
-  Light: ['light', 'cupcake', 'bumblebee', 'emerald', 'corporate', 'lemonade', 'winter', 'garden'],
-  Dark: ['dark', 'synthwave', 'halloween', 'forest', 'black', 'dracula', 'night', 'coffee', 'dim', 'sunset'],
-  Colorful: ['retro', 'cyberpunk', 'valentine', 'aqua', 'lofi', 'pastel', 'fantasy', 'wireframe', 'luxury', 'cmyk', 'autumn'],
+  Light: ['light', 'cupcake', 'bumblebee', 'emerald', 'corporate', 'lemonade', 'winter', 'garden', 'silk'],
+  Dark: ['dark', 'synthwave', 'halloween', 'forest', 'black', 'dracula', 'night', 'coffee', 'dim', 'sunset', 'abyss'],
+  Colorful: ['retro', 'cyberpunk', 'valentine', 'aqua', 'lofi', 'pastel', 'fantasy', 'wireframe', 'luxury', 'cmyk', 'autumn', 'caramellatte'],
   Professional: ['business', 'corporate', 'nord', 'winter'],
   Creative: ['acid', 'fantasy', 'wireframe']
 };
@@ -20,7 +20,7 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({
   onThemeChange,
 }) => {
   // Determine if current theme is considered dark
-  const isDarkTheme = ['dark', 'synthwave', 'halloween', 'forest', 'black', 'dracula', 'night', 'coffee', 'dim', 'sunset'].includes(currentTheme);
+  const isDarkTheme = ['dark', 'synthwave', 'halloween', 'forest', 'black', 'dracula', 'night', 'coffee', 'dim', 'sunset', 'abyss'].includes(currentTheme);
 
   return (
     <div className="dropdown dropdown-end">
