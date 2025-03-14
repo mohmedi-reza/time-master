@@ -1,30 +1,47 @@
 import React from "react";
-import Icon from "../../components/common/icon/icon.component";
-import { IconName } from "../../components/common/icon/iconPack";
+import SettingCard from "../../components/settings/SettingCard";
+import AboutSection from "../../components/settings/AboutSection";
+import { SettingSection, AboutInfo } from "../../interfaces/setting.interface";
 
 const SettingPage: React.FC = () => {
-  const settingSections = [
+  // Mock settings sections data
+  const settingSections: SettingSection[] = [
     {
       title: "Account Settings",
-      icon: "user" as IconName,
+      icon: "user",
       items: ["Profile Information", "Password & Security", "Notifications"],
     },
     {
       title: "Workspace",
-      icon: "setting" as IconName,
+      icon: "setting",
       items: ["Theme", "Language", "Time Zone"],
     },
     {
       title: "Integrations",
-      icon: "link" as IconName,
+      icon: "link",
       items: ["Connected Apps", "API Keys", "Webhooks"],
     },
     {
       title: "Privacy",
-      icon: "shield" as IconName,
+      icon: "shield",
       items: ["Data Usage", "Cookie Settings", "Privacy Policy"],
     },
   ];
+
+  // Mock about info data
+  const aboutInfo: AboutInfo = {
+    version: "1.0.0",
+    links: [
+      { icon: "document", label: "Documentation" },
+      { icon: "Support", label: "Support" },
+      { icon: "github", label: "GitHub" },
+    ],
+  };
+
+  const handleSettingItemClick = (item: string) => {
+    // TODO: Implement setting item click handler
+    console.log("Setting item clicked:", item);
+  };
 
   return (
     <div className="p-6 space-y-8 min-h-screen bg-gradient-to-br from-base-100 to-base-200">
@@ -43,64 +60,16 @@ const SettingPage: React.FC = () => {
       {/* Settings Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
         {settingSections.map((section, index) => (
-          <div
+          <SettingCard
             key={index}
-            className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
-          >
-            <div className="card-body">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-primary/10">
-                  <Icon name={section.icon} className="text-2xl text-primary" />
-                </div>
-                <h2 className="card-title bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                  {section.title}
-                </h2>
-              </div>
-              <ul className="space-y-3">
-                {section.items.map((item, itemIndex) => (
-                  <li key={itemIndex}>
-                    <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-primary/10 text-base-content/80 hover:text-primary transition-all duration-300 flex items-center justify-between group">
-                      {item}
-                      <Icon 
-                        name="arrowRight" 
-                        className="text-xl text-primary opacity-0 group-hover:opacity-100 transition-all duration-300" 
-                      />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+            section={section}
+            onItemClick={handleSettingItemClick}
+          />
         ))}
       </div>
 
-      {/* Additional Info */}
-      <div className="card bg-base-100/50 border border-accent/20   backdrop-blur-sm animate-fade-in">
-        <div className="card-body">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 rounded-xl bg-primary/10">
-              <Icon name="infoCircle" className="text-2xl text-primary" />
-            </div>
-            <div>
-              <h2 className="card-title bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                About Time Master
-              </h2>
-              <p className="text-base-content/60">Version 1.0.0</p>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <button className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300">
-              <Icon name="document" className="text-xl text-primary" /> Documentation
-            </button>
-            <button className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300">
-              <Icon name="Support" className="text-xl text-primary" /> Support
-            </button>
-            <button className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300">
-              <Icon name="github" className="text-xl text-primary" /> GitHub
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* About Section */}
+      <AboutSection info={aboutInfo} />
     </div>
   );
 };
