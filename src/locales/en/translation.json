@@ -1,0 +1,646 @@
+{
+  "welcome": "Welcome to Time Master",
+  "projectManagement": "Project Management",
+  "bookDemo": "Live Demo",
+  "signIn": "Sign In",
+  "sponsorsAndBackers": "Sponsors and backers",
+  "noSupportYet": "Unfortunately, no one has supported me on this journey yet. 💔",
+  "beFirst": "Be the first to support and help this project grow!",
+  "becomeSponsor": "Become a Sponsor",
+  "timeMasterDescription": "Time Master is a powerful project management tool designed to help you track time, manage tasks, and collaborate with your team efficiently.",
+  "developer": "Developer & Sponsor",
+  "loginWithGithub": "Login with GitHub",
+  "donateACoffee": "Donate a coffee",
+  "manageTeam": "Manage Your Team",
+  "effectively": "Effectively",
+  "manageTeamDescription": "With Time Master, you can easily manage your team members, assign tasks, and track their progress. Ensure everyone is on the same page and working towards the same goals.",
+  "collaborateWith": "Collaborate with",
+  "groups": "Groups",
+  "collaborateDescription": "Create and manage groups to streamline collaboration. Assign projects to groups and track their progress collectively.",
+  "trackYour": "Track Your",
+  "tasks": {
+    "overview": {
+      "title": "Tasks Dashboard",
+      "subtitle": "Track and manage your tasks efficiently"
+    },
+    "actions": {
+      "newTask": "New Task",
+      "filter": "Filter Tasks",
+      "sort": "Sort Tasks"
+    },
+    "stats": {
+      "total": "Total Tasks",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "overdue": "Overdue"
+    },
+    "list": {
+      "title": "Recent Tasks",
+      "subtitle": "View and manage your tasks"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "status": {
+      "completed": "Completed",
+      "in-progress": "In Progress",
+      "pending": "Pending"
+    },
+    "pagination": {
+      "showing": "Showing {{start}}-{{end}} of {{total}} tasks"
+    }
+  },
+  "myVision": "My Vision",
+  "buildingPlatform": "Building a Complete Platform",
+  "visionDescription": "My goal is to create a comprehensive platform for remote business owners, freelancers, and even individuals who want to manage their personal tasks efficiently. With Time Master, managing and advancing remote work and businesses will be easier than ever.",
+  "visionSupport": "This is an exciting journey, and I would love to have your support along the way. Your feedback and encouragement will help me stay motivated and make this platform truly valuable for everyone.",
+  "currentTheme": "Current Theme",
+  "themes": {
+    "light": "Light",
+    "dark": "Dark",
+    "colorful": "Colorful",
+    "professional": "Professional",
+    "creative": "Creative"
+  },
+  "processingProject": "Processing project...",
+  "projectCompleted": "Project processing completed!",
+  "whyThisProject": "Why I Decided to Undertake This Project",
+  "projectStory": {
+    "challenge": {
+      "title": "The Challenge",
+      "description": "As someone constantly juggling multiple projects, I found myself in need of a tool that could seamlessly manage the projects I take on and delegate to others. I wanted a solution that would not only help me stay organized but also allow me to easily share project details and collaborate with others."
+    },
+    "journey": {
+      "title": "The Journey",
+      "description": "Initially, I set out to create a personal tool tailored to my own needs. However, as I worked on it, I realized that this could be something much bigger—a solution that could benefit others as well. That's when I decided to shift gears and build a comprehensive, free tool designed for project managers, freelancers, and teams alike."
+    },
+    "vision": {
+      "title": "The Vision",
+      "description": "My goal is to empower individuals and teams to streamline their workflows, enhance collaboration, and achieve their goals more efficiently. This project is not just a tool; it's a commitment to making project management accessible, intuitive, and impactful for everyone."
+    }
+  },
+  "sidebar": {
+    "toggleSidebar": "Toggle Sidebar",
+    "logout": "Logout",
+    "appName": "Time Master",
+    "appDescription": "PROJECT MANAGEMENT",
+    "items": {
+      "timeTracker": "Time Tracker",
+      "projects": "Projects",
+      "clients": "Clients",
+      "reports": "Reports",
+      "financial": "Financial",
+      "groups": "Groups",
+      "calendar": "Calendar",
+      "meeting": "Meeting",
+      "setting": "Settings",
+      "connections": "Connections",
+      "tags": "Tags",
+      "tasks": "Tasks"
+    }
+  },
+  "language": {
+    "select": "Language",
+    "english": "English",
+    "persian": "Persian"
+  },
+  "timeTracker": {
+    "title": "Time Tracker",
+    "subtitle": "Track and manage your working hours efficiently",
+    "startTimer": "Start Timer",
+    "stats": {
+      "todayHours": "Today's Hours",
+      "weekTotal": "Week Total",
+      "tasksDone": "Tasks Done",
+      "billableHours": "Billable Hours",
+      "fromLastWeek": "from last week"
+    },
+    "workLog": {
+      "title": "Time Entries",
+      "filters": {
+        "today": "Today",
+        "thisWeek": "This Week",
+        "thisMonth": "This Month"
+      },
+      "form": {
+        "whatWorkedOn": "What have you worked on?",
+        "addEntry": "Add Entry",
+        "selectProject": "Select Project"
+      }
+    }
+  },
+  "projects": {
+    "overview": {
+      "title": "Projects Overview",
+      "subtitle": "Manage and track your team's projects",
+      "newProject": "New Project"
+    },
+    "stats": {
+      "totalProjects": {
+        "title": "Total Projects",
+        "active": "active"
+      },
+      "totalHours": {
+        "title": "Total Hours",
+        "subtitle": "Hours tracked"
+      },
+      "totalRevenue": {
+        "title": "Total Revenue",
+        "subtitle": "Billable amount"
+      },
+      "teamMembers": {
+        "title": "Team Members",
+        "subtitle": "Active members"
+      }
+    },
+    "list": {
+      "title": "Active Projects",
+      "subtitle": "View and manage your ongoing projects",
+      "filters": {
+        "all": "All",
+        "active": "Active",
+        "completed": "Completed"
+      },
+      "noProjects": "No projects found"
+    },
+    "card": {
+      "createdBy": "Created by",
+      "client": "Client",
+      "groups": "Groups",
+      "teamMembers": "Team Members",
+      "totalTime": "Total Time",
+      "billable": "Billable",
+      "workHours": "Work Hours"
+    }
+  },
+  "clients": {
+    "overview": {
+      "title": "Clients",
+      "subtitle": "Manage your client relationships",
+      "addClient": "Add New Client",
+      "searchPlaceholder": "Search clients..."
+    },
+    "list": {
+      "noClients": {
+        "title": "No clients found",
+        "withSearch": "Try adjusting your search",
+        "withoutSearch": "Start by adding your first client"
+      },
+      "status": "Active",
+      "viewDetails": "View Details"
+    },
+    "details": {
+      "contact": "Contact",
+      "editClient": "Edit Client",
+      "stats": {
+        "totalProjects": {
+          "title": "Total Projects",
+          "subtitle": "Active and completed"
+        },
+        "totalPaid": {
+          "title": "Total Paid",
+          "subtitle": "Across all projects"
+        },
+        "amountDue": {
+          "title": "Amount Due",
+          "subtitle": "Outstanding balance"
+        }
+      },
+      "projects": {
+        "title": "Projects",
+        "subtitle": "Manage client projects",
+        "filters": {
+          "allStatus": "All Status",
+          "pending": "Pending",
+          "inProgress": "In Progress",
+          "completed": "Completed",
+          "onHold": "On Hold",
+          "cancelled": "Cancelled"
+        },
+        "sort": {
+          "date": "Sort: Date",
+          "progress": "Sort: Progress",
+          "amount": "Sort: Amount"
+        },
+        "addProject": "Add Project",
+        "noProjects": {
+          "title": "No projects found",
+          "withFilter": "Try changing the filter to see more projects",
+          "withoutFilter": "Start by adding your first project"
+        },
+        "actions": {
+          "editProject": "Edit Project",
+          "viewTimeline": "View Timeline",
+          "generateReport": "Generate Report"
+        },
+        "metrics": {
+          "total": "Total",
+          "paid": "Paid",
+          "due": "Due",
+          "progress": "Progress"
+        }
+      }
+    },
+    "forms": {
+      "client": {
+        "title": {
+          "add": "Add New Client",
+          "edit": "Edit Client"
+        },
+        "fields": {
+          "name": "Client Name",
+          "email": "Email Address",
+          "phone": "Phone Number",
+          "company": "Company Name",
+          "address": "Address"
+        }
+      },
+      "project": {
+        "title": {
+          "add": "Add New Project",
+          "edit": "Edit Project"
+        },
+        "fields": {
+          "name": "Project Name",
+          "status": "Status",
+          "description": "Description",
+          "progress": "Progress (%)",
+          "totalAmount": "Total Amount ($)",
+          "paidAmount": "Paid Amount ($)",
+          "remainingAmount": "Remaining Amount ($)",
+          "startDate": "Start Date",
+          "endDate": "End Date"
+        }
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "saving": "Saving...",
+        "add": "Add",
+        "update": "Update"
+      }
+    }
+  },
+  "reports": {
+    "overview": {
+      "title": "Reports & Analytics",
+      "subtitle": "Track your team's performance and productivity metrics",
+      "exportReport": "Export Report"
+    },
+    "filters": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
+    },
+    "stats": {
+      "totalHours": {
+        "title": "Total Hours",
+        "change": "from previous period"
+      },
+      "teamEfficiency": {
+        "title": "Team Efficiency",
+        "change": "from previous period"
+      },
+      "tasksCompleted": {
+        "title": "Tasks Completed",
+        "change": "from previous period"
+      },
+      "activeProjects": {
+        "title": "Active Projects",
+        "change": "from previous period"
+      }
+    },
+    "charts": {
+      "teamWorkingHours": {
+        "title": "Team Working Hours vs Target",
+        "workingHours": "Working Hours",
+        "targetHours": "Target Hours"
+      },
+      "weeklyTrends": {
+        "title": "Weekly Trends",
+        "hoursWorked": "Hours Worked",
+        "tasksCompleted": "Tasks Completed"
+      }
+    },
+    "tables": {
+      "groupStatistics": {
+        "title": "Group Statistics",
+        "subtitle": "Performance metrics by team",
+        "columns": {
+          "groupName": "Group Name",
+          "hoursTarget": "Hours / Target",
+          "tasksProgress": "Tasks Progress",
+          "completionRate": "Completion Rate",
+          "tasks": "tasks"
+        }
+      },
+      "contributors": {
+        "title": "Individual Contributors",
+        "subtitle": "Performance metrics by team member",
+        "columns": {
+          "user": "User",
+          "section": "Section",
+          "hours": "Hours",
+          "tasks": "Tasks",
+          "efficiency": "Efficiency"
+        }
+      }
+    }
+  },
+  "financial": {
+    "overview": {
+      "title": "Financial Overview",
+      "subtitle": "Track your financial activities and transactions",
+      "newTransaction": "New Transaction"
+    },
+    "wallet": {
+      "title": "Wallet Balance",
+      "connectWallet": "Connect Wallet",
+      "tokens": "Tokens"
+    },
+    "stats": {
+      "totalIncome": {
+        "title": "Total Income",
+        "description": "from last month"
+      },
+      "totalExpenses": {
+        "title": "Total Expenses",
+        "description": "from last month"
+      },
+      "netBalance": {
+        "title": "Net Balance",
+        "description": "from last month"
+      },
+      "pending": {
+        "title": "Pending",
+        "description": "2 incoming, 1 outgoing"
+      }
+    },
+    "transactions": {
+      "title": "Transaction History",
+      "subtitle": "View and manage your transactions",
+      "export": "Export",
+      "search": {
+        "placeholder": "Search transactions..."
+      },
+      "filters": {
+        "allCategories": "All Categories",
+        "income": "Income",
+        "expense": "Expense",
+        "subscription": "Subscription",
+        "allTime": "All Time",
+        "today": "Today",
+        "thisWeek": "This Week",
+        "thisMonth": "This Month",
+        "thisYear": "This Year"
+      },
+      "table": {
+        "date": "Date",
+        "description": "Description",
+        "category": "Category",
+        "status": "Status",
+        "amount": "Amount"
+      },
+      "pagination": {
+        "showing": "Showing 1-3 of 24 transactions"
+      },
+      "status": {
+        "completed": "Completed",
+        "pending": "Pending"
+      }
+    }
+  },
+  "group": {
+    "users": {
+      "title": "Users",
+      "subtitle": "Manage and organize your team members",
+      "search": "Search users by name...",
+      "noUsers": "No users found matching your criteria",
+      "card": {
+        "totalHours": "Total Hours",
+        "projects": "Projects"
+      }
+    },
+    "groups": {
+      "title": "Groups",
+      "subtitle": "Organize teams and manage collaborations",
+      "search": "Search groups by name...",
+      "noGroups": "No groups found matching your criteria",
+      "card": {
+        "teamMembers": "Team Members",
+        "totalHours": "Total Hours",
+        "projects": "Projects"
+      }
+    },
+    "filters": {
+      "project": {
+        "all": "All Projects"
+      },
+      "sort": {
+        "asc": "Hours: Low to High",
+        "desc": "Hours: High to Low"
+      }
+    }
+  },
+  "calendar": {
+    "overview": {
+      "title": "Calendar",
+      "subtitle": "Manage your schedule and tasks",
+      "addEvent": "Add Event"
+    },
+    "today": {
+      "title": "Today's Overview",
+      "tasks": {
+        "title": "Today's Tasks",
+        "noTasks": "No tasks scheduled",
+        "completed": "Completed"
+      }
+    },
+    "grid": {
+      "today": "Today",
+      "weekDays": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
+      }
+    },
+    "task": {
+      "tasks": "tasks",
+      "dueTime": "Due at"
+    }
+  },
+  "meetings": {
+    "overview": {
+      "title": "Meetings",
+      "subtitle": "Manage your meetings and calendar events",
+      "connect": "Connect Calendar",
+      "connected": "Connected to Google Calendar"
+    },
+    "sections": {
+      "upcoming": {
+        "title": "Upcoming Meetings",
+        "empty": "No upcoming meetings scheduled"
+      },
+      "past": {
+        "title": "Past Meetings",
+        "empty": "No past meetings this week"
+      }
+    },
+    "card": {
+      "join": "Join",
+      "attendees": "Attendees"
+    }
+  },
+  "settings": {
+    "overview": {
+      "title": "Settings",
+      "subtitle": "Customize your workspace preferences",
+      "description": "Manage your account settings and preferences"
+    },
+    "sections": {
+      "account": {
+        "title": "Account Settings",
+        "description": "Manage your personal information and account security",
+        "items": {
+          "profile": "Profile Information",
+          "security": "Password & Security",
+          "notifications": "Notifications"
+        }
+      },
+      "workspace": {
+        "title": "Workspace",
+        "description": "Customize your workspace appearance and preferences",
+        "items": {
+          "theme": "Theme",
+          "language": "Language",
+          "timezone": "Time Zone"
+        }
+      },
+      "integrations": {
+        "title": "Integrations",
+        "description": "Connect and manage third-party integrations",
+        "items": {
+          "apps": "Connected Apps",
+          "api": "API Keys",
+          "webhooks": "Webhooks"
+        }
+      },
+      "privacy": {
+        "title": "Privacy",
+        "description": "Control your privacy and data settings",
+        "items": {
+          "data": "Data Usage",
+          "cookies": "Cookie Settings",
+          "policy": "Privacy Policy"
+        }
+      }
+    },
+    "about": {
+      "title": "About Time Master",
+      "description": "Information about Time Master and helpful resources",
+      "version": "Version",
+      "resources": "Resources",
+      "links": {
+        "docs": "Documentation",
+        "support": "Support",
+        "github": "GitHub"
+      },
+      "actions": {
+        "viewDocs": "View Documentation",
+        "getSupport": "Get Support",
+        "viewGithub": "View on GitHub"
+      }
+    }
+  },
+  "tags": {
+    "overview": {
+      "subtitle": "Manage tags and categorization"
+    },
+    "actions": {
+      "addCategory": "Add Category",
+      "addTag": "Add Tag"
+    },
+    "empty": {
+      "noCategories": "No categories yet. Create one to get started!"
+    },
+    "categoryModal": {
+      "title": "Add New Category",
+      "subtitle": "Create a category to group related tags",
+      "fields": {
+        "name": "Category Name",
+        "description": "Description"
+      },
+      "placeholders": {
+        "name": "e.g., Work, Personal, Study",
+        "description": "Describe the purpose of this category..."
+      },
+      "actions": {
+        "create": "Create Category"
+      }
+    },
+    "tagModal": {
+      "title": "Add New Tag",
+      "subtitle": "Create a new tag to organize your tasks",
+      "fields": {
+        "name": "Tag Name",
+        "category": "Category",
+        "color": "Color"
+      },
+      "placeholders": {
+        "name": "e.g., Important, Urgent, Follow-up",
+        "selectCategory": "Select a category"
+      },
+      "actions": {
+        "create": "Create Tag"
+      }
+    },
+    "category": {
+      "noTags": "No tags in this category"
+    }
+  },
+  "common": {
+    "required": "*Required",
+    "optional": "Optional",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "colors": {
+      "blue": "Blue",
+      "purple": "Purple",
+      "teal": "Teal",
+      "gray": "Gray",
+      "sky": "Sky",
+      "green": "Green",
+      "yellow": "Yellow",
+      "red": "Red"
+    }
+  },
+  "connections": {
+    "overview": {
+      "title": "Connections",
+      "subtitle": "Manage your integrated services and tools"
+    },
+    "stats": {
+      "connectedServices": "Connected Services",
+      "format": "{{connected}}/{{total}}"
+    },
+    "service": {
+      "connected": "Connected",
+      "connect": "Connect",
+      "lastSync": "Last sync: {{time}}",
+      "descriptions": {
+        "jira": "Track your tasks and manage your projects",
+        "confluence": "Access your team documentation and knowledge base",
+        "trello": "Manage your boards and track project progress",
+        "slack": "Stay connected with your team communications",
+        "github": "Sync with your code repositories and issues",
+        "gitlab": "Manage your GitLab projects and merge requests"
+      }
+    }
+  }
+}
