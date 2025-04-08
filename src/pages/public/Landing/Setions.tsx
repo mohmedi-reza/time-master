@@ -29,7 +29,7 @@ const Sections = () => {
           <div className="flex gap-2 mt-4">
             <div className="avatar">
               <div className="w-14 rounded-full">
-                <img src="reza-mohmedi.jpg" />
+                <img src="reza-mohmedi.jpg" alt="Reza Mohmedi" />
               </div>
             </div>
             <div>
