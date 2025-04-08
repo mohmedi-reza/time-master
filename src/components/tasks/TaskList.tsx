@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 import TaskCard from "./TaskCard";
 import { Task } from "../../interfaces/task.interface";
@@ -20,6 +21,8 @@ const TaskList: React.FC<TaskListProps> = ({
   currentPage,
   onPageChange,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="card bg-base-100/50 border border-accent/20 backdrop-blur-sm">
       <div className="card-body p-4">
@@ -27,15 +30,21 @@ const TaskList: React.FC<TaskListProps> = ({
           <div className="space-y-1">
             <h2 className="text-lg font-bold flex items-center gap-2">
               <Icon name="taskSquare" className="text-primary text-base" />
-              Recent Tasks
+              {t('tasks.list.title')}
             </h2>
-            <p className="text-xs text-base-content/60">View and manage your tasks</p>
+            <p className="text-xs text-base-content/60">{t('tasks.list.subtitle')}</p>
           </div>
           <div className="flex gap-2">
-            <button className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300">
+            <button 
+              className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300"
+              title={t('tasks.actions.filter')}
+            >
               <Icon name="filter" className="text-base text-primary" />
             </button>
-            <button className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300">
+            <button 
+              className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300"
+              title={t('tasks.actions.sort')}
+            >
               <Icon name="sort" className="text-base text-primary" />
             </button>
           </div>
@@ -56,7 +65,11 @@ const TaskList: React.FC<TaskListProps> = ({
         {/* Pagination */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
           <p className="text-xs text-base-content/60">
-            Showing {(currentPage - 1) * 4 + 1}-{Math.min(currentPage * 4, totalTasks)} of {totalTasks} tasks
+            {t('tasks.pagination.showing', {
+              start: (currentPage - 1) * 4 + 1,
+              end: Math.min(currentPage * 4, totalTasks),
+              total: totalTasks
+            })}
           </p>
           <div className="join">
             <button 

@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Client } from '../../interfaces/client.interface';
 import Icon from '../../components/common/icon/icon.component';
 import ClientForm from '../../components/clients/ClientForm';
+import { useTranslation } from 'react-i18next';
 
 const ClientsPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [clients, setClients] = React.useState<Client[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -122,15 +124,15 @@ const ClientsPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-base-content">Clients</h1>
-          <p className="text-base-content/60">Manage your client relationships</p>
+          <h1 className="text-2xl font-bold text-base-content">{t('clients.overview.title')}</h1>
+          <p className="text-base-content/60">{t('clients.overview.subtitle')}</p>
         </div>
         <button 
           className="btn btn-primary"
           onClick={() => setIsModalOpen(true)}
         >
           <Icon name="add" />
-          Add New Client
+          {t('clients.overview.addClient')}
         </button>
       </div>
 
@@ -141,7 +143,7 @@ const ClientsPage: React.FC = () => {
         </div>
         <input
           type="text"
-          placeholder="Search clients..."
+          placeholder={t('clients.overview.searchPlaceholder')}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="input input-sm join-item bg-transparent border-0 focus:outline-none w-full h-full"
@@ -155,9 +157,9 @@ const ClientsPage: React.FC = () => {
         </div>
       ) : filteredClients.length === 0 ? (
         <div className="text-center py-12">
-          <h3 className="text-lg font-semibold text-base-content/70">No clients found</h3>
+          <h3 className="text-lg font-semibold text-base-content/70">{t('clients.list.noClients.title')}</h3>
           <p className="text-base-content/50">
-            {searchTerm ? 'Try adjusting your search' : 'Start by adding your first client'}
+            {searchTerm ? t('clients.list.noClients.withSearch') : t('clients.list.noClients.withoutSearch')}
           </p>
         </div>
       ) : (
@@ -178,7 +180,7 @@ const ClientsPage: React.FC = () => {
                       <p className="text-base-content/70 text-sm">{client.company}</p>
                     )}
                   </div>
-                  <div className="badge badge-primary">Active</div>
+                  <div className="badge badge-primary">{t('clients.list.status')}</div>
                 </div>
 
                 <div className="mt-4 space-y-2">
@@ -204,19 +206,19 @@ const ClientsPage: React.FC = () => {
 
                 <div className="grid grid-cols-3 gap-4">
                   <div className="flex flex-col items-center p-2 bg-base-200 rounded-lg">
-                    <span className="text-xs text-base-content/70">Projects</span>
+                    <span className="text-xs text-base-content/70">{t('clients.details.stats.totalProjects.title')}</span>
                     <span className="text-lg font-semibold text-primary">
                       {client.projects.length}
                     </span>
                   </div>
                   <div className="flex flex-col items-center p-2 bg-base-200 rounded-lg">
-                    <span className="text-xs text-base-content/70">Paid</span>
+                    <span className="text-xs text-base-content/70">{t('clients.details.stats.totalPaid.title')}</span>
                     <span className="text-lg font-semibold text-success">
                       ${client.totalPaid}
                     </span>
                   </div>
                   <div className="flex flex-col items-center p-2 bg-base-200 rounded-lg">
-                    <span className="text-xs text-base-content/70">Due</span>
+                    <span className="text-xs text-base-content/70">{t('clients.details.stats.amountDue.title')}</span>
                     <span className="text-lg font-semibold text-error">
                       ${client.totalDue}
                     </span>
@@ -226,14 +228,14 @@ const ClientsPage: React.FC = () => {
                 {client.projects.length > 0 && (
                   <div className="mt-4">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-base-content/70">Latest Project</span>
+                      <span className="text-sm text-base-content/70">{t('clients.details.projects.title')}</span>
                       <div className={`badge badge-sm ${
                         client.projects[0].status === 'completed' ? 'badge-success' :
                         client.projects[0].status === 'in-progress' ? 'badge-warning' :
                         client.projects[0].status === 'on-hold' ? 'badge-error' :
                         'badge-ghost'
                       }`}>
-                        {client.projects[0].status}
+                        {t(`clients.details.projects.filters.${client.projects[0].status.replace('-', '')}`)}
                       </div>
                     </div>
                     <div className="text-sm font-medium text-base-content">
@@ -241,7 +243,7 @@ const ClientsPage: React.FC = () => {
                     </div>
                     <div className="mt-2">
                       <div className="flex justify-between items-center text-xs mb-1">
-                        <span className="text-base-content/70">Progress</span>
+                        <span className="text-base-content/70">{t('clients.details.projects.metrics.progress')}</span>
                         <span>{client.projects[0].progress}%</span>
                       </div>
                       <progress 
@@ -262,7 +264,7 @@ const ClientsPage: React.FC = () => {
                     }}
                   >
                     <Icon name="arrowRight" />
-                    View Details
+                    {t('clients.list.viewDetails')}
                   </button>
                 </div>
               </div>
@@ -275,7 +277,7 @@ const ClientsPage: React.FC = () => {
       {isModalOpen && (
         <div className="modal modal-open">
           <div className="modal-box w-11/12 max-w-3xl">
-            <h3 className="font-bold text-lg mb-6">Add New Client</h3>
+            <h3 className="font-bold text-lg mb-6">{t('clients.forms.client.title.add')}</h3>
             <ClientForm
               onSubmit={handleAddClient}
               onCancel={() => setIsModalOpen(false)}

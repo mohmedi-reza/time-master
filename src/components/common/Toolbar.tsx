@@ -4,7 +4,11 @@ import WorkspaceSelector from "./toolbar/WorkspaceSelector";
 import UserProfile from "./toolbar/UserProfile";
 import ErrorBoundary from "./ErrorBoundary";
 import ThemeSelector from "./toolbar/ThemeSelector";
+import LanguageSwitcher from "../../utils/LanguageSwitcher";
 import { Workspace, UserData } from "./toolbar/types";
+import { logoutUser } from "../../services/mock-services/LoginService";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface ToolbarProps {
   workspaces?: Workspace[];
@@ -14,7 +18,6 @@ interface ToolbarProps {
   userData?: UserData;
   onProfileClick?: () => void;
   onSettingsClick?: () => void;
-  onLogoutClick?: () => void;
   showMenuButton?: boolean;
   onMenuClick?: () => void;
   isLoading?: boolean;
@@ -28,7 +31,6 @@ const Toolbar: React.FC<ToolbarProps> = ({
   userData,
   onProfileClick,
   onSettingsClick,
-  onLogoutClick,
   showMenuButton = false,
   onMenuClick,
   isLoading = false,
@@ -39,10 +41,19 @@ const Toolbar: React.FC<ToolbarProps> = ({
     return savedTheme || (prefersDark ? 'dark' : 'light');
   });
 
+  const { setIsAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
   const handleThemeChange = (newTheme: string) => {
     document.documentElement.setAttribute('data-theme', newTheme);
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
+  };
+
+  const handleLogout = () => {
+    logoutUser();
+    setIsAuthenticated(false);
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -82,6 +93,10 @@ const Toolbar: React.FC<ToolbarProps> = ({
 
         <div className="flex items-center gap-4">
           <ErrorBoundary>
+            <LanguageSwitcher />
+          </ErrorBoundary>
+
+          <ErrorBoundary>
             <ThemeSelector
               currentTheme={theme}
               onThemeChange={handleThemeChange}
@@ -93,7 +108,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
               userData={userData}
               onProfileClick={onProfileClick}
               onSettingsClick={onSettingsClick}
-              onLogoutClick={onLogoutClick}
+              onLogoutClick={handleLogout}
               isLoading={isLoading}
             />
           </ErrorBoundary>

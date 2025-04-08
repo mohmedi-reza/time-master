@@ -1,6 +1,7 @@
 import React from "react";
 import Icon from "../common/icon/icon.component";
 import { IconName } from "../common/icon/iconPack";
+import { useTranslation } from "react-i18next";
 
 interface StatCardProps {
   title: string;
@@ -11,6 +12,8 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon, change, index }) => {
+  const { t } = useTranslation();
+
   return (
     <div
       className="card bg-base-100/50 border border-accent/20 hover:transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
@@ -40,7 +43,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, icon, change, index }
               {change}%
             </span>
           )}
-          <span className="text-base-content/60 ml-1">from last week</span>
+          <span className="text-base-content/60 ml-1">{t('timeTracker.stats.fromLastWeek')}</span>
         </div>
       </div>
     </div>

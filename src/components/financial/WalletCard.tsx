@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 
 interface Token {
@@ -17,6 +18,8 @@ interface WalletCardProps {
 }
 
 const WalletCard: React.FC<WalletCardProps> = ({ walletData }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="card bg-base-100/50 border border-accent/20 hover:transition-all duration-300 backdrop-blur-sm animate-fade-in">
       <div className="card-body p-4">
@@ -24,7 +27,7 @@ const WalletCard: React.FC<WalletCardProps> = ({ walletData }) => {
           <div className="space-y-2">
             <h2 className="text-lg font-bold flex items-center gap-2">
               <Icon name="wallet" className="text-primary text-base" />
-              Wallet Balance
+              {t('financial.wallet.title')}
             </h2>
             <p className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               ${walletData.balance}
@@ -36,7 +39,7 @@ const WalletCard: React.FC<WalletCardProps> = ({ walletData }) => {
           </div>
           <button className="btn btn-primary btn-sm gap-2 hover:scale-105 transition-transform">
             <Icon name="wallet3" className="text-base" />
-            Connect Wallet
+            {t('financial.wallet.connectWallet')}
           </button>
         </div>
 
@@ -45,7 +48,7 @@ const WalletCard: React.FC<WalletCardProps> = ({ walletData }) => {
         <div className="space-y-3">
           <h3 className="text-sm font-bold flex items-center gap-2">
             <Icon name="coin" className="text-primary text-base" />
-            Tokens
+            {t('financial.wallet.tokens')}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {walletData.tokens.map((token) => (

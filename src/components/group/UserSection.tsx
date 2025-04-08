@@ -1,76 +1,102 @@
-import React from "react";
-import Icon from "../common/icon/icon.component";
-import Section from "../common/Section";
-import FilterBar from "../common/FilterBar";
+import React, { ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import UserCard from "./UserCard";
-import { User } from "../../interfaces/user.interface";
+import Icon from "../common/icon/icon.component";
+
+interface User {
+  name: string;
+  avatar: string;
+  hours: number;
+  projects: string[];
+  position: string;
+}
 
 interface UserSectionProps {
   users: User[];
   searchTerm: string;
-  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  filterProject: string;
-  onFilterChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  selectedProject: string;
+  onProjectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   sortOrder: "asc" | "desc";
-  onSortChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onSortChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   projects: string[];
-  isLoading: boolean;
 }
 
 const UserSection: React.FC<UserSectionProps> = ({
   users,
   searchTerm,
   onSearchChange,
-  filterProject,
-  onFilterChange,
+  selectedProject,
+  onProjectChange,
   sortOrder,
   onSortChange,
   projects,
-  isLoading,
 }) => {
-  return (
-    <>
-      <Section 
-        title="Users" 
-        description="Manage and organize your team members"
-        count={users.length}
-      >
-        <FilterBar
-          searchTerm={searchTerm}
-          onSearchChange={onSearchChange}
-          filterProject={filterProject}
-          onFilterChange={onFilterChange}
-          sortOrder={sortOrder}
-          onSortChange={onSortChange}
-          projects={projects}
-          placeholder="Search users by name..."
-        />
-      </Section>
+  const { t } = useTranslation();
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {isLoading ? (
-          Array(4).fill(0).map((_, i) => (
-            <div key={i} className="card bg-base-100/50 border border-accent/20 animate-pulse h-48" />
-          ))
-        ) : users.length === 0 ? (
-          <div className="col-span-full text-center py-12">
-            <Icon name="user" className="text-5xl text-primary/40 mx-auto mb-4" />
-            <p className="text-base-content/60">No users found matching your criteria</p>
+  return (
+    <div className="space-y-4">
+      <div className="border-l-4 border-primary pl-4">
+        <h2 className="text-xl font-bold text-base-content">{t('group.users.title')}</h2>
+        <p className="text-sm text-base-content/60 mt-1">{t('group.users.subtitle')}</p>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-2">
+        <div className="join flex-1">
+          <div className="join-item bg-base-100/50 border border-accent/20 px-3 flex items-center">
+            <Icon name="user" className="text-base-content/60" />
           </div>
-        ) : (
-          users.map((user, index) => (
+          <input
+            type="text"
+            placeholder={t('group.users.search')}
+            className="input join-item input-bordered flex-1 bg-base-100/50 border-accent/20"
+            value={searchTerm}
+            onChange={onSearchChange}
+          />
+        </div>
+
+        <select
+          className="select select-bordered bg-base-100/50 border-accent/20"
+          value={selectedProject}
+          onChange={onProjectChange}
+        >
+          <option value="">{t('group.filters.project.all')}</option>
+          {projects.map((project) => (
+            <option key={project} value={project}>
+              {project}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="select select-bordered bg-base-100/50 border-accent/20"
+          value={sortOrder}
+          onChange={onSortChange}
+        >
+          <option value="asc">{t('group.filters.sort.asc')}</option>
+          <option value="desc">{t('group.filters.sort.desc')}</option>
+        </select>
+      </div>
+
+      {users.length === 0 ? (
+        <div className="text-center py-8 text-base-content/60">
+          {t('group.users.noUsers')}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {users.map((user, index) => (
             <UserCard
               key={index}
-              avatar={user.avatar}
               name={user.name}
-              position={user.position}
+              avatar={user.avatar}
               hours={user.hours}
               projects={user.projects}
+              position={user.position}
             />
-          ))
-        )}
-      </div>
-    </>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 

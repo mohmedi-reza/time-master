@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 import { IconName } from "../common/icon/iconPack";
 
@@ -20,47 +21,49 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   isConnected,
   lastSync,
   onToggle,
-}) => (
-  <div className="card bg-base-100 border border-accent/40 hover:  transition-all duration-300 backdrop-blur-sm bg-opacity-80">
-    <div className="card-body p-6">
-      <div className="flex items-start justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-lg bg-base-200/50 flex items-center justify-center">
-            <Icon name={icon} className="text-2xl" />
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <div className="card-body">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-primary/10">
+            <Icon name={icon} className="w-6 h-6 text-primary" />
           </div>
-          <div>
-            <h3 className="text-lg font-bold">{name}</h3>
-            <p className="text-base-content/60 text-sm">{description}</p>
-          </div>
+          <h2 className="card-title text-xl font-bold">{name}</h2>
         </div>
-        <label className="swap">
-          <input
-            type="checkbox"
-            checked={isConnected}
-            onChange={() => onToggle(id)}
-          />
-          <div className="swap-on">
-            <div className="badge badge-success gap-2 p-3">
-              <Icon name="tickCircle" className="text-base" />
-              Connected
+        <p className="text-base-content/60 mb-4">{description}</p>
+        <div className="flex justify-between items-center">
+          <label className="swap">
+            <input
+              type="checkbox"
+              checked={isConnected}
+              onChange={() => onToggle(id)}
+            />
+            <div className="swap-on">
+              <div className="badge badge-success gap-2 p-3">
+                <Icon name="tickCircle" className="text-base" />
+                {t('connections.service.connected')}
+              </div>
             </div>
-          </div>
-          <div className="swap-off">
-            <button className="btn btn-primary btn-sm gap-2 hover:scale-105 transition-transform">
-              <Icon name="link" className="text-base" />
-              Connect
-            </button>
-          </div>
-        </label>
-      </div>
-      {lastSync && (
-        <div className="mt-4 flex items-center gap-2 text-sm text-base-content/60">
-          <Icon name="timer" className="text-base" />
-          Last synced: {lastSync}
+            <div className="swap-off">
+              <button className="btn btn-primary btn-sm gap-2 hover:scale-105 transition-transform">
+                <Icon name="link" className="text-base" />
+                {t('connections.service.connect')}
+              </button>
+            </div>
+          </label>
         </div>
-      )}
+        {lastSync && (
+          <div className="mt-4 flex items-center gap-2 text-sm text-base-content/60">
+            <Icon name="timer" className="text-base" />
+            {t('connections.service.lastSync')}: {lastSync}
+          </div>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default ServiceCard; 

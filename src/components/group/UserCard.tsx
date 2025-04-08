@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../../components/common/icon/icon.component";
 
 interface UserCardProps {
@@ -16,12 +17,14 @@ const UserCard: React.FC<UserCardProps> = ({
   hours,
   projects,
 }) => {
+  const { t } = useTranslation();
+
   return (
-    <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+    <div className="card bg-base-100/50 border border-accent/20 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
       <div className="card-body p-4">
         <div className="flex items-center gap-3">
           <div className="avatar">
-            <div className="w-10 h-10 rounded-lg ring-1 ring-primary/20 ring-offset-1 ring-offset-base-100">
+            <div className="w-10 h-10 rounded-full ring-1 ring-primary/20 ring-offset-1 ring-offset-base-100">
               <img 
                 src={avatar} 
                 alt={name} 
@@ -42,7 +45,7 @@ const UserCard: React.FC<UserCardProps> = ({
         <div className="space-y-1 mt-3">
           <span className="text-xs text-base-content/60 flex items-center gap-1.5">
             <Icon name="timer" className="text-sm text-primary" />
-            Total Hours
+            {t('group.users.card.totalHours')}
           </span>
           <div className="badge badge-primary badge-sm font-medium">{hours} hrs</div>
         </div>
@@ -50,7 +53,7 @@ const UserCard: React.FC<UserCardProps> = ({
         <div className="space-y-1.5 mt-3">
           <span className="text-xs text-base-content/60 flex items-center gap-1.5">
             <Icon name="folder" className="text-sm text-primary" />
-            Projects
+            {t('group.users.card.projects')}
           </span>
           <div className="flex gap-1.5 flex-wrap">
             {projects.map((project, index) => (

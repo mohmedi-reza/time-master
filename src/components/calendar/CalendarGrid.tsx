@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
 import Icon from "../common/icon/icon.component";
 import CalendarDay from "./CalendarDay";
@@ -21,10 +22,16 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
   onNextMonth,
   onToday,
 }) => {
+  const { t } = useTranslation();
+
   const days = eachDayOfInterval({
     start: startOfMonth(selectedDate),
     end: endOfMonth(selectedDate),
   });
+
+  const weekDays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].map(day => 
+    t(`calendar.grid.weekDays.${day}`)
+  );
 
   return (
     <div className="card bg-base-100/50 border border-accent/20 backdrop-blur-sm">
@@ -44,7 +51,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
               className="join-item btn btn-sm btn-primary"
               onClick={onToday}
             >
-              Today
+              {t('calendar.grid.today')}
             </button>
             <button 
               className="join-item btn btn-sm hover:bg-primary/10 transition-colors"
@@ -56,7 +63,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
         </div>
 
         <div className="grid grid-cols-7 gap-1.5 text-center mb-2">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+          {weekDays.map(day => (
             <div key={day} className="font-medium text-base-content/70 py-1 text-xs">
               {day}
             </div>

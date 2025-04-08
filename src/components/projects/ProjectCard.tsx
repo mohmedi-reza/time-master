@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "../../components/common/icon/icon.component";
+import { useTranslation } from "react-i18next";
 
 interface ProjectCardProps {
   name: string;
@@ -24,6 +25,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   allowedWorkHours,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const handleCardClick = () => {
     navigate("/me/project");
   };
@@ -41,7 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
           <p className="text-xs text-base-content/60 mt-1 flex items-center gap-1.5">
             <Icon name="user" className="text-sm" />
-            Created by {owner}
+            {t('projects.card.createdBy')} {owner}
           </p>
         </div>
 
@@ -50,11 +53,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="space-y-1.5">
           <span className="text-xs font-medium text-base-content flex items-center gap-1.5">
             <Icon name="profileuser" className="text-sm text-primary" />
-            Client
+            {t('projects.card.client')}
           </span>
           <div className="flex items-center gap-2 p-2 rounded-lg bg-base-200/50 hover:bg-base-200 transition-colors">
             <div className="avatar">
-              <div className="ring-1 ring-primary/20 ring-offset-base-100 w-7 h-7 rounded-lg ring-offset-1">
+              <div className="ring-1 ring-primary/20 ring-offset-base-100 w-7 h-7 rounded-full ring-offset-1">
                 <img
                   alt={clientId}
                   src="https://avatar.iran.liara.run/username?username=rezamohmedi"
@@ -73,7 +76,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="space-y-1.5">
           <span className="text-xs font-medium text-base-content flex items-center gap-1.5">
             <Icon name="people" className="text-sm text-primary" />
-            Groups
+            {t('projects.card.groups')}
           </span>
           <div className="flex gap-1.5 flex-wrap">
             {groups.map((group, index) => (
@@ -87,7 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="space-y-1.5">
           <span className="text-xs font-medium text-base-content flex items-center gap-1.5">
             <Icon name="profileuser" className="text-sm text-primary" />
-            Team Members
+            {t('projects.card.teamMembers')}
           </span>
           <div className="avatar-group -space-x-3 rtl:space-x-reverse">
             {users.map((user, index) => (
@@ -110,7 +113,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="space-y-1">
             <span className="text-xs text-base-content/60 flex items-center gap-1.5">
               <Icon name="timer" className="text-sm text-primary" />
-              Total Time
+              {t('projects.card.totalTime')}
             </span>
             <div className="badge badge-primary badge-sm font-medium">{totalTrackedTime} hrs</div>
           </div>
@@ -118,7 +121,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="space-y-1">
             <span className="text-xs text-base-content/60 flex items-center gap-1.5">
               <Icon name="moneys" className="text-sm text-primary" />
-              Billable
+              {t('projects.card.billable')}
             </span>
             <div className="badge badge-secondary badge-sm font-medium">${billableAmount}</div>
           </div>
@@ -128,7 +131,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="space-y-1">
             <span className="text-xs text-base-content/60 flex items-center gap-1.5">
               <Icon name="calendar" className="text-sm text-primary" />
-              Work Hours
+              {t('projects.card.workHours')}
             </span>
             <div className="badge badge-accent badge-sm font-medium">
               {allowedWorkHours.start} - {allowedWorkHours.end}

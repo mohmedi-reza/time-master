@@ -1,30 +1,49 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import SettingCard from "../../components/settings/SettingCard";
 import AboutSection from "../../components/settings/AboutSection";
 import { SettingSection, AboutInfo } from "../../interfaces/setting.interface";
 
 const SettingPage: React.FC = () => {
+  const { t } = useTranslation();
+
   // Mock settings sections data
   const settingSections: SettingSection[] = [
     {
-      title: "Account Settings",
+      title: t('settings.sections.account.title'),
       icon: "user",
-      items: ["Profile Information", "Password & Security", "Notifications"],
+      items: [
+        t('settings.sections.account.items.profile'),
+        t('settings.sections.account.items.security'),
+        t('settings.sections.account.items.notifications'),
+      ],
     },
     {
-      title: "Workspace",
+      title: t('settings.sections.workspace.title'),
       icon: "setting",
-      items: ["Theme", "Language", "Time Zone"],
+      items: [
+        t('settings.sections.workspace.items.theme'),
+        t('settings.sections.workspace.items.language'),
+        t('settings.sections.workspace.items.timezone'),
+      ],
     },
     {
-      title: "Integrations",
+      title: t('settings.sections.integrations.title'),
       icon: "link",
-      items: ["Connected Apps", "API Keys", "Webhooks"],
+      items: [
+        t('settings.sections.integrations.items.apps'),
+        t('settings.sections.integrations.items.api'),
+        t('settings.sections.integrations.items.webhooks'),
+      ],
     },
     {
-      title: "Privacy",
+      title: t('settings.sections.privacy.title'),
       icon: "shield",
-      items: ["Data Usage", "Cookie Settings", "Privacy Policy"],
+      items: [
+        t('settings.sections.privacy.items.data'),
+        t('settings.sections.privacy.items.cookies'),
+        t('settings.sections.privacy.items.policy'),
+      ],
     },
   ];
 
@@ -32,9 +51,9 @@ const SettingPage: React.FC = () => {
   const aboutInfo: AboutInfo = {
     version: "1.0.0",
     links: [
-      { icon: "document", label: "Documentation" },
-      { icon: "Support", label: "Support" },
-      { icon: "github", label: "GitHub" },
+      { icon: "document", label: t('settings.about.links.docs') },
+      { icon: "Support", label: t('settings.about.links.support') },
+      { icon: "github", label: t('settings.about.links.github') },
     ],
   };
 
@@ -49,10 +68,10 @@ const SettingPage: React.FC = () => {
       <div className="flex justify-between items-start animate-fade-in">
         <div className="space-y-1">
           <h1 className="text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Settings
+            {t('settings.overview.title')}
           </h1>
           <p className="text-base-content/60 text-lg">
-            Customize your workspace preferences
+            {t('settings.overview.description')}
           </p>
         </div>
       </div>

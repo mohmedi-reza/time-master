@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { SidebarItemProps } from "../../interfaces/SidebarItem";
 import Icon from "./icon/icon.component";
 import { CSS } from "@dnd-kit/utilities";
+import { useTranslation } from "react-i18next";
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
   item,
@@ -9,6 +10,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   location,
   navigate,
 }) => {
+  const { t } = useTranslation();
   const {
     attributes,
     listeners,
@@ -53,7 +55,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           }
         }}
         tabIndex={0}
-        aria-label={`Navigate to ${item.label}`}
+        aria-label={t(item.label)}
       >
         <Icon 
           name={item.name} 
@@ -65,7 +67,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           <span className={`text-inherit font-medium transition-all duration-300 ${
             isDragging ? 'opacity-75' : ''
           }`}>
-            {item.label}
+            {t(item.label)}
           </span>
         )}
 

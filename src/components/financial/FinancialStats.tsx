@@ -1,46 +1,49 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 import { IconName } from "../common/icon/iconPack";
 
 const FinancialStats: React.FC = () => {
+  const { t } = useTranslation();
+
   const stats = [
     {
-      title: "Total Income",
+      title: t('financial.stats.totalIncome.title'),
       value: "$1,250.00",
       icon: "moneyRecive" as IconName,
       iconBg: "bg-success/10",
       iconColor: "text-success",
       change: 12,
       changeType: "success",
-      description: "from last month"
+      description: t('financial.stats.totalIncome.description')
     },
     {
-      title: "Total Expenses",
+      title: t('financial.stats.totalExpenses.title'),
       value: "$475.00",
       icon: "moneySend",
       iconBg: "bg-error/10",
       iconColor: "text-error",
       change: -8,
       changeType: "error",
-      description: "from last month"
+      description: t('financial.stats.totalExpenses.description')
     },
     {
-      title: "Net Balance",
+      title: t('financial.stats.netBalance.title'),
       value: "$775.00",
       icon: "wallet",
       iconBg: "bg-primary/10",
       iconColor: "text-primary",
       change: 15,
       changeType: "success",
-      description: "from last month"
+      description: t('financial.stats.netBalance.description')
     },
     {
-      title: "Pending",
+      title: t('financial.stats.pending.title'),
       value: "3",
       icon: "timer",
       iconBg: "bg-warning/10",
       iconColor: "text-warning",
-      description: "2 incoming, 1 outgoing",
+      description: t('financial.stats.pending.description'),
       showChangeAsInfo: true
     }
   ];

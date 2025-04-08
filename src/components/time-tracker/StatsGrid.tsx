@@ -1,6 +1,7 @@
 import React from "react";
 import StatCard from "./StatCard";
 import { IconName } from "../common/icon/iconPack";
+import { useTranslation } from "react-i18next";
 
 interface StatData {
   title: string;
@@ -10,11 +11,13 @@ interface StatData {
 }
 
 const StatsGrid: React.FC = () => {
+  const { t } = useTranslation();
+
   const stats: StatData[] = [
-    { title: "Today's Hours", value: "08:45", icon: "clock", change: 12.5 },
-    { title: "Week Total", value: "38:15", icon: "calendarTick", change: -2.4 },
-    { title: "Tasks Done", value: "12", icon: "taskSquare", change: 8.1 },
-    { title: "Billable Hours", value: "32:30", icon: "dollarCircle", change: 5.3 },
+    { title: t('timeTracker.stats.todayHours'), value: "08:45", icon: "clock", change: 12.5 },
+    { title: t('timeTracker.stats.weekTotal'), value: "38:15", icon: "calendarTick", change: -2.4 },
+    { title: t('timeTracker.stats.tasksDone'), value: "12", icon: "taskSquare", change: 8.1 },
+    { title: t('timeTracker.stats.billableHours'), value: "32:30", icon: "dollarCircle", change: 5.3 }
   ];
 
   return (

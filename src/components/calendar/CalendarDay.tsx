@@ -1,8 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { format, isToday, isSameMonth } from "date-fns";
 import { DayProps } from "../../interfaces/calendar.interface";
 
 const CalendarDay: React.FC<DayProps> = ({ day, selectedDate, tasks, onSelectDate }) => {
+  const { t } = useTranslation();
   const isSelected = format(day, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
   const hasEvents = tasks.length > 0;
 
@@ -29,7 +31,7 @@ const CalendarDay: React.FC<DayProps> = ({ day, selectedDate, tasks, onSelectDat
       )}
       {hasEvents && isSelected && (
         <div className="text-[10px] mt-0.5 font-medium">
-          {tasks.length} tasks
+          {tasks.length} {t('calendar.task.tasks')}
         </div>
       )}
     </div>

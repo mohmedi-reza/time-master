@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import ChartCard from "../common/ChartCard";
@@ -15,6 +16,8 @@ const TeamWorkingHoursChart: React.FC<TeamWorkingHoursChartProps> = ({
   primaryColor,
   primaryColorLight
 }) => {
+  const { t } = useTranslation();
+
   const options: ApexOptions = {
     chart: {
       type: "bar",
@@ -58,7 +61,7 @@ const TeamWorkingHoursChart: React.FC<TeamWorkingHoursChartProps> = ({
     },
     yaxis: {
       title: {
-        text: "Hours",
+        text: t('reports.tables.groupStatistics.columns.hours'),
         style: { 
           color: "#9ca3af",
           fontSize: '13px',
@@ -78,7 +81,7 @@ const TeamWorkingHoursChart: React.FC<TeamWorkingHoursChartProps> = ({
     },
     tooltip: {
       theme: "dark",
-      y: { formatter: (val: number) => `${val} hours` },
+      y: { formatter: (val: number) => `${val} ${t('reports.tables.groupStatistics.columns.hours')}` },
     },
     colors: [primaryColor, primaryColorLight],
     grid: {
@@ -89,17 +92,17 @@ const TeamWorkingHoursChart: React.FC<TeamWorkingHoursChartProps> = ({
 
   const series = [
     {
-      name: "Working Hours",
+      name: t('reports.charts.teamWorkingHours.workingHours'),
       data: data.map((item) => item.hours),
     },
     {
-      name: "Target Hours",
+      name: t('reports.charts.teamWorkingHours.targetHours'),
       data: data.map((item) => item.target - item.hours),
     },
   ];
 
   return (
-    <ChartCard title="Team Working Hours vs Target" icon="chart">
+    <ChartCard title={t('reports.charts.teamWorkingHours.title')} icon="chart">
       <ReactApexChart
         options={options}
         series={series}

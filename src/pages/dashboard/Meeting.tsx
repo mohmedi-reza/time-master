@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { isAfter, isBefore, parseISO } from "date-fns";
 import MeetingSection from "../../components/meetings/MeetingSection";
 import GoogleConnectButton from "../../components/meetings/GoogleConnectButton";
 import { Meeting } from "../../interfaces/meeting.interface";
 
 const MeetingPage: React.FC = () => {
+  const { t } = useTranslation();
   const [isGoogleConnected, setIsGoogleConnected] = useState(false);
   const [meetings, setMeetings] = useState<Meeting[]>([]);
   const [loading, setLoading] = useState(true);
@@ -66,8 +68,10 @@ const MeetingPage: React.FC = () => {
     <div className="space-y-6 p-6 bg-gradient-to-br from-base-100 to-base-200 min-h-screen">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="space-y-1">
-          <h1 className="text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Meetings</h1>
-          <p className="text-base-content/60 text-lg">Manage your meetings and calendar events</p>
+          <h1 className="text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {t('meetings.overview.title')}
+          </h1>
+          <p className="text-base-content/60 text-lg">{t('meetings.overview.subtitle')}</p>
         </div>
         <GoogleConnectButton
           isConnected={isGoogleConnected}
@@ -77,17 +81,17 @@ const MeetingPage: React.FC = () => {
 
       <div className="grid grid-cols-1 gap-6">
         <MeetingSection
-          title="Upcoming Meetings"
+          title={t('meetings.sections.upcoming.title')}
           icon="calendar"
           meetings={getUpcomingMeetings()}
-          emptyStateMessage="No upcoming meetings scheduled"
+          emptyStateMessage={t('meetings.sections.upcoming.empty')}
         />
 
         <MeetingSection
-          title="Past Meetings"
+          title={t('meetings.sections.past.title')}
           icon="timer"
           meetings={getPastMeetings()}
-          emptyStateMessage="No past meetings this week"
+          emptyStateMessage={t('meetings.sections.past.empty')}
         />
       </div>
     </div>

@@ -1,9 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Toolbar from "../components/common/Toolbar";
 import Sidebar from "../components/common/Sidebar";
 
 const DashboardLayout: React.FC = () => {
+  const { i18n } = useTranslation();
+  const isRTL = i18n.language === "fa";
+
   const handleWorkspaceChange = (workspaceId: string) => {
     console.log('Workspace changed:', workspaceId);
     // TODO: Implement workspace change
@@ -14,7 +18,7 @@ const DashboardLayout: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden">
+    <div className={`flex h-screen w-screen overflow-hidden ${isRTL ? 'rtl' : 'ltr'}`}>
       <Sidebar />
       <div className="flex flex-1 flex-col">
         <Toolbar 

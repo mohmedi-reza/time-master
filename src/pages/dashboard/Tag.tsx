@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../../components/common/icon/icon.component";
 import CategoryCard from "../../components/tag/CategoryCard";
 import AddTagModal from "../../components/tag/AddTagModal";
@@ -6,6 +7,7 @@ import AddCategoryModal from "../../components/tag/AddCategoryModal";
 import { Tag, Category, TagColor, TagFormData, CategoryFormData } from "../../interfaces/tag.interface";
 
 const TagPage: React.FC = () => {
+  const { t } = useTranslation();
   const [showAddCategory, setShowAddCategory] = useState(false);
 
   // Mock categories for demonstration
@@ -69,8 +71,10 @@ const TagPage: React.FC = () => {
     <div className="space-y-6 p-4 bg-gradient-to-br from-base-100 to-base-200 min-h-screen">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Tags</h1>
-          <p className="text-gray-400 mt-1 text-sm">Manage tags and categorization</p>
+          <h1 className="text-3xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {t('sidebar.items.tags')}
+          </h1>
+          <p className="text-gray-400 mt-1 text-sm">{t('tags.overview.subtitle')}</p>
         </div>
         <div className="join gap-2">
           <button
@@ -78,14 +82,14 @@ const TagPage: React.FC = () => {
             onClick={() => setShowAddCategory(true)}
           >
             <Icon name="folderAdd" className="text-lg" />
-            Add Category
+            {t('tags.actions.addCategory')}
           </button>
           <button
             className="btn btn-primary gap-2 hover:scale-105 transition-transform"
             onClick={() => (document.getElementById('add_tag_modal') as HTMLDialogElement)?.showModal()}
           >
             <Icon name="tagUser" className="text-lg" />
-            Add Tag
+            {t('tags.actions.addTag')}
           </button>
         </div>
       </div>
@@ -104,7 +108,7 @@ const TagPage: React.FC = () => {
         {categories.length === 0 && (
           <div className="text-center p-6 bg-base-200/50 rounded-lg">
             <Icon name="folder" className="text-4xl text-base-content/30 mx-auto mb-3" />
-            <p className="text-base-content/60 text-sm">No categories yet. Create one to get started!</p>
+            <p className="text-base-content/60 text-sm">{t('tags.empty.noCategories')}</p>
           </div>
         )}
       </div>

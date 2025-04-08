@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import StatCard from "../../components/common/StatCard";
 import TeamWorkingHoursChart from "../../components/report/TeamWorkingHoursChart";
 import WeeklyTrendsChart from "../../components/report/WeeklyTrendsChart";
@@ -9,6 +10,7 @@ import { IconName } from "../../components/common/icon/iconPack";
 import { TimeData, UserTimeData } from "../../interfaces/report.interface";
 
 const ReportPage: React.FC = () => {
+  const { t } = useTranslation();
   const [dateRange, setDateRange] = useState("week");
   const [primaryColor, setPrimaryColor] = useState("#000");
   const [primaryColorLight, setPrimaryColorLight] = useState("#0002");
@@ -53,25 +55,25 @@ const ReportPage: React.FC = () => {
 
   const stats: { title: string; value: string | number; change: number; icon: IconName; }[] = [
     {
-      title: "Total Hours",
+      title: t('reports.stats.totalHours.title'),
       value: groupTimeData.reduce((acc, curr) => acc + curr.hours, 0),
       change: 12.5,
       icon: "timer",
     },
     {
-      title: "Team Efficiency",
+      title: t('reports.stats.teamEfficiency.title'),
       value: "87%",
       change: 4.2,
       icon: "chart",
     },
     {
-      title: "Tasks Completed",
+      title: t('reports.stats.tasksCompleted.title'),
       value: groupTimeData.reduce((acc, curr) => acc + curr.completedTasks, 0),
       change: -2.4,
       icon: "task",
     },
     {
-      title: "Active Projects",
+      title: t('reports.stats.activeProjects.title'),
       value: 12,
       change: 8.1,
       icon: "folder",
@@ -82,9 +84,9 @@ const ReportPage: React.FC = () => {
     <div className="p-4 space-y-6 min-h-screen bg-gradient-to-br from-base-100 to-base-200">
       <div className="animate-fade-in space-y-1">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          Reports & Analytics
+          {t('reports.overview.title')}
         </h1>
-        <p className="text-base-content/60 text-sm">Track your team's performance and productivity metrics</p>
+        <p className="text-base-content/60 text-sm">{t('reports.overview.subtitle')}</p>
       </div>
 
       {/* Date Range Filter */}
@@ -100,13 +102,13 @@ const ReportPage: React.FC = () => {
               }`}
               onClick={() => setDateRange(range)}
             >
-              {range.charAt(0).toUpperCase() + range.slice(1)}
+              {t(`reports.filters.${range}`)}
             </button>
           ))}
         </div>
         <button className="btn btn-primary btn-sm gap-2 hover:scale-105 transition-all duration-300 rounded-lg">
           <Icon name="documentDownload" className="text-base" />
-          Export Report
+          {t('reports.overview.exportReport')}
         </button>
       </div>
 

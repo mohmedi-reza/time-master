@@ -17,6 +17,7 @@ const LandingPage = () => {
   const usersSponsor = generateUserImages(0);
   const navigate = useNavigate();
   const { setIsAuthenticated } = useAuth();
+  const sectionsArray = sections();
 
   // Refs
   const heroRef = useRef<HTMLDivElement>(null);
@@ -47,20 +48,20 @@ const LandingPage = () => {
   // Scroll handler with debounce
   useLayoutEffect(() => {
     let timeoutId: number;
-    
+
     const handleScroll = () => {
       if (timeoutId) clearTimeout(timeoutId);
-      
+
       timeoutId = setTimeout(() => {
         if (!heroRef.current) return;
 
         const scrollTop = window.scrollY;
         const newIsScrollingUp = scrollTop < lastScrollTop.current;
-        
+
         if (newIsScrollingUp !== isScrollingUp) {
           setIsScrollingUp(newIsScrollingUp);
         }
-        
+
         lastScrollTop.current = scrollTop;
 
         const { offsetTop, clientHeight } = heroRef.current;
@@ -129,7 +130,7 @@ const LandingPage = () => {
     });
 
     // Section triggers
-    const sectionTriggers = sections.map((_, index) => 
+    const sectionTriggers = sectionsArray.map((_, index) =>
       ScrollTrigger.create({
         trigger: `.section-${index}`,
         start: "top center",
@@ -190,7 +191,7 @@ const LandingPage = () => {
       rotateAnimation.current?.kill();
       [...sectionTriggers, section5Trigger, sponsorsTrigger].forEach(trigger => trigger.kill());
     };
-  }, [isScrollingUp, sections.length, isSection5End]);
+  }, [isScrollingUp, sectionsArray.length, isSection5End]);
 
   // Height adjustment
   useEffect(() => {
@@ -218,7 +219,7 @@ const LandingPage = () => {
         position: 'relative' as const
       };
     }
-    
+
     return {
       ...baseStyle,
       transform: `translateY(${scaleValue(scrollYProgress, [17, 35], [120, 0])}%)`,
@@ -262,7 +263,7 @@ const LandingPage = () => {
       >
         {/* Left Column */}
         <div ref={leftColumnRef} className="shrink xl:w-1/2">
-          {sections.map((section, index) => (
+          {sectionsArray.map((section, index) => (
             <div
               key={section.id}
               className={`section-${index} flex min-h-[calc(100vh-4rem)] items-center justify-center px-2 py-10 text-center xl:justify-start xl:pe-0 xl:ps-10 xl:text-start`}
@@ -285,7 +286,7 @@ const LandingPage = () => {
           >
             <div className="overflow-y-auto" style={{ maxHeight: "30rem" }}>
               <div className="p-6">
-                {sections[activeSectionIndex].rightContent}
+                {sectionsArray[activeSectionIndex].rightContent}
               </div>
             </div>
           </div>
