@@ -1,6 +1,5 @@
-import React from "react";
-import WorkLogForm from "./WorkLogForm";
 import { useTranslation } from "react-i18next";
+import WorkLogForm from "./WorkLogForm";
 
 const WorkLogList = () => {
   const { t } = useTranslation();
