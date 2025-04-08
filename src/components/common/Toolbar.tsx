@@ -36,18 +36,20 @@ const Toolbar: React.FC<ToolbarProps> = ({
   isLoading = false,
 }) => {
   const [theme, setTheme] = useState<string>(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return savedTheme || (prefersDark ? 'dark' : 'light');
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    return savedTheme || (prefersDark ? "dark" : "light");
   });
 
   const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleThemeChange = (newTheme: string) => {
-    document.documentElement.setAttribute('data-theme', newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
   const handleLogout = () => {
@@ -57,29 +59,34 @@ const Toolbar: React.FC<ToolbarProps> = ({
   };
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem('theme')) {
-        handleThemeChange(e.matches ? 'dark' : 'light');
+      if (!localStorage.getItem("theme")) {
+        handleThemeChange(e.matches ? "dark" : "light");
       }
     };
 
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   return (
     <div className="navbar bg-gradient-to-r from-base-100 to-base-200 border-b border-accent/20 p-4 backdrop-blur-sm z-40 sticky top-0">
       <div className="flex flex-1 gap-4 justify-between">
         <div className="flex items-center gap-4">
-          <button className={showMenuButton ? "block" : "hidden"} onClick={onMenuClick}>
+          <button
+            type="button"
+            className={showMenuButton ? "block" : "hidden"}
+            onClick={onMenuClick}
+            title="Open menu"
+          >
             <Icon name="menu" className="text-3xl text-primary" />
           </button>
-          
+
           <ErrorBoundary>
             <WorkspaceSelector
               workspaces={workspaces}
