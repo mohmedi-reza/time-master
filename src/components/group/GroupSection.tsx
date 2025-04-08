@@ -1,64 +1,89 @@
-import React from "react";
-import Icon from "../common/icon/icon.component";
-import Section from "../common/Section";
-import FilterBar from "../common/FilterBar";
+import React, { ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import GroupCard from "./GroupCard";
-import { Group } from "../../interfaces/group.interface";
+import Icon from "../common/icon/icon.component";
+
+interface Group {
+  name: string;
+  members: string[];
+  hours: number;
+  projects: string[];
+}
 
 interface GroupSectionProps {
   groups: Group[];
   searchTerm: string;
-  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  filterProject: string;
-  onFilterChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  selectedProject: string;
+  onProjectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   sortOrder: "asc" | "desc";
-  onSortChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onSortChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   projects: string[];
-  isLoading: boolean;
 }
 
 const GroupSection: React.FC<GroupSectionProps> = ({
   groups,
   searchTerm,
   onSearchChange,
-  filterProject,
-  onFilterChange,
+  selectedProject,
+  onProjectChange,
   sortOrder,
   onSortChange,
   projects,
-  isLoading,
 }) => {
-  return (
-    <>
-      <Section 
-        title="Groups" 
-        description="Organize teams and manage collaborations"
-        count={groups.length}
-      >
-        <FilterBar
-          searchTerm={searchTerm}
-          onSearchChange={onSearchChange}
-          filterProject={filterProject}
-          onFilterChange={onFilterChange}
-          sortOrder={sortOrder}
-          onSortChange={onSortChange}
-          projects={projects}
-          placeholder="Search groups by name..."
-        />
-      </Section>
+  const { t } = useTranslation();
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {isLoading ? (
-          Array(4).fill(0).map((_, i) => (
-            <div key={i} className="card bg-base-100/50 border border-accent/20 animate-pulse h-48" />
-          ))
-        ) : groups.length === 0 ? (
-          <div className="col-span-full text-center py-12">
-            <Icon name="people" className="text-5xl text-primary/40 mx-auto mb-4" />
-            <p className="text-base-content/60">No groups found matching your criteria</p>
+  return (
+    <div className="space-y-4">
+      <div className="border-l-4 border-primary pl-4">
+        <h2 className="text-xl font-bold text-base-content">{t('group.groups.title')}</h2>
+        <p className="text-sm text-base-content/60 mt-1">{t('group.groups.subtitle')}</p>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-2">
+        <div className="join flex-1">
+          <div className="join-item bg-base-100/50 border border-accent/20 px-3 flex items-center">
+            <Icon name="people" className="text-base-content/60" />
           </div>
-        ) : (
-          groups.map((group, index) => (
+          <input
+            type="text"
+            placeholder={t('group.groups.search')}
+            className="input join-item input-bordered flex-1 bg-base-100/50 border-accent/20"
+            value={searchTerm}
+            onChange={onSearchChange}
+          />
+        </div>
+
+        <select
+          className="select select-bordered bg-base-100/50 border-accent/20"
+          value={selectedProject}
+          onChange={onProjectChange}
+        >
+          <option value="">{t('group.filters.project.all')}</option>
+          {projects.map((project) => (
+            <option key={project} value={project}>
+              {project}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="select select-bordered bg-base-100/50 border-accent/20"
+          value={sortOrder}
+          onChange={onSortChange}
+        >
+          <option value="asc">{t('group.filters.sort.asc')}</option>
+          <option value="desc">{t('group.filters.sort.desc')}</option>
+        </select>
+      </div>
+
+      {groups.length === 0 ? (
+        <div className="text-center py-8 text-base-content/60">
+          {t('group.groups.noGroups')}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {groups.map((group, index) => (
             <GroupCard
               key={index}
               name={group.name}
@@ -66,10 +91,10 @@ const GroupSection: React.FC<GroupSectionProps> = ({
               hours={group.hours}
               projects={group.projects}
             />
-          ))
-        )}
-      </div>
-    </>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 

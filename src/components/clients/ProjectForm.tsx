@@ -1,6 +1,7 @@
 import React from 'react';
 import { ClientProject } from '../../interfaces/client.interface';
 import Icon from '../common/icon/icon.component';
+import { useTranslation } from 'react-i18next';
 
 interface ProjectFormProps {
   project?: ClientProject;
@@ -27,6 +28,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
   onCancel,
   isLoading = false,
 }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = React.useState<ProjectFormData>({
     name: project?.name || '',
     description: project?.description || '',
@@ -77,14 +79,14 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         {/* Project Name */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Project Name*</span>
+            <span className="label-text">{t('clients.forms.project.fields.name')}*</span>
           </label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Enter project name"
+            placeholder={t('clients.forms.project.fields.name')}
             className="input input-bordered w-full"
             required
           />
@@ -93,7 +95,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         {/* Status */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Status*</span>
+            <span className="label-text">{t('clients.forms.project.fields.status')}*</span>
           </label>
           <select
             name="status"
@@ -102,24 +104,24 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
             className="select select-bordered w-full"
             required
           >
-            <option value="pending">Pending</option>
-            <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
-            <option value="on-hold">On Hold</option>
-            <option value="cancelled">Cancelled</option>
+            <option value="pending">{t('clients.details.projects.filters.pending')}</option>
+            <option value="in-progress">{t('clients.details.projects.filters.inProgress')}</option>
+            <option value="completed">{t('clients.details.projects.filters.completed')}</option>
+            <option value="on-hold">{t('clients.details.projects.filters.onHold')}</option>
+            <option value="cancelled">{t('clients.details.projects.filters.cancelled')}</option>
           </select>
         </div>
 
         {/* Description */}
         <div className="form-control w-full md:col-span-2">
           <label className="label">
-            <span className="label-text">Description</span>
+            <span className="label-text">{t('clients.forms.project.fields.description')}</span>
           </label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
-            placeholder="Enter project description"
+            placeholder={t('clients.forms.project.fields.description')}
             className="textarea textarea-bordered w-full h-24"
           />
         </div>
@@ -127,7 +129,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         {/* Progress */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Progress (%)*</span>
+            <span className="label-text">{t('clients.forms.project.fields.progress')}*</span>
           </label>
           <input
             type="number"
@@ -144,7 +146,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         {/* Total Amount */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Total Amount ($)*</span>
+            <span className="label-text">{t('clients.forms.project.fields.totalAmount')}*</span>
           </label>
           <input
             type="number"
@@ -161,7 +163,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         {/* Paid Amount */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Paid Amount ($)*</span>
+            <span className="label-text">{t('clients.forms.project.fields.paidAmount')}*</span>
           </label>
           <input
             type="number"
@@ -179,7 +181,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         {/* Remaining Amount (Read-only) */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Remaining Amount ($)</span>
+            <span className="label-text">{t('clients.forms.project.fields.remainingAmount')}</span>
           </label>
           <input
             type="number"
@@ -192,7 +194,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         {/* Start Date */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Start Date*</span>
+            <span className="label-text">{t('clients.forms.project.fields.startDate')}*</span>
           </label>
           <input
             type="date"
@@ -207,7 +209,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         {/* End Date */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">End Date</span>
+            <span className="label-text">{t('clients.forms.project.fields.endDate')}</span>
           </label>
           <input
             type="date"
@@ -227,7 +229,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
           className="btn btn-ghost"
           disabled={isLoading}
         >
-          Cancel
+          {t('clients.forms.buttons.cancel')}
         </button>
         <button
           type="submit"
@@ -237,12 +239,12 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
           {isLoading ? (
             <>
               <span className="loading loading-spinner"></span>
-              Saving...
+              {t('clients.forms.buttons.saving')}
             </>
           ) : (
             <>
               <Icon name="tickCircle" />
-              {project ? 'Update Project' : 'Add Project'}
+              {project ? t('clients.forms.buttons.update') : t('clients.forms.buttons.add')}
             </>
           )}
         </button>

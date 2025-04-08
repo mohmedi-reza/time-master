@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 import { Task } from "../../interfaces/task.interface";
 
@@ -9,6 +10,8 @@ interface TaskCardProps {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
+  const { t } = useTranslation();
+
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "high":
@@ -42,7 +45,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
           <div className="flex items-center gap-2">
             <h3 className="font-medium text-sm">{task.title}</h3>
             <span className={`text-xs ${getPriorityColor(task.priority)}`}>
-              • {task.priority}
+              • {t(`tasks.priority.${task.priority}`)}
             </span>
           </div>
           <p className="text-xs text-base-content/60">{task.description}</p>
@@ -56,7 +59,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
               <span className="text-xs">{task.assignee}</span>
             </div>
             <span className={`badge ${getStatusColor(task.status)} badge-xs px-2`}>
-              {task.status}
+              {t(`tasks.status.${task.status}`)}
             </span>
           </div>
         </div>
@@ -64,12 +67,14 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
           <button 
             className="btn btn-ghost btn-xs hover:bg-primary/10 transition-colors"
             onClick={() => onEdit(task.id)}
+            title={t('common.edit')}
           >
             <Icon name="edit" className="text-base text-primary" />
           </button>
           <button 
             className="btn btn-ghost btn-xs hover:bg-error/10 transition-colors"
             onClick={() => onDelete(task.id)}
+            title={t('common.delete')}
           >
             <Icon name="trash" className="text-base text-error" />
           </button>

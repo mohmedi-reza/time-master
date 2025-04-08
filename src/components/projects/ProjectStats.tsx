@@ -2,6 +2,7 @@ import React from "react";
 import Icon from "../common/icon/icon.component";
 import { Project } from "../../interfaces/project.interface";
 import { IconName } from "../common/icon/iconPack";
+import { useTranslation } from "react-i18next";
 
 interface ProjectStatsProps {
   projects: Project[];
@@ -19,6 +20,7 @@ interface StatItem {
 }
 
 const ProjectStats: React.FC<ProjectStatsProps> = ({ projects }) => {
+  const { t } = useTranslation();
   const totalProjects = projects.length;
   const totalHours = projects.reduce((acc, proj) => acc + proj.totalTrackedTime, 0);
   const totalRevenue = projects.reduce((acc, proj) => acc + proj.billableAmount, 0);
@@ -27,44 +29,44 @@ const ProjectStats: React.FC<ProjectStatsProps> = ({ projects }) => {
 
   const stats: StatItem[] = [
     {
-      title: "Total Projects",
+      title: t('projects.stats.totalProjects.title'),
       value: totalProjects.toString(),
       icon: "folder2" as IconName,
       iconBg: "bg-primary/10",
       iconColor: "text-primary",
       subIcon: "tickCircle" as IconName,
       subIconColor: "text-success",
-      subText: `${activeProjects} active`
+      subText: `${activeProjects} ${t('projects.stats.totalProjects.active')}`
     },
     {
-      title: "Total Hours",
+      title: t('projects.stats.totalHours.title'),
       value: totalHours.toString(),
       icon: "timer" as IconName,
       iconBg: "bg-secondary/10",
       iconColor: "text-secondary",
       subIcon: "calendar" as IconName,
       subIconColor: "text-secondary",
-      subText: "Hours tracked"
+      subText: t('projects.stats.totalHours.subtitle')
     },
     {
-      title: "Total Revenue",
+      title: t('projects.stats.totalRevenue.title'),
       value: `$${totalRevenue}`,
       icon: "moneyReceive" as IconName,
       iconBg: "bg-success/10",
       iconColor: "text-success",
       subIcon: "wallet" as IconName,
       subIconColor: "text-success",
-      subText: "Billable amount"
+      subText: t('projects.stats.totalRevenue.subtitle')
     },
     {
-      title: "Team Members",
+      title: t('projects.stats.teamMembers.title'),
       value: totalTeamMembers.toString(),
       icon: "people" as IconName,
       iconBg: "bg-warning/10",
       iconColor: "text-warning",
       subIcon: "profile2User" as IconName,
       subIconColor: "text-warning",
-      subText: "Active members"
+      subText: t('projects.stats.teamMembers.subtitle')
     }
   ];
 

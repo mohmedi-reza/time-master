@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 import { Category, TagColor, TagFormData } from "../../interfaces/tag.interface";
 
@@ -13,6 +14,7 @@ const AddTagModal: React.FC<AddTagModalProps> = ({
   tagColors,
   onAddTag,
 }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<TagFormData>({
     name: "",
     category: "",
@@ -40,9 +42,9 @@ const AddTagModal: React.FC<AddTagModalProps> = ({
           <div>
             <h3 className="text-xl font-bold flex items-center gap-2">
               <Icon name="tagUser" className="text-primary text-lg" />
-              Add New Tag
+              {t('tags.tagModal.title')}
             </h3>
-            <p className="text-xs text-base-content/60 mt-1">Create a new tag to organize your tasks</p>
+            <p className="text-xs text-base-content/60 mt-1">{t('tags.tagModal.subtitle')}</p>
           </div>
 
           <div className="space-y-4">
@@ -50,13 +52,13 @@ const AddTagModal: React.FC<AddTagModalProps> = ({
               <label className="label">
                 <span className="label-text font-medium flex items-center gap-2">
                   <Icon name="edit" className="text-base" />
-                  Tag Name
+                  {t('tags.tagModal.fields.name')}
                 </span>
-                <span className="label-text-alt text-error">{!formData.name.trim() && '*Required'}</span>
+                <span className="label-text-alt text-error">{!formData.name.trim() && t('common.required')}</span>
               </label>
               <input
                 type="text"
-                placeholder="e.g., Important, Urgent, Follow-up"
+                placeholder={t('tags.tagModal.placeholders.name')}
                 className="input input-bordered w-full focus:border-primary transition-colors"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -67,16 +69,16 @@ const AddTagModal: React.FC<AddTagModalProps> = ({
               <label className="label">
                 <span className="label-text font-medium flex items-center gap-2">
                   <Icon name="folder" className="text-base" />
-                  Category
+                  {t('tags.tagModal.fields.category')}
                 </span>
-                <span className="label-text-alt text-error">{!formData.category && '*Required'}</span>
+                <span className="label-text-alt text-error">{!formData.category && t('common.required')}</span>
               </label>
               <select
                 className="select select-bordered w-full focus:border-primary transition-colors"
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
               >
-                <option value="">Select a category</option>
+                <option value="">{t('tags.tagModal.placeholders.selectCategory')}</option>
                 {categories.map(category => (
                   <option key={category.id} value={category.name}>
                     {category.name}
@@ -89,7 +91,7 @@ const AddTagModal: React.FC<AddTagModalProps> = ({
               <label className="label">
                 <span className="label-text font-medium flex items-center gap-2">
                   <Icon name="colorSwatch" className="text-base" />
-                  Color
+                  {t('tags.tagModal.fields.color')}
                 </span>
               </label>
               <div className="grid grid-cols-4 gap-2">
@@ -104,7 +106,7 @@ const AddTagModal: React.FC<AddTagModalProps> = ({
                     } btn-${color.name} hover:scale-105 transition-transform`}
                     onClick={() => setFormData({ ...formData, color: color.name })}
                   >
-                    {color.label}
+                    {t(`common.colors.${color.label.toLowerCase()}`)}
                   </button>
                 ))}
               </div>
@@ -114,14 +116,16 @@ const AddTagModal: React.FC<AddTagModalProps> = ({
           <div className="flex justify-end gap-2">
             <form method="dialog">
               <div className="join gap-2">
-                <button className="btn join-item hover:bg-base-200 transition-colors">Cancel</button>
+                <button className="btn join-item hover:bg-base-200 transition-colors">
+                  {t('common.cancel')}
+                </button>
                 <button
                   type="button"
                   className="btn btn-primary join-item hover:scale-105 transition-transform"
                   onClick={handleSubmit}
                   disabled={!formData.name.trim() || !formData.category}
                 >
-                  Create Tag
+                  {t('tags.tagModal.actions.create')}
                 </button>
               </div>
             </form>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import ChartCard from "../common/ChartCard";
@@ -12,6 +13,8 @@ const WeeklyTrendsChart: React.FC<WeeklyTrendsChartProps> = ({
   primaryColor,
   primaryColorLight,
 }) => {
+  const { t } = useTranslation();
+
   const options: ApexOptions = {
     chart: {
       type: "line",
@@ -97,17 +100,17 @@ const WeeklyTrendsChart: React.FC<WeeklyTrendsChartProps> = ({
 
   const series = [
     {
-      name: "Hours Worked",
+      name: t('reports.charts.weeklyTrends.hoursWorked'),
       data: [30, 40, 35, 50, 49, 20, 25],
     },
     {
-      name: "Tasks Completed",
+      name: t('reports.charts.weeklyTrends.tasksCompleted'),
       data: [20, 25, 30, 35, 30, 15, 20],
     },
   ];
 
   return (
-    <ChartCard title="Weekly Trends" icon="chart2">
+    <ChartCard title={t('reports.charts.weeklyTrends.title')} icon="chart2">
       <ReactApexChart
         options={options}
         series={series}

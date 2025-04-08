@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../../components/common/icon/icon.component";
 
 interface GroupCardProps {
@@ -14,8 +15,10 @@ const GroupCard: React.FC<GroupCardProps> = ({
   hours,
   projects,
 }) => {
+  const { t } = useTranslation();
+
   return (
-    <div className="card bg-base-100/50 border border-accent/20   hover:   transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+    <div className="card bg-base-100/50 border border-accent/20 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
       <div className="card-body p-4">
         <div className="flex items-center gap-2">
           <Icon name="people" className="text-lg text-primary" />
@@ -25,7 +28,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
         <div className="space-y-1.5 mt-3">
           <span className="text-xs text-base-content/60 flex items-center gap-1.5">
             <Icon name="profileuser" className="text-sm text-primary" />
-            Team Members
+            {t('group.groups.card.teamMembers')}
           </span>
           <div className="avatar-group -space-x-4 rtl:space-x-reverse">
             {members.map((member, index) => (
@@ -45,7 +48,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
         <div className="space-y-1 mt-3">
           <span className="text-xs text-base-content/60 flex items-center gap-1.5">
             <Icon name="timer" className="text-sm text-primary" />
-            Total Hours
+            {t('group.groups.card.totalHours')}
           </span>
           <div className="badge badge-primary badge-sm font-medium">{hours} hrs</div>
         </div>
@@ -53,7 +56,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
         <div className="space-y-1.5 mt-3">
           <span className="text-xs text-base-content/60 flex items-center gap-1.5">
             <Icon name="folder" className="text-sm text-primary" />
-            Projects
+            {t('group.groups.card.projects')}
           </span>
           <div className="flex gap-1.5 flex-wrap">
             {projects.map((project, index) => (

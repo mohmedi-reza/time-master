@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { services } from "../../constants/services";
 import ConnectionStats from "../../components/connections/ConnectionStats";
 import ServiceCard from "../../components/connections/ServiceCard";
@@ -6,6 +7,7 @@ import EmptyState from "../../components/connections/EmptyState";
 import { ConnectionState } from "../../interfaces/connection.interface";
 
 const ConnectionPage: React.FC = () => {
+  const { t } = useTranslation();
   const [connections, setConnections] = useState<ConnectionState>({
     jira: { isConnected: true, lastSync: "2024-03-15 10:30 AM" },
     confluence: { isConnected: true, lastSync: "2024-03-15 09:45 AM" },
@@ -34,9 +36,9 @@ const ConnectionPage: React.FC = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Connections
+            {t('sidebar.items.connections')}
           </h1>
-          <p className="text-gray-400 mt-2">Connect and manage your integrations with various services.</p>
+          <p className="text-gray-400 mt-2">{t('connections.overview.subtitle')}</p>
         </div>
         <ConnectionStats connectedCount={connectedCount} totalCount={totalCount} />
       </div>

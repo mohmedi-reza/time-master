@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 import { CategoryFormData } from "../../interfaces/tag.interface";
 
@@ -13,6 +14,7 @@ const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
   onClose,
   onAddCategory,
 }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<CategoryFormData>({
     name: "",
     description: "",
@@ -43,9 +45,9 @@ const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
           <div>
             <h3 className="text-xl font-bold flex items-center gap-2">
               <Icon name="folderAdd" className="text-primary text-lg" />
-              Add New Category
+              {t('tags.categoryModal.title')}
             </h3>
-            <p className="text-xs text-base-content/60 mt-1">Create a category to group related tags</p>
+            <p className="text-xs text-base-content/60 mt-1">{t('tags.categoryModal.subtitle')}</p>
           </div>
 
           <div className="space-y-4">
@@ -53,13 +55,13 @@ const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
               <label className="label">
                 <span className="label-text font-medium flex items-center gap-2">
                   <Icon name="edit" className="text-base" />
-                  Category Name
+                  {t('tags.categoryModal.fields.name')}
                 </span>
-                <span className="label-text-alt text-error">{!formData.name.trim() && '*Required'}</span>
+                <span className="label-text-alt text-error">{!formData.name.trim() && t('common.required')}</span>
               </label>
               <input
                 type="text"
-                placeholder="e.g., Work, Personal, Study"
+                placeholder={t('tags.categoryModal.placeholders.name')}
                 className="input input-bordered w-full focus:border-primary transition-colors"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -70,13 +72,13 @@ const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
               <label className="label">
                 <span className="label-text font-medium flex items-center gap-2">
                   <Icon name="document" className="text-base" />
-                  Description
+                  {t('tags.categoryModal.fields.description')}
                 </span>
-                <span className="label-text-alt text-base-content/60">Optional</span>
+                <span className="label-text-alt text-base-content/60">{t('common.optional')}</span>
               </label>
               <textarea
                 className="textarea textarea-bordered w-full min-h-[100px] focus:border-primary transition-colors"
-                placeholder="Describe the purpose of this category..."
+                placeholder={t('tags.categoryModal.placeholders.description')}
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               />
@@ -90,7 +92,7 @@ const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
                   className="btn join-item hover:bg-base-200 transition-colors"
                   onClick={onClose}
                 >
-                  Cancel
+                  {t('common.cancel')}
                 </button>
                 <button
                   type="button"
@@ -98,7 +100,7 @@ const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
                   onClick={handleSubmit}
                   disabled={!formData.name.trim()}
                 >
-                  Create Category
+                  {t('tags.categoryModal.actions.create')}
                 </button>
               </div>
             </form>

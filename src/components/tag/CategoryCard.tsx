@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 import { Category, Tag } from "../../interfaces/tag.interface";
 import TagBadge from "./TagBadge";
@@ -16,6 +17,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
   onDeleteCategory,
   onDeleteTag,
 }) => {
+  const { t } = useTranslation();
   const categoryTags = tags.filter(tag => tag.category === category.name);
 
   return (
@@ -46,7 +48,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
           ))}
           {categoryTags.length === 0 && (
             <p className="text-base-content/60 p-3 bg-base-200/50 rounded-lg text-center w-full text-sm">
-              No tags in this category
+              {t('tags.category.noTags')}
             </p>
           )}
         </div>

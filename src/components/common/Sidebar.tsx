@@ -20,8 +20,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { sidebarItems as defaultSidebarItems } from "../../constants/sidebarItems";
 import Icon from "./icon/icon.component";
 import SidebarItem from "./SidebarItem";
+import { logoutUser } from "../../services/mock-services/LoginService";
+import { useAuth } from "../../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 const Sidebar: React.FC = () => {
+  const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(() => {
     const savedIsExpanded = localStorage.getItem("isSidebarExpanded");
     return savedIsExpanded !== null ? JSON.parse(savedIsExpanded) : false;
@@ -30,6 +34,7 @@ const Sidebar: React.FC = () => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const { setIsAuthenticated } = useAuth();
 
   useEffect(() => {
     const savedIsExpanded = localStorage.getItem("isSidebarExpanded");
@@ -52,7 +57,7 @@ const Sidebar: React.FC = () => {
         navigate(defaultSidebarItems[0].path);
       }
     }
-  }, []);
+  }, [location.pathname, navigate]);
 
   useEffect(() => {
     localStorage.setItem("isSidebarExpanded", JSON.stringify(isExpanded));
@@ -92,6 +97,12 @@ const Sidebar: React.FC = () => {
 
   const activeItem = sidebarItems.find((item) => item.name === activeId);
 
+  const handleLogout = () => {
+    logoutUser();
+    setIsAuthenticated(false);
+    navigate("/");
+  };
+
   return (
     <div
       className={`relative flex flex-col z-50 h-full bg-gradient-to-b from-base-100 to-base-200 border-r border-accent/20 p-4 transition-all ease-in-out duration-300 backdrop-blur-sm ${
@@ -107,9 +118,9 @@ const Sidebar: React.FC = () => {
           <Icon name={"logo"} className="text-5xl scale-[0.9] text-primary animate-pulse" />
           {isExpanded && (
             <div>
-              <p className="text-nowrap text-xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Time Master</p>
+              <p className="text-nowrap text-xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{t('sidebar.appName')}</p>
               <p className="text-nowrap text-xs text-base-content/60 font-medium">
-                PROJECT MANAGEMENT
+                {t('sidebar.appDescription')}
               </p>
             </div>
           )}
@@ -119,7 +130,7 @@ const Sidebar: React.FC = () => {
             isExpanded ? "" : "rotate-180"
           }`}
           onClick={() => setIsExpanded(!isExpanded)}
-          aria-label="Toggle Sidebar"
+          aria-label={t('sidebar.toggleSidebar')}
         >
           <Icon
             name={"arrowCircleLeft"}
@@ -173,11 +184,11 @@ const Sidebar: React.FC = () => {
           className={`btn btn-ghost hover:bg-primary/10 w-full justify-start gap-2 transition-all duration-300 ${
             !isExpanded && "btn-square"
           }`}
-          onClick={() => console.log("logout")}
+          onClick={handleLogout}
           tabIndex={0}
         >
           <Icon name={"logout"} className="text-2xl text-primary" />
-          {isExpanded && <span className="text-base-content">Logout</span>}
+          {isExpanded && <span className="text-base-content">{t('sidebar.logout')}</span>}
         </button>
       </div>
     </div>

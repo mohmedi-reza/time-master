@@ -4,9 +4,11 @@ import { Client, ClientProject } from '../../interfaces/client.interface';
 import Icon from '../../components/common/icon/icon.component';
 import ProjectForm from '../../components/clients/ProjectForm';
 import ClientForm from '../../components/clients/ClientForm';
+import { useTranslation } from 'react-i18next';
 
 const ClientDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
   const [client, setClient] = React.useState<Client | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
@@ -208,7 +210,7 @@ const ClientDetailPage: React.FC = () => {
                   <div>
                     <h1 className="text-3xl font-bold text-base-content">
                       {client.name}
-                      <div className="badge badge-primary ml-3">Active</div>
+                      <div className="badge badge-primary ml-3">{t('clients.list.status')}</div>
                     </h1>
                     {client.company && (
                       <p className="text-lg text-base-content/60 mt-1">
@@ -250,14 +252,14 @@ const ClientDetailPage: React.FC = () => {
                   onClick={() => window.location.href = `mailto:${client.email}`}
                 >
                   <Icon name="sms" />
-                  Contact
+                  {t('clients.details.contact')}
                 </button>
                 <button
                   className="btn btn-primary"
                   onClick={() => setIsEditClientModalOpen(true)}
                 >
                   <Icon name="edit" />
-                  Edit Client
+                  {t('clients.details.editClient')}
                 </button>
               </div>
             </div>
@@ -271,9 +273,9 @@ const ClientDetailPage: React.FC = () => {
                   <Icon name="folder" className="text-3xl text-primary" />
                 </div>
               </div>
-              <div className="stat-title">Total Projects</div>
+              <div className="stat-title">{t('clients.details.stats.totalProjects.title')}</div>
               <div className="stat-value">{client.projects.length}</div>
-              <div className="stat-desc">Active and completed</div>
+              <div className="stat-desc">{t('clients.details.stats.totalProjects.subtitle')}</div>
             </div>
             <div className="stat bg-base-100 rounded-box shadow-sm border border-success/20">
               <div className="stat-figure text-success">
@@ -281,9 +283,9 @@ const ClientDetailPage: React.FC = () => {
                   <Icon name="moneyRecive" className="text-3xl text-success" />
                 </div>
               </div>
-              <div className="stat-title">Total Paid</div>
+              <div className="stat-title">{t('clients.details.stats.totalPaid.title')}</div>
               <div className="stat-value text-success">${client.totalPaid}</div>
-              <div className="stat-desc">Across all projects</div>
+              <div className="stat-desc">{t('clients.details.stats.totalPaid.subtitle')}</div>
             </div>
             <div className="stat bg-base-100 rounded-box shadow-sm border border-error/20">
               <div className="stat-figure text-error">
@@ -291,9 +293,9 @@ const ClientDetailPage: React.FC = () => {
                   <Icon name="moneyRecive" className="text-3xl text-error" />
                 </div>
               </div>
-              <div className="stat-title">Amount Due</div>
+              <div className="stat-title">{t('clients.details.stats.amountDue.title')}</div>
               <div className="stat-value text-error">${client.totalDue}</div>
-              <div className="stat-desc">Outstanding balance</div>
+              <div className="stat-desc">{t('clients.details.stats.amountDue.subtitle')}</div>
             </div>
           </div>
 
@@ -301,8 +303,8 @@ const ClientDetailPage: React.FC = () => {
           <div className="bg-base-100 rounded-box p-6 shadow-sm border border-primary/20 space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-base-content">Projects</h2>
-                <p className="text-base-content/60">Manage client projects</p>
+                <h2 className="text-2xl font-bold text-base-content">{t('clients.details.projects.title')}</h2>
+                <p className="text-base-content/60">{t('clients.details.projects.subtitle')}</p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <div className="join space-x-2">
@@ -311,12 +313,12 @@ const ClientDetailPage: React.FC = () => {
                     value={projectFilter}
                     onChange={(e) => setProjectFilter(e.target.value)}
                   >
-                    <option value="all">All Status</option>
-                    <option value="pending">Pending</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="completed">Completed</option>
-                    <option value="on-hold">On Hold</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="all">{t('clients.details.projects.filters.allStatus')}</option>
+                    <option value="pending">{t('clients.details.projects.filters.pending')}</option>
+                    <option value="in-progress">{t('clients.details.projects.filters.inProgress')}</option>
+                    <option value="completed">{t('clients.details.projects.filters.completed')}</option>
+                    <option value="on-hold">{t('clients.details.projects.filters.onHold')}</option>
+                    <option value="cancelled">{t('clients.details.projects.filters.cancelled')}</option>
                   </select>
                   <select
                     className="select select-sm select-bordered join-item w-[120px]"
@@ -324,9 +326,9 @@ const ClientDetailPage: React.FC = () => {
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                       setProjectSort(e.target.value as 'date' | 'progress' | 'amount')}
                   >
-                    <option value="date">Sort: Date</option>
-                    <option value="progress">Sort: Progress</option>
-                    <option value="amount">Sort: Amount</option>
+                    <option value="date">{t('clients.details.projects.sort.date')}</option>
+                    <option value="progress">{t('clients.details.projects.sort.progress')}</option>
+                    <option value="amount">{t('clients.details.projects.sort.amount')}</option>
                   </select>
                 </div>
                 <button
@@ -337,7 +339,7 @@ const ClientDetailPage: React.FC = () => {
                   }}
                 >
                   <Icon name="add" />
-                  Add Project
+                  {t('clients.details.projects.addProject')}
                 </button>
               </div>
             </div>
@@ -355,11 +357,11 @@ const ClientDetailPage: React.FC = () => {
                                 project.status === 'on-hold' ? 'badge-error' :
                                   'badge-ghost'
                             }`}>
-                            {project.status}
+                            {t(`clients.details.projects.filters.${project.status.replace('-', '')}`)}
                           </div>
                         </h3>
                         <p className="text-sm text-base-content/60">
-                          Started {new Date(project.startDate).toLocaleDateString()}
+                          {t('clients.forms.project.fields.startDate')}: {new Date(project.startDate).toLocaleDateString()}
                         </p>
                       </div>
                       <div className="dropdown dropdown-end">
@@ -373,19 +375,19 @@ const ClientDetailPage: React.FC = () => {
                               setIsProjectModalOpen(true);
                             }}>
                               <Icon name="edit" />
-                              Edit Project
+                              {t('clients.details.projects.actions.editProject')}
                             </button>
                           </li>
                           <li>
                             <button>
                               <Icon name="chart" />
-                              View Timeline
+                              {t('clients.details.projects.actions.viewTimeline')}
                             </button>
                           </li>
                           <li>
                             <button>
                               <Icon name="document" />
-                              Generate Report
+                              {t('clients.details.projects.actions.generateReport')}
                             </button>
                           </li>
                         </ul>
@@ -399,7 +401,7 @@ const ClientDetailPage: React.FC = () => {
                     <div className="mt-4 space-y-4">
                       <div>
                         <div className="flex justify-between items-center text-sm mb-1">
-                          <span className="text-base-content/70">Progress</span>
+                          <span className="text-base-content/70">{t('clients.details.projects.metrics.progress')}</span>
                           <span className="font-medium">{project.progress}%</span>
                         </div>
                         <div className="w-full bg-base-300 rounded-full h-2">
@@ -415,19 +417,19 @@ const ClientDetailPage: React.FC = () => {
 
                       <div className="grid grid-cols-3 gap-4">
                         <div className="flex flex-col items-center p-3 bg-base-100 rounded-lg">
-                          <span className="text-xs text-base-content/70">Total</span>
+                          <span className="text-xs text-base-content/70">{t('clients.details.projects.metrics.total')}</span>
                           <span className="text-lg font-semibold text-primary">
                             ${project.totalAmount}
                           </span>
                         </div>
                         <div className="flex flex-col items-center p-3 bg-base-100 rounded-lg">
-                          <span className="text-xs text-base-content/70">Paid</span>
+                          <span className="text-xs text-base-content/70">{t('clients.details.projects.metrics.paid')}</span>
                           <span className="text-lg font-semibold text-success">
                             ${project.paidAmount}
                           </span>
                         </div>
                         <div className="flex flex-col items-center p-3 bg-base-100 rounded-lg">
-                          <span className="text-xs text-base-content/70">Due</span>
+                          <span className="text-xs text-base-content/70">{t('clients.details.projects.metrics.due')}</span>
                           <span className="text-lg font-semibold text-error">
                             ${project.remainingAmount}
                           </span>
@@ -444,11 +446,11 @@ const ClientDetailPage: React.FC = () => {
                 <div className="w-16 h-16 bg-base-200 rounded-full mx-auto flex items-center justify-center mb-4">
                   <Icon name="folder" className="text-3xl text-primary/60" />
                 </div>
-                <h3 className="text-lg font-semibold text-base-content/70">No projects found</h3>
+                <h3 className="text-lg font-semibold text-base-content/70">{t('clients.details.projects.noProjects.title')}</h3>
                 <p className="text-base-content/50">
                   {projectFilter !== 'all'
-                    ? 'Try changing the filter to see more projects'
-                    : 'Start by adding your first project'}
+                    ? t('clients.details.projects.noProjects.withFilter')
+                    : t('clients.details.projects.noProjects.withoutFilter')}
                 </p>
               </div>
             )}
@@ -460,7 +462,7 @@ const ClientDetailPage: React.FC = () => {
               <div className="modal-box w-11/12 max-w-3xl">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-2xl font-bold">
-                    {selectedProject ? 'Edit Project' : 'Add New Project'}
+                    {selectedProject ? t('clients.forms.project.title.edit') : t('clients.forms.project.title.add')}
                   </h3>
                   <button
                     className="btn btn-sm btn-circle btn-ghost"
@@ -497,7 +499,7 @@ const ClientDetailPage: React.FC = () => {
             <div className="modal modal-open">
               <div className="modal-box w-11/12 max-w-3xl">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-2xl font-bold">Edit Client</h3>
+                  <h3 className="text-2xl font-bold">{t('clients.forms.client.title.edit')}</h3>
                   <button
                     className="btn btn-sm btn-circle btn-ghost"
                     onClick={() => setIsEditClientModalOpen(false)}
@@ -521,8 +523,8 @@ const ClientDetailPage: React.FC = () => {
         </>
       ) : (
         <div className="text-center py-12">
-          <h3 className="text-lg font-semibold text-base-content/70">Client not found</h3>
-          <p className="text-base-content/50">The requested client could not be found</p>
+          <h3 className="text-lg font-semibold text-base-content/70">{t('clients.list.noClients.title')}</h3>
+          <p className="text-base-content/50">{t('clients.list.noClients.withoutSearch')}</p>
         </div>
       )}
     </div>

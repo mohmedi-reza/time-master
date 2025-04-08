@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Icon from "../common/icon/icon.component";
 import MultiSelect from "../common/MultiSelect";
+import { useTranslation } from "react-i18next";
 
 const projects = ["Admin Panel", "Client Side", "Hangout Location"];
 
 const WorkLogForm: React.FC = () => {
+  const { t } = useTranslation();
   const [startTime, setStartTime] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
   const [duration, setDuration] = useState<string>("00:00:00");
@@ -87,7 +89,7 @@ const WorkLogForm: React.FC = () => {
         <input
           type="text"
           className="input join-item bg-transparent border-0 focus:outline-none w-full"
-          placeholder="What have you worked on?"
+          placeholder={t('timeTracker.workLog.form.whatWorkedOn')}
         />
       </div>
 
@@ -170,9 +172,9 @@ const WorkLogForm: React.FC = () => {
         )}
       </div>
 
-      <button className="btn btn-primary hover:scale-105 transition-all duration-300   rounded-xl gap-2 w-full lg:w-auto">
+      <button className="btn btn-primary hover:scale-105 transition-all duration-300 rounded-xl gap-2 w-full lg:w-auto">
         <Icon name="addCircle" className="text-lg" />
-        Add Entry
+        {t('timeTracker.workLog.form.addEntry')}
       </button>
     </div>
   );

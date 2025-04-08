@@ -1,8 +1,8 @@
 import React from "react";
 import FinancialHeader from "../../components/financial/FinancialHeader";
-import WalletCard from "../../components/financial/WalletCard";
 import FinancialStats from "../../components/financial/FinancialStats";
 import TransactionHistory from "../../components/financial/TransactionHistory";
+import WalletCard from "../../components/financial/WalletCard";
 
 const FinancialPage: React.FC = () => {
   // Mock data - replace with actual data later

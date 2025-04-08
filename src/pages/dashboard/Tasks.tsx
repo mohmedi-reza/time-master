@@ -1,18 +1,20 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../../components/common/icon/icon.component";
 import StatCard from "../../components/tasks/StatCard";
 import TaskList from "../../components/tasks/TaskList";
 import { Task, TaskStat } from "../../interfaces/task.interface";
 
 const TaskPage: React.FC = () => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
 
   // Mock statistics for the dashboard
   const stats: TaskStat[] = [
-    { title: "Total Tasks", value: "24", icon: "taskSquare" },
-    { title: "In Progress", value: "8", icon: "timer" },
-    { title: "Completed", value: "12", icon: "tickCircle" },
-    { title: "Overdue", value: "4", icon: "danger" },
+    { title: t('tasks.stats.total'), value: "24", icon: "taskSquare" },
+    { title: t('tasks.stats.inProgress'), value: "8", icon: "timer" },
+    { title: t('tasks.stats.completed'), value: "12", icon: "tickCircle" },
+    { title: t('tasks.stats.overdue'), value: "4", icon: "danger" },
   ];
 
   // Mock tasks data
@@ -71,15 +73,15 @@ const TaskPage: React.FC = () => {
       <div className="flex justify-between items-start animate-fade-in">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Tasks Dashboard
+            {t('tasks.overview.title')}
           </h1>
           <p className="text-base-content/60 text-sm">
-            Track and manage your tasks efficiently
+            {t('tasks.overview.subtitle')}
           </p>
         </div>
         <button className="btn btn-primary btn-sm gap-2 hover:scale-105 transition-transform duration-300">
           <Icon name="addSquare" className="text-base" />
-          New Task
+          {t('tasks.actions.newTask')}
         </button>
       </div>
 

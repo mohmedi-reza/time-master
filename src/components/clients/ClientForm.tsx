@@ -1,6 +1,7 @@
 import React from 'react';
 import { Client } from '../../interfaces/client.interface';
 import Icon from '../common/icon/icon.component';
+import { useTranslation } from 'react-i18next';
 
 interface ClientFormProps {
   client?: Client;
@@ -15,6 +16,7 @@ const ClientForm: React.FC<ClientFormProps> = ({
   onCancel,
   isLoading = false,
 }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = React.useState<Partial<Client>>({
     name: client?.name || '',
     email: client?.email || '',
@@ -39,14 +41,14 @@ const ClientForm: React.FC<ClientFormProps> = ({
         {/* Name */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Client Name*</span>
+            <span className="label-text">{t('clients.forms.client.fields.name')}*</span>
           </label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Enter client name"
+            placeholder={t('clients.forms.client.fields.name')}
             className="input input-bordered w-full"
             required
           />
@@ -55,14 +57,14 @@ const ClientForm: React.FC<ClientFormProps> = ({
         {/* Email */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Email Address*</span>
+            <span className="label-text">{t('clients.forms.client.fields.email')}*</span>
           </label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Enter email address"
+            placeholder={t('clients.forms.client.fields.email')}
             className="input input-bordered w-full"
             required
           />
@@ -71,14 +73,14 @@ const ClientForm: React.FC<ClientFormProps> = ({
         {/* Phone */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Phone Number</span>
+            <span className="label-text">{t('clients.forms.client.fields.phone')}</span>
           </label>
           <input
             type="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="Enter phone number"
+            placeholder={t('clients.forms.client.fields.phone')}
             className="input input-bordered w-full"
           />
         </div>
@@ -86,14 +88,14 @@ const ClientForm: React.FC<ClientFormProps> = ({
         {/* Company */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Company Name</span>
+            <span className="label-text">{t('clients.forms.client.fields.company')}</span>
           </label>
           <input
             type="text"
             name="company"
             value={formData.company}
             onChange={handleChange}
-            placeholder="Enter company name"
+            placeholder={t('clients.forms.client.fields.company')}
             className="input input-bordered w-full"
           />
         </div>
@@ -101,13 +103,13 @@ const ClientForm: React.FC<ClientFormProps> = ({
         {/* Address */}
         <div className="form-control w-full md:col-span-2">
           <label className="label">
-            <span className="label-text">Address</span>
+            <span className="label-text">{t('clients.forms.client.fields.address')}</span>
           </label>
           <textarea
             name="address"
             value={formData.address}
             onChange={handleChange}
-            placeholder="Enter address"
+            placeholder={t('clients.forms.client.fields.address')}
             className="textarea textarea-bordered w-full h-24"
           />
         </div>
@@ -120,7 +122,7 @@ const ClientForm: React.FC<ClientFormProps> = ({
           className="btn btn-ghost"
           disabled={isLoading}
         >
-          Cancel
+          {t('clients.forms.buttons.cancel')}
         </button>
         <button
           type="submit"
@@ -130,12 +132,12 @@ const ClientForm: React.FC<ClientFormProps> = ({
           {isLoading ? (
             <>
               <span className="loading loading-spinner"></span>
-              Saving...
+              {t('clients.forms.buttons.saving')}
             </>
           ) : (
             <>
               <Icon name="tickCircle" />
-              {client ? 'Update Client' : 'Add Client'}
+              {client ? t('clients.forms.buttons.update') : t('clients.forms.buttons.add')}
             </>
           )}
         </button>

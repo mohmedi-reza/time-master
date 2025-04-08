@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { startOfToday } from "date-fns";
 import Icon from "../../components/common/icon/icon.component";
 import CalendarGrid from "../../components/calendar/CalendarGrid";
@@ -6,6 +7,7 @@ import TaskList from "../../components/calendar/TaskList";
 import { Task } from "../../interfaces/calendar.interface";
 
 const CalenderPage: React.FC = () => {
+  const { t } = useTranslation();
   const today = startOfToday();
   const [selectedDate, setSelectedDate] = useState(today);
   
@@ -24,12 +26,14 @@ const CalenderPage: React.FC = () => {
     <div className="space-y-8 p-6 bg-gradient-to-br from-base-100 to-base-200 min-h-screen">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Calendar</h1>
-          <p className="text-gray-400 mt-2">Manage your schedule and tasks</p>
+          <h1 className="text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {t('calendar.overview.title')}
+          </h1>
+          <p className="text-gray-400 mt-2">{t('calendar.overview.subtitle')}</p>
         </div>
         <button className="btn btn-primary btn-lg gap-2 hover:scale-105 transition-transform">
           <Icon name="addSquare" className="text-xl" />
-          Add Event
+          {t('calendar.overview.addEvent')}
         </button>
       </div>
 
@@ -40,19 +44,19 @@ const CalenderPage: React.FC = () => {
             <div className="card-body p-8">
               <h2 className="text-2xl font-bold flex items-center gap-2">
                 <Icon name="calendar" className="text-primary text-2xl" />
-                Today's Overview
+                {t('calendar.today.title')}
               </h2>
               <div className="divider my-4"></div>
               
               <div className="space-y-6">
                 <TaskList
                   tasks={getTodaysTasks()}
-                  title="Today's Tasks"
+                  title={t('calendar.today.tasks.title')}
                   icon="taskSquare"
                 />
                 <TaskList
                   tasks={getCompletedTasks()}
-                  title="Completed"
+                  title={t('calendar.today.tasks.completed')}
                   icon="tickCircle"
                   iconColor="text-success"
                 />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "../common/icon/icon.component";
 
 interface Transaction {
@@ -11,6 +12,7 @@ interface Transaction {
 }
 
 const TransactionHistory: React.FC = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [dateRange, setDateRange] = useState("all");
@@ -28,13 +30,13 @@ const TransactionHistory: React.FC = () => {
           <div className="space-y-1">
             <h2 className="text-lg font-bold flex items-center gap-2">
               <Icon name="documentText" className="text-primary text-base" />
-              Transaction History
+              {t('financial.transactions.title')}
             </h2>
-            <p className="text-xs text-base-content/60">View and manage your transactions</p>
+            <p className="text-xs text-base-content/60">{t('financial.transactions.subtitle')}</p>
           </div>
           <button className="btn btn-primary btn-sm gap-2 hover:scale-105 transition-transform">
             <Icon name="documentDownload" className="text-base" />
-            Export
+            {t('financial.transactions.export')}
           </button>
         </div>
 
@@ -46,7 +48,7 @@ const TransactionHistory: React.FC = () => {
             </div>
             <input
               type="text"
-              placeholder="Search transactions..."
+              placeholder={t('financial.transactions.search.placeholder')}
               className="input input-sm join-item bg-transparent border-0 focus:outline-none w-full h-full text-sm"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -58,21 +60,21 @@ const TransactionHistory: React.FC = () => {
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
-              <option value="all">All Categories</option>
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>
-              <option value="subscription">Subscription</option>
+              <option value="all">{t('financial.transactions.filters.allCategories')}</option>
+              <option value="income">{t('financial.transactions.filters.income')}</option>
+              <option value="expense">{t('financial.transactions.filters.expense')}</option>
+              <option value="subscription">{t('financial.transactions.filters.subscription')}</option>
             </select>
             <select
               className="select h-10 bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-lg min-h-0 flex-1 text-sm"
               value={dateRange}
               onChange={(e) => setDateRange(e.target.value)}
             >
-              <option value="all">All Time</option>
-              <option value="today">Today</option>
-              <option value="week">This Week</option>
-              <option value="month">This Month</option>
-              <option value="year">This Year</option>
+              <option value="all">{t('financial.transactions.filters.allTime')}</option>
+              <option value="today">{t('financial.transactions.filters.today')}</option>
+              <option value="week">{t('financial.transactions.filters.thisWeek')}</option>
+              <option value="month">{t('financial.transactions.filters.thisMonth')}</option>
+              <option value="year">{t('financial.transactions.filters.thisYear')}</option>
             </select>
           </div>
         </div>
@@ -82,11 +84,11 @@ const TransactionHistory: React.FC = () => {
           <table className="table table-sm w-full">
             <thead>
               <tr>
-                <th className="bg-base-200/50 rounded-l-lg text-xs font-medium">Date</th>
-                <th className="bg-base-200/50 text-xs font-medium">Description</th>
-                <th className="bg-base-200/50 text-xs font-medium">Category</th>
-                <th className="bg-base-200/50 text-xs font-medium">Status</th>
-                <th className="bg-base-200/50 rounded-r-lg text-right text-xs font-medium">Amount</th>
+                <th className="bg-base-200/50 rounded-l-lg text-xs font-medium">{t('financial.transactions.table.date')}</th>
+                <th className="bg-base-200/50 text-xs font-medium">{t('financial.transactions.table.description')}</th>
+                <th className="bg-base-200/50 text-xs font-medium">{t('financial.transactions.table.category')}</th>
+                <th className="bg-base-200/50 text-xs font-medium">{t('financial.transactions.table.status')}</th>
+                <th className="bg-base-200/50 rounded-r-lg text-right text-xs font-medium">{t('financial.transactions.table.amount')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-accent/20 text-sm">
@@ -103,7 +105,7 @@ const TransactionHistory: React.FC = () => {
                         ? 'badge-success text-success-content' 
                         : 'badge-warning text-warning-content'
                     } badge-xs px-2`}>
-                      {payment.status}
+                      {t(`financial.transactions.status.${payment.status.toLowerCase()}`)}
                     </span>
                   </td>
                   <td className={`text-right font-bold text-sm ${
@@ -121,7 +123,7 @@ const TransactionHistory: React.FC = () => {
 
         {/* Pagination */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
-          <p className="text-xs text-base-content/60">Showing 1-3 of 24 transactions</p>
+          <p className="text-xs text-base-content/60">{t('financial.transactions.pagination.showing')}</p>
           <div className="join">
             <button className="join-item btn btn-xs hover:bg-primary/10 transition-colors">
               <Icon name="arrowLeft2" className="text-base text-primary" />
