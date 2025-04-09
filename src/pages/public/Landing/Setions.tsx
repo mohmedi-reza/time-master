@@ -9,9 +9,11 @@ import { mockTasks } from "../../../constants/mocks/mockTaskData";
 import { users } from "../../../constants/mocks/mockUsersData";
 import TaskList from "../../projects/TaskList";
 import EyeFollower from "./EyeFollower";
+import i18n from "i18next";
 
 const Sections = () => {
   const { t } = useTranslation();
+  const isRTL = i18n.language === "fa";
 
   // Define sections data
   const sectionsData = [
@@ -183,8 +185,17 @@ const Sections = () => {
     },
   ];
 
+  // If RTL, reverse the order of sections (except the first and last)
+  const orderedSections = isRTL 
+    ? [
+        sectionsData[0],
+        ...sectionsData.slice(1, -1).reverse(),
+        sectionsData[sectionsData.length - 1]
+      ]
+    : sectionsData;
+
   // Return sectionsData for use in parent component
-  return sectionsData;
+  return orderedSections;
 };
 
 export default Sections;

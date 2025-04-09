@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import i18n from "i18next";
 
 const EyeFollower: React.FC = () => {
   const leftPupilRef = useRef<SVGCircleElement>(null);
@@ -7,6 +8,7 @@ const EyeFollower: React.FC = () => {
   const animationFrameRef = useRef<number | null>(null);
   const leftTarget = useRef({ x: 49.24, y: 146.94 });
   const rightTarget = useRef({ x: 206.54, y: 146.94 });
+  const isRTL = i18n.language === "fa";
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -18,8 +20,13 @@ const EyeFollower: React.FC = () => {
       
       const scaleX = viewBox.width / rect.width;
       const scaleY = viewBox.height / rect.height;
-      const mouseX = (e.clientX - rect.left) * scaleX;
+      let mouseX = (e.clientX - rect.left) * scaleX;
       const mouseY = (e.clientY - rect.top) * scaleY;
+
+      // If RTL, mirror the mouse X position
+      if (isRTL) {
+        mouseX = viewBox.width - mouseX;
+      }
 
       // Left eye calculations
       const leftEyeX = 49.24;
@@ -78,7 +85,7 @@ const EyeFollower: React.FC = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
-  }, []);
+  }, [isRTL]);
 
   return (
     <div className="flex justify-center items-center min-h-[200px] sm:min-h-[250px] md:min-h-[300px] animate-fade-in w-full">
@@ -143,6 +150,22 @@ const EyeFollower: React.FC = () => {
           cy="120" 
           rx="9.65" 
           ry="8.36" 
+        />
+        
+        {/* Pupils - these will be animated */}
+        <circle 
+          ref={leftPupilRef} 
+          className="fill-black" 
+          cx="49.24" 
+          cy="146.94" 
+          r="12" 
+        />
+        <circle 
+          ref={rightPupilRef} 
+          className="fill-black" 
+          cx="206.54" 
+          cy="146.94" 
+          r="12" 
         />
       </svg>
     </div>

@@ -10,6 +10,7 @@ import DynamicTimeline from "./TimeLineStage";
 import { loginUser } from "../../../services/mock-services/LoginService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
+import i18n from "i18next";
 
 const LandingPage = () => {
   gsap.registerPlugin(ScrollTrigger);
@@ -18,6 +19,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const { setIsAuthenticated } = useAuth();
   const sectionsArray = sections();
+  const isRTL = i18n.language === "fa";
 
   // Refs
   const heroRef = useRef<HTMLDivElement>(null);
@@ -87,11 +89,14 @@ const LandingPage = () => {
       rotateAnimation.current.kill();
     }
 
+    // Adjust rotation based on RTL direction
+    const rtlFactor = isRTL ? -1 : 1;
+
     // Initial state
     gsap.set(mockupWindow, {
       rotateX: 20,
-      rotateZ: -20,
-      skewY: 8,
+      rotateZ: -20 * rtlFactor, // Flip the Z rotation for RTL
+      skewY: 8 * rtlFactor, // Flip the skew for RTL
       transformPerspective: 1000,
       immediateRender: true
     });
@@ -106,8 +111,8 @@ const LandingPage = () => {
 
     const createReverseRotationAnimation = (target: HTMLElement) => gsap.to(target, {
       rotateX: 20,
-      rotateZ: -20,
-      skewY: 8,
+      rotateZ: -20 * rtlFactor, // Flip the Z rotation for RTL
+      skewY: 8 * rtlFactor, // Flip the skew for RTL
       duration: 0.5,
       ease: "power2.in"
     });
@@ -191,7 +196,7 @@ const LandingPage = () => {
       rotateAnimation.current?.kill();
       [...sectionTriggers, section5Trigger, sponsorsTrigger].forEach(trigger => trigger.kill());
     };
-  }, [isScrollingUp, sectionsArray.length, isSection5End]);
+  }, [isScrollingUp, sectionsArray.length, isSection5End, isRTL]); // Add isRTL dependency
 
   // Height adjustment
   useEffect(() => {
@@ -210,6 +215,9 @@ const LandingPage = () => {
       willChange: 'transform, opacity'
     };
 
+    // For RTL, adjust positioning and animations
+    const rtlFactor = isRTL ? -1 : 1;
+
     if (isSection5End) {
       return {
         ...baseStyle,
@@ -227,7 +235,19 @@ const LandingPage = () => {
       pointerEvents: 'auto' as const,
       position: 'fixed' as const
     };
-  }, [isSection5End, isScrollingUp, scrollYProgress, scaleValue]);
+  }, [isSection5End, isScrollingUp, scrollYProgress, scaleValue, isRTL]); // Add isRTL dependency
+
+  // Determine the appropriate column order based on RTL
+  const columnOrder = isRTL ? "xl:flex-row-reverse" : "xl:flex-row";
+
+  // Determine RTL-aware positioning classes
+  const rightColumnPositionClass = isRTL 
+    ? "bottom-4 left-4 xl:-start-32" 
+    : "bottom-4 right-4 xl:-end-32";
+  
+  const mockupWindowPositionClass = isRTL
+    ? "xl:-start-20 xl:-ms-10 xl:rounded-s-none xl:ps-4 xl:shadow-[0.05rem_0.1rem_0rem_#00000014]"
+    : "xl:-end-20 xl:-me-10 xl:rounded-e-none xl:pe-4 xl:shadow-[-0.05rem_0.1rem_0rem_#00000014]";
 
   return (
     <div className="w-full">
@@ -259,7 +279,7 @@ const LandingPage = () => {
 
       <div
         ref={heroRef}
-        className="flex min-h-[500vh] max-w-8/10 mx-auto flex-col items-center justify-start xl:flex-row xl:items-start xl:justify-between overflow-auto"
+        className={`flex min-h-[500vh] max-w-8/10 mx-auto flex-col items-center justify-start ${columnOrder} xl:items-start xl:justify-between overflow-auto`}
       >
         {/* Left Column */}
         <div ref={leftColumnRef} className="shrink xl:w-1/2">
@@ -276,13 +296,12 @@ const LandingPage = () => {
         {/* Right Column */}
         <div
           ref={rightColumnRef}
-          className={`${isSection5End ? "relative" : "fixed"
-            } bottom-4 right-4 hidden xl:flex xl:w-1/2 shrink will-change-transform xl:visible xl:-end-32 xl:bottom-auto xl:top-16 xl:!transform-none xl:bg-transparent xl:pb-16 xl:pt-16`}
+          className={`${isSection5End ? "relative" : "fixed"} ${rightColumnPositionClass} hidden xl:flex xl:w-1/2 shrink will-change-transform xl:visible xl:bottom-auto xl:top-16 xl:!transform-none xl:bg-transparent xl:pb-16 xl:pt-16`}
           style={getRightColumnStyle()}
         >
           <div
             ref={mockupWindowRef}
-            className="mockup mockup-window rotate-x-3 bg-base-200/90 xl:bg-base-200 origin-top overflow-visible pb-4 backdrop-blur will-change-auto [--rtl-reverse:1] rtl:[--rtl-reverse:-1] max-[1279px]:![transform:translate3d(0,0,0)] xl:-end-20 xl:-me-10 xl:h-[32rem] xl:w-[50rem] xl:rounded-e-none xl:pe-4 xl:shadow-[-0.05rem_0.1rem_0rem_#00000014] xl:backdrop-blur-0"
+            className={`mockup mockup-window rotate-x-3 bg-base-200/90 xl:bg-base-200 origin-top overflow-visible pb-4 backdrop-blur will-change-auto [--rtl-reverse:1] rtl:[--rtl-reverse:-1] max-[1279px]:![transform:translate3d(0,0,0)] ${mockupWindowPositionClass} xl:h-[32rem] xl:w-[50rem] xl:backdrop-blur-0`}
           >
             <div className="overflow-y-auto" style={{ maxHeight: "30rem" }}>
               <div className="p-6">

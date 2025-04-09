@@ -19,13 +19,21 @@ const ProjectDetailsPage: React.FC = () => {
   return (
     <div className="p-6 space-y-8 min-h-screen bg-gradient-to-br from-base-100 to-base-200">
       <nav className="flex items-center gap-4 animate-fade-in">
-        <button className="btn btn-ghost btn-circle hover:bg-primary/10 transition-colors">
+        <button 
+          className="btn btn-ghost btn-circle hover:bg-primary/10 transition-colors" 
+          type="button"
+          title="Go back"
+        >
           <Icon name="arrowLeft" className="text-2xl text-primary" />
         </button>
         <h1 className="text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
           Project Details
         </h1>
-        <button className="btn btn-ghost btn-circle hover:bg-primary/10 transition-colors ms-auto">
+        <button 
+          className="btn btn-ghost btn-circle hover:bg-primary/10 transition-colors ms-auto" 
+          type="button"
+          title="More options"
+        >
           <Icon name="more" className="text-2xl text-primary" />
         </button>
       </nav>
@@ -99,6 +107,7 @@ const ProjectDetailsPage: React.FC = () => {
             <button
               key={tab}
               role="tab"
+              type="button"
               className={`tab text-lg transition-all duration-300 rounded-lg ${
                 activeTab === tab 
                 ? "tab-active bg-primary text-primary-content   font-medium" 

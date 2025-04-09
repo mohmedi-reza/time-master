@@ -63,3 +63,8 @@ button,input,option,select{
   --tw-space-x-reverse: 1;
 }
 
+/* Persian Font Class */
+.persian-font {
+  font-family: 'Yekan Bakh FaNum', sans-serif;
+}
+
