@@ -242,17 +242,17 @@ const LandingPage = () => {
               </span>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-row flex-nowrap items-center gap-2">
             <LanguageSwitcher />
 
             <button
-              className="btn btn-soft btn-warning rounded-lg"
+              className="btn btn-soft btn-warning rounded-lg btn-sm sm:btn-md"
               onClick={handleLiveDemo}
             >
               <span className="status status-error size-2 animate-ping"></span>
               {t("bookDemo")}
             </button>
-            <button className="btn btn-soft rounded-lg">{t("signIn")}</button>
+            <button className="btn btn-soft rounded-lg btn-sm sm:btn-md">{t("signIn")}</button>
           </div>
         </div>
       </div>
@@ -277,7 +277,7 @@ const LandingPage = () => {
         <div
           ref={rightColumnRef}
           className={`${isSection5End ? "relative" : "fixed"
-            } bottom-4 right-4 flex xl:w-1/2 shrink will-change-transform xl:visible xl:-end-32 xl:bottom-auto xl:top-16 xl:!transform-none xl:bg-transparent xl:pb-16 xl:pt-16`}
+            } bottom-4 right-4 hidden xl:flex xl:w-1/2 shrink will-change-transform xl:visible xl:-end-32 xl:bottom-auto xl:top-16 xl:!transform-none xl:bg-transparent xl:pb-16 xl:pt-16`}
           style={getRightColumnStyle()}
         >
           <div

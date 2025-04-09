@@ -13,11 +13,12 @@ import EyeFollower from "./EyeFollower";
 const Sections = () => {
   const { t } = useTranslation();
 
-  return [
+  // Define sections data
+  const sectionsData = [
     {
       id: 1,
       leftContent: (
-        <div>
+        <div className="flex flex-col items-center justify-center">
           <span className="text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none text-primary">
             <span className="font-black">
               {" "}
@@ -25,24 +26,26 @@ const Sections = () => {
               T<span className="opacity-25">i</span>me Master
             </span>
           </span>
-          <p className="py-6 text-2xl">{t('timeMasterDescription')}</p>
-          <div className="flex gap-2 mt-4">
+          <p className="py-6 text-lg md:text-xl">{t('timeMasterDescription')}</p>
+
+          <div className="flex flex-col items-center gap-2 mt-4">
             <div className="avatar">
               <div className="w-14 rounded-full">
                 <img src="reza-mohmedi.jpg" alt="Reza Mohmedi" />
               </div>
             </div>
-            <div>
-              <p className="font-semibold">Reza Mohmedi</p>
-              <p className="text-gray-500">{t('developer')}</p>
+            <div className="flex flex-col items-center gap-1">
+              <span className="font-semibold">Reza Mohmedi TEST</span>
+              <span className="text-gray-500">{t('developer')}</span>
             </div>
           </div>
-          <div className="mt-3 flex gap-3">
-            <button className="btn btn-primary">
+
+          <div className="mt-3 flex flex-wrap justify-center gap-3">
+            <button className="btn btn-primary btn-sm sm:btn-md">
               <Icon name="github" className="text-3xl" />
               {t('loginWithGithub')}
             </button>
-            <button className="btn btn-primary btn-outline">
+            <button className="btn btn-primary btn-outline btn-sm sm:btn-md">
               <Icon name="coffee" className="text-3xl" />
               {t('donateACoffee')}
             </button>
@@ -50,8 +53,8 @@ const Sections = () => {
         </div>
       ),
       rightContent: (
-        <div className="flex flex-col gap-2 -translate-32 z-50 scale-[0.8] absolute">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col items-center gap-4 p-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg">
             <div>
               <UserCard
                 key={users[0].name}
@@ -76,7 +79,9 @@ const Sections = () => {
               />
             </div>
           </div>
-          <TaskList key="task-list" tasks={mockTasks} />
+          <div className="w-full max-w-lg">
+            <TaskList key="task-list" tasks={mockTasks} />
+          </div>
         </div>
       ),
     },
@@ -84,13 +89,13 @@ const Sections = () => {
       id: 2,
       leftContent: (
         <div>
-          <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none">
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-light leading-none">
             {t('manageTeam')} <br />{" "}
             <span className="text-primary">
               <span className="font-black">{t('effectively')}</span>
             </span>
           </h2>
-          <p className="text-base-content/70 font-title py-4 font-light md:text-2xl">
+          <p className="text-base-content/70 font-title py-4 font-light text-lg md:text-xl">
             {t('manageTeamDescription')}
           </p>
         </div>
@@ -112,13 +117,13 @@ const Sections = () => {
       id: 3,
       leftContent: (
         <div>
-          <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none">
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-light leading-none">
             {t('collaborateWith')} <br />{" "}
             <span className="text-error">
               <span className="font-black">{t('groups')}</span>
             </span>
           </h2>
-          <p className="text-base-content/70 font-title py-4 font-light md:text-2xl">
+          <p className="text-base-content/70 font-title py-4 font-light text-lg md:text-xl">
             {t('collaborateDescription')}
           </p>
         </div>
@@ -139,13 +144,13 @@ const Sections = () => {
       id: 4,
       leftContent: (
         <div>
-          <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none">
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-light leading-none">
             {t('trackYour')} <br />{" "}
             <span className="text-success">
               <span className="font-black">{t('tasks')}</span>
             </span>
           </h2>
-          <p className="text-base-content/70 font-title py-4 font-light md:text-2xl">
+          <p className="text-base-content/70 font-title py-4 font-light text-lg md:text-xl">
             {t('trackTasksDescription')}
           </p>
         </div>
@@ -156,16 +161,16 @@ const Sections = () => {
       id: 5,
       leftContent: (
         <div>
-          <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-none">
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-light leading-none">
             {t('myVision')} <br />
             <span className="text-warning">
               <span className="font-black">{t('buildingPlatform')}</span>
             </span>
           </h2>
-          <p className="text-base-content/70 font-title py-4 font-light md:text-2xl">
+          <p className="text-base-content/70 font-title py-4 font-light text-lg md:text-xl">
             {t('visionDescription')}
           </p>
-          <p className="text-base-content/70 font-title py-2 font-light md:text-2xl">
+          <p className="text-base-content/70 font-title py-2 font-light text-lg md:text-xl">
             {t('visionSupport')}
           </p>
         </div>
@@ -177,6 +182,9 @@ const Sections = () => {
       ),
     },
   ];
+
+  // Return sectionsData for use in parent component
+  return sectionsData;
 };
 
 export default Sections;
