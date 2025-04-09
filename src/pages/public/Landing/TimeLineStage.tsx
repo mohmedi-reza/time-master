@@ -7,31 +7,24 @@ interface TimelineStage {
 }
 
 const timelineStages: TimelineStage[] = [
-  { name: "Web Application Front-End", funded: true, className: "bg-warning" },
+  { name: "Web App Front-End", funded: true, className: "bg-warning" },
   { name: "Backend API", funded: false, className: "bg-amber-50" },
-  { name: "Android & iOS", funded: false, className: "bg-amber-50" },
-  { name: "Windows", funded: false, className: "bg-amber-50" },
-  { name: "Extension", funded: false, className: "bg-amber-50" },
+  { name: "Android & iOS Apps", funded: false, className: "bg-amber-50" },
+  { name: "Windows App", funded: false, className: "bg-amber-50" },
+  { name: "Browser Extension", funded: false, className: "bg-amber-50" },
 ];
 
 const DynamicTimeline: React.FC = () => {
   return (
-    <ul className="timeline">
+    <ul className="timeline timeline-vertical lg:timeline-horizontal p-2 lg:justify-center">
       {timelineStages.map((stage, index) => (
         <li key={index}>
-          {/* Connector line before the icon */}
-          {index !== 0 && <hr className={timelineStages[index - 1].className} />}
+          {index !== 0 && <hr className={`${timelineStages[index - 1].funded ? timelineStages[index - 1].className : 'bg-gray-300'}`} />}
 
-          {/* Timeline content */}
-          {index % 2 === 0 ? (
-            <div className="timeline-start timeline-box">
-              <p className="text-center">{stage.name}</p>
-            </div>
-          ) : (
-            <div className="timeline-end timeline-box">{stage.name}</div>
-          )}
+          <div className={`timeline-${index % 2 === 0 ? 'start' : 'end'} ${index % 2 !== 0 ? 'lg:timeline-end' : 'lg:timeline-start'} timeline-box text-xs sm:text-sm`}>
+            <p className="text-center lg:text-start px-1">{stage.name}</p>
+          </div>
 
-          {/* Status icon */}
           <div className="timeline-middle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -47,8 +40,7 @@ const DynamicTimeline: React.FC = () => {
             </svg>
           </div>
 
-          {/* Connector line after the icon (except for the last item) */}
-          {index < timelineStages.length - 1 && <hr className={stage.className} />}
+          {index < timelineStages.length - 1 && <hr className={`${stage.funded ? stage.className : 'bg-gray-300'}`} />}
         </li>
       ))}
     </ul>
