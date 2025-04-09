@@ -81,13 +81,13 @@ const EyeFollower: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-[300px] animate-fade-in">
+    <div className="flex justify-center items-center min-h-[200px] sm:min-h-[250px] md:min-h-[300px] animate-fade-in w-full">
       <svg
         ref={svgRef}
         id="eyes"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 300 248.95"
-        className="w-[250px] h-auto overflow-visible hover:scale-105 transition-transform duration-300"
+        className="w-full max-w-[180px] sm:max-w-[220px] md:max-w-[250px] h-auto overflow-visible hover:scale-105 transition-transform duration-300"
       >
         {/* Left eye */}
         <ellipse
@@ -104,7 +104,6 @@ const EyeFollower: React.FC = () => {
           r="45.22" 
         />
         <circle
-          ref={leftPupilRef}
           className="fill-[#ff9900] drop-  transition-colors duration-300 hover:fill-[#ffad33]"
           cx="49.24"
           cy="146.94"
@@ -133,7 +132,6 @@ const EyeFollower: React.FC = () => {
           r="45.22" 
         />
         <circle
-          ref={rightPupilRef}
           className="fill-[#ff9900] drop-  transition-colors duration-300 hover:fill-[#ffad33]"
           cx="206.54"
           cy="146.94"
