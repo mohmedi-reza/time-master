@@ -34,9 +34,9 @@ const LanguageSwitcher = () => {
         <li>
           <a onClick={() => changeLanguage("en")}>{t("language.english")}</a>
         </li>
-        <li>
+        {/* <li>
           <a onClick={() => changeLanguage("fa")}>{t("language.persian")}</a>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
