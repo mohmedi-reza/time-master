@@ -42,18 +42,21 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
           </h2>
           <div className="join">
             <button 
+              title="Previous Month"
               className="join-item btn btn-sm hover:bg-primary/10 transition-colors"
               onClick={onPrevMonth}
             >
               <Icon name="arrowLeft2" className="text-lg text-primary" />
             </button>
             <button 
+              title="Today"
               className="join-item btn btn-sm btn-primary"
               onClick={onToday}
             >
               {t('calendar.grid.today')}
             </button>
             <button 
+              title="Next Month"
               className="join-item btn btn-sm hover:bg-primary/10 transition-colors"
               onClick={onNextMonth}
             >

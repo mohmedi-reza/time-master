@@ -2,7 +2,11 @@
 
 /* Theme Configuration */
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake, bumblebee, emerald, corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim, nord, sunset, caramellatte, abyss, silk;
+  themes: light --default, dark --prefersdark, cupcake, bumblebee, emerald,
+    corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest,
+    aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn,
+    business, acid, lemonade, night, coffee, winter, dim, nord, sunset,
+    caramellatte, abyss, silk;
 }
 
 * {
@@ -30,10 +34,21 @@ body {
   overflow: auto;
 }
 
-button,input,option,select{
+button,
+input,
+option,
+select {
   @apply rounded-xl;
 }
 
+input,
+select,
+details,
+summary,
+ul,
+li {
+  @apply rounded-lg outline-0;
+}
 /* RTL/LTR Support */
 .rtl {
   direction: rtl;
@@ -65,6 +80,5 @@ button,input,option,select{
 
 /* Persian Font Class */
 .persian-font {
-  font-family: 'Yekan Bakh FaNum', sans-serif;
+  font-family: "Yekan Bakh FaNum", sans-serif;
 }
-

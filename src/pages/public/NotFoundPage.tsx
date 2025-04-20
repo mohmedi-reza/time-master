@@ -13,10 +13,10 @@ const NotFoundPage = () => {
           </p>
         </div>
         <div className="flex items-center justify-center gap-3">
-          <button className="btn btn-soft btn-circle ">
+          <button title="Refresh" className="btn btn-soft btn-circle " type="button">
             <Icon name={"repeatCircle"} className="text-2xl" />
           </button>
-          <button className="btn btn-soft btn-circle ">
+          <button title="Back" className="btn btn-soft btn-circle ">
             <Icon name={"backSquare"} className="text-2xl" />
           </button>
         </div>

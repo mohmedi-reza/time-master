@@ -55,9 +55,15 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
           Tasks
         </h3>
         <div className="join bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl">
-          <button className="btn btn-ghost btn-sm join-item">All</button>
-          <button className="btn btn-ghost btn-sm join-item">Active</button>
-          <button className="btn btn-ghost btn-sm join-item">Completed</button>
+          <button title="All" className="btn btn-ghost btn-sm join-item">
+            All
+          </button>
+          <button title="Active" className="btn btn-ghost btn-sm join-item">
+            Active
+          </button>
+          <button title="Completed" className="btn btn-ghost btn-sm join-item">
+            Completed
+          </button>
         </div>
       </div>
 
@@ -75,14 +81,18 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                       <Icon name="square" className="text-xl text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-base-content">{task.title}</h4>
-                      <span className={`badge mt-1 ${
-                        task.status === "Pending"
-                          ? "badge-warning text-warning-content"
-                          : task.status === "In Progress"
-                          ? "badge-info text-info-content"
-                          : "badge-success text-success-content"
-                      }`}>
+                      <h4 className="font-medium text-base-content">
+                        {task.title}
+                      </h4>
+                      <span
+                        className={`badge mt-1 ${
+                          task.status === "Pending"
+                            ? "badge-warning text-warning-content"
+                            : task.status === "In Progress"
+                            ? "badge-info text-info-content"
+                            : "badge-success text-success-content"
+                        }`}
+                      >
                         {task.status}
                       </span>
                     </div>
@@ -114,7 +124,9 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                     }
 
                     return (
-                      <div className={`flex items-center gap-2 ${priorityColor}`}>
+                      <div
+                        className={`flex items-center gap-2 ${priorityColor}`}
+                      >
                         <div className={`p-2 rounded-lg ${bgColor}`}>
                           <Icon name={icon as IconName} className="text-base" />
                         </div>
@@ -140,7 +152,9 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                     {task.assignedUsers.length > 4 && (
                       <div className="avatar placeholder">
                         <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary">
-                          <span className="text-xs">+{task.assignedUsers.length - 4}</span>
+                          <span className="text-xs">
+                            +{task.assignedUsers.length - 4}
+                          </span>
                         </div>
                       </div>
                     )}
@@ -160,6 +174,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
 
                 <div className="flex items-center justify-end gap-2">
                   <button
+                    title={running[task.id] ? "Stop timer" : "Start timer"}
                     className={`btn btn-circle btn-ghost hover:bg-primary/10 transition-colors ${
                       running[task.id] ? "text-error" : "text-primary"
                     }`}
@@ -170,7 +185,10 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                       className="text-2xl"
                     />
                   </button>
-                  <button className="btn btn-circle btn-ghost hover:bg-primary/10 transition-colors">
+                  <button
+                    title="More options"
+                    className="btn btn-circle btn-ghost hover:bg-primary/10 transition-colors"
+                  >
                     <Icon name="more" className="text-2xl text-primary" />
                   </button>
                 </div>

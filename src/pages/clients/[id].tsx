@@ -309,6 +309,7 @@ const ClientDetailPage: React.FC = () => {
               <div className="flex flex-wrap items-center gap-2">
                 <div className="join space-x-2">
                   <select
+                    title="Select Project Status"
                     className="select select-sm select-bordered join-item w-[120px]"
                     value={projectFilter}
                     onChange={(e) => setProjectFilter(e.target.value)}
@@ -321,6 +322,7 @@ const ClientDetailPage: React.FC = () => {
                     <option value="cancelled">{t('clients.details.projects.filters.cancelled')}</option>
                   </select>
                   <select
+                    title="Select Project Sort"
                     className="select select-sm select-bordered join-item w-[120px]"
                     value={projectSort}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
@@ -465,6 +467,7 @@ const ClientDetailPage: React.FC = () => {
                     {selectedProject ? t('clients.forms.project.title.edit') : t('clients.forms.project.title.add')}
                   </h3>
                   <button
+                    title="Close"
                     className="btn btn-sm btn-circle btn-ghost"
                     onClick={() => {
                       setIsProjectModalOpen(false);
@@ -501,6 +504,7 @@ const ClientDetailPage: React.FC = () => {
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-2xl font-bold">{t('clients.forms.client.title.edit')}</h3>
                   <button
+                    title="Close"
                     className="btn btn-sm btn-circle btn-ghost"
                     onClick={() => setIsEditClientModalOpen(false)}
                   >

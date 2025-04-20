@@ -98,6 +98,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
             <span className="label-text">{t('clients.forms.project.fields.status')}*</span>
           </label>
           <select
+            title={t('clients.forms.project.fields.status')}
             name="status"
             value={formData.status}
             onChange={handleChange}
@@ -132,6 +133,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
             <span className="label-text">{t('clients.forms.project.fields.progress')}*</span>
           </label>
           <input
+            title={t('clients.forms.project.fields.progress')}
             type="number"
             name="progress"
             value={formData.progress}
@@ -149,6 +151,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
             <span className="label-text">{t('clients.forms.project.fields.totalAmount')}*</span>
           </label>
           <input
+            title={t('clients.forms.project.fields.totalAmount')}
             type="number"
             name="totalAmount"
             value={formData.totalAmount}
@@ -166,6 +169,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
             <span className="label-text">{t('clients.forms.project.fields.paidAmount')}*</span>
           </label>
           <input
+            title={t('clients.forms.project.fields.paidAmount')}
             type="number"
             name="paidAmount"
             value={formData.paidAmount}
@@ -184,6 +188,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
             <span className="label-text">{t('clients.forms.project.fields.remainingAmount')}</span>
           </label>
           <input
+            title={t('clients.forms.project.fields.remainingAmount')}
             type="number"
             value={formData.remainingAmount}
             className="input input-bordered w-full"
@@ -197,6 +202,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
             <span className="label-text">{t('clients.forms.project.fields.startDate')}*</span>
           </label>
           <input
+            title={t('clients.forms.project.fields.startDate')}
             type="date"
             name="startDate"
             value={formData.startDate}
@@ -211,7 +217,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
           <label className="label">
             <span className="label-text">{t('clients.forms.project.fields.endDate')}</span>
           </label>
-          <input
+          <input  
+            title={t('clients.forms.project.fields.endDate')}
             type="date"
             name="endDate"
             value={formData.endDate}

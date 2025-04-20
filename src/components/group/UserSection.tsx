@@ -56,6 +56,7 @@ const UserSection: React.FC<UserSectionProps> = ({
         </div>
 
         <select
+          title={t('group.filters.project.all')}
           className="select select-bordered bg-base-100/50 border-accent/20"
           value={selectedProject}
           onChange={onProjectChange}
@@ -69,6 +70,7 @@ const UserSection: React.FC<UserSectionProps> = ({
         </select>
 
         <select
+          title={t('group.filters.sort.all')}
           className="select select-bordered bg-base-100/50 border-accent/20"
           value={sortOrder}
           onChange={onSortChange}

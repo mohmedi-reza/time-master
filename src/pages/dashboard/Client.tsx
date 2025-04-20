@@ -35,6 +35,7 @@ const ClientPage: React.FC = () => {
             className="p-2 border-0 bg-gray-700/50 rounded-lg"
           />
           <select
+            title="Filter by project"
             value={userFilterProject}
             onChange={(e) => setUserFilterProject(e.target.value)}
             className="p-2 border-0 bg-gray-700/50 rounded-lg"
@@ -49,6 +50,7 @@ const ClientPage: React.FC = () => {
             )}
           </select>
           <select
+            title="Sort by hours"
             value={userSortOrder}
             onChange={(e) => setUserSortOrder(e.target.value as "asc" | "desc")}
             className="p-2 border-0 bg-gray-700/50 rounded-lg"

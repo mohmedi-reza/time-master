@@ -3,9 +3,11 @@ import { useTranslation } from "react-i18next";
 import SettingCard from "../../components/settings/SettingCard";
 import AboutSection from "../../components/settings/AboutSection";
 import { SettingSection, AboutInfo } from "../../interfaces/setting.interface";
+import { useNavigate } from "react-router-dom";
 
 const SettingPage: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   // Mock settings sections data
   const settingSections: SettingSection[] = [
@@ -25,6 +27,7 @@ const SettingPage: React.FC = () => {
         t('settings.sections.workspace.items.theme'),
         t('settings.sections.workspace.items.language'),
         t('settings.sections.workspace.items.timezone'),
+        t('settings.sections.workspace.items.management'),
       ],
     },
     {
@@ -58,7 +61,13 @@ const SettingPage: React.FC = () => {
   };
 
   const handleSettingItemClick = (item: string) => {
-    // TODO: Implement setting item click handler
+    // Handle workspace management navigation
+    if (item === t('settings.sections.workspace.items.management')) {
+      navigate('/me/setting/workspaces');
+      return;
+    }
+    
+    // TODO: Implement other setting item click handlers
     console.log("Setting item clicked:", item);
   };
 

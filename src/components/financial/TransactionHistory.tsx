@@ -56,6 +56,7 @@ const TransactionHistory: React.FC = () => {
           </div>
           <div className="flex gap-2 flex-1 md:flex-none">
             <select
+              title={t('financial.transactions.filters.category')}
               className="select h-10 bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-lg min-h-0 flex-1 text-sm"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
@@ -66,6 +67,7 @@ const TransactionHistory: React.FC = () => {
               <option value="subscription">{t('financial.transactions.filters.subscription')}</option>
             </select>
             <select
+              title={t('financial.transactions.filters.dateRange')}
               className="select h-10 bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-lg min-h-0 flex-1 text-sm"
               value={dateRange}
               onChange={(e) => setDateRange(e.target.value)}
@@ -125,13 +127,13 @@ const TransactionHistory: React.FC = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
           <p className="text-xs text-base-content/60">{t('financial.transactions.pagination.showing')}</p>
           <div className="join">
-            <button className="join-item btn btn-xs hover:bg-primary/10 transition-colors">
+            <button title="Previous" className="join-item btn btn-xs hover:bg-primary/10 transition-colors">
               <Icon name="arrowLeft2" className="text-base text-primary" />
             </button>
-            <button className="join-item btn btn-xs btn-primary">1</button>
-            <button className="join-item btn btn-xs hover:bg-primary/10 transition-colors">2</button>
-            <button className="join-item btn btn-xs hover:bg-primary/10 transition-colors">3</button>
-            <button className="join-item btn btn-xs hover:bg-primary/10 transition-colors">
+            <button title="1" className="join-item btn btn-xs btn-primary">1</button>
+            <button title="2" className="join-item btn btn-xs hover:bg-primary/10 transition-colors">2</button>
+            <button title="3" className="join-item btn btn-xs hover:bg-primary/10 transition-colors">3</button>
+            <button title="Next" className="join-item btn btn-xs hover:bg-primary/10 transition-colors">
               <Icon name="arrowRight2" className="text-base text-primary" />
             </button>
           </div>

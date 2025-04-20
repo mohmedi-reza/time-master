@@ -20,7 +20,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { sidebarItems as defaultSidebarItems } from "../../constants/sidebarItems";
 import Icon from "./icon/icon.component";
 import SidebarItem from "./SidebarItem";
-import { logoutUser } from "../../services/mock-services/LoginService";
+import { logout } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
 
@@ -47,13 +47,13 @@ const Sidebar: React.FC = () => {
       const parsedItems = JSON.parse(savedItems);
       setSidebarItems(parsedItems);
       
-      // Navigate to first item's path if we're at root path
-      if (location.pathname === '/') {
+      // Navigate to first item's path if we're at dashboard root
+      if (location.pathname === '/me' || location.pathname === '/me/') {
         navigate(parsedItems[0].path);
       }
     } else {
-      // If no saved items, navigate to first default item's path if at root
-      if (location.pathname === '/') {
+      // If no saved items, navigate to first default item's path if at dashboard root
+      if (location.pathname === '/me' || location.pathname === '/me/') {
         navigate(defaultSidebarItems[0].path);
       }
     }
@@ -98,9 +98,8 @@ const Sidebar: React.FC = () => {
   const activeItem = sidebarItems.find((item) => item.name === activeId);
 
   const handleLogout = () => {
-    logoutUser();
+    logout();
     setIsAuthenticated(false);
-    navigate("/");
   };
 
   return (

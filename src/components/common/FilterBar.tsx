@@ -37,6 +37,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
     </div>
     <div className="flex gap-2 flex-1 sm:flex-none h-10">
       <select
+        title={placeholder}
         value={filterProject}
         onChange={onFilterChange}
         className="select h-full bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl flex-1 min-h-0"
@@ -49,6 +50,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
         ))}
       </select>
       <select
+        title={placeholder}
         value={sortOrder}
         onChange={onSortChange}
         className="select h-full bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl flex-1 min-h-0"

@@ -20,6 +20,7 @@ const MultiSelect = () => {
   return (
     <div className="relative inline-block">
       <button 
+        title="Select Users"
         onClick={() => setIsOpen(!isOpen)} 
         className="btn btn-circle btn-ghost hover:bg-primary/10 transition-all duration-300"
       >

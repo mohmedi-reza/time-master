@@ -46,6 +46,7 @@ const GroupSection: React.FC<GroupSectionProps> = ({
             <Icon name="people" className="text-base-content/60" />
           </div>
           <input
+            title={t('group.groups.search')}
             type="text"
             placeholder={t('group.groups.search')}
             className="input join-item input-bordered flex-1 bg-base-100/50 border-accent/20"
@@ -55,6 +56,7 @@ const GroupSection: React.FC<GroupSectionProps> = ({
         </div>
 
         <select
+          title={t('group.filters.project.all')}
           className="select select-bordered bg-base-100/50 border-accent/20"
           value={selectedProject}
           onChange={onProjectChange}
@@ -68,6 +70,7 @@ const GroupSection: React.FC<GroupSectionProps> = ({
         </select>
 
         <select
+          title={t('group.filters.sort.all')}
           className="select select-bordered bg-base-100/50 border-accent/20"
           value={sortOrder}
           onChange={onSortChange}

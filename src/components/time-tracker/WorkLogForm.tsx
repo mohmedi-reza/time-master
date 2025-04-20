@@ -94,14 +94,14 @@ const WorkLogForm: React.FC = () => {
       </div>
 
       <div className="flex gap-2 w-full lg:w-auto">
-        <select className="select bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl w-full lg:w-auto">
+        <select title={t('timeTracker.workLog.form.project')} className="select bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl w-full lg:w-auto">
           {projects.map((p) => (
             <option key={p} value={p}>
               {p}
             </option>
           ))}
         </select>
-        <button className="btn btn-square btn-ghost hover:bg-primary/10 transition-colors">
+        <button title={t('timeTracker.workLog.form.addProject')} className="btn btn-square btn-ghost hover:bg-primary/10 transition-colors">
           <Icon name="addSquare" className="text-2xl text-primary" />
         </button>
       </div>
@@ -110,7 +110,7 @@ const WorkLogForm: React.FC = () => {
         <MultiSelect />
       </div>
 
-      <button className="btn btn-circle btn-ghost hover:bg-primary/10 transition-colors">
+      <button title={t('timeTracker.workLog.form.addProject')} className="btn btn-circle btn-ghost hover:bg-primary/10 transition-colors">
         <Icon name="dollarCircle" className="text-2xl text-primary" />
       </button>
 
@@ -124,6 +124,7 @@ const WorkLogForm: React.FC = () => {
             className="input join-item bg-transparent border-0 focus:outline-none w-full lg:w-32"
             value={startTime}
             onChange={handleStartTimeChange}
+            title={t('timeTracker.workLog.form.startTime')}
           />
         </div>
         <div className="join bg-base-100/50 backdrop-blur-sm border border-accent/20 rounded-xl">
@@ -135,6 +136,7 @@ const WorkLogForm: React.FC = () => {
             className="input join-item bg-transparent border-0 focus:outline-none w-full lg:w-32"
             value={endTime}
             onChange={handleEndTimeChange}
+            title={t('timeTracker.workLog.form.endTime')}
           />
         </div>
       </div>
@@ -144,6 +146,7 @@ const WorkLogForm: React.FC = () => {
           <Icon name="calendar" className="text-base-content/60" />
         </div>
         <input 
+          title={t('timeTracker.workLog.form.date')}
           type="date" 
           className="input join-item bg-transparent border-0 focus:outline-none w-full lg:w-auto" 
         />
@@ -155,6 +158,7 @@ const WorkLogForm: React.FC = () => {
         </div>
         {isDurationEditable ? (
           <input
+            title={t('timeTracker.workLog.form.duration')}
             type="text"
             className="input join-item bg-transparent border-0 focus:outline-none w-full lg:w-32"
             value={duration}

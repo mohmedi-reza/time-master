@@ -47,9 +47,13 @@ const LandingPage = () => {
     navigate("/me");
   }, [navigate, setIsAuthenticated]);
 
+  const handleSignIn = useCallback(() => {
+    navigate("/auth/login");
+  }, [navigate]);
+
   // Scroll handler with debounce
   useLayoutEffect(() => {
-    let timeoutId: number;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     const handleScroll = () => {
       if (timeoutId) clearTimeout(timeoutId);
@@ -272,7 +276,12 @@ const LandingPage = () => {
               <span className="status status-error size-2 animate-ping"></span>
               {t("bookDemo")}
             </button>
-            <button className="btn btn-soft rounded-lg btn-sm sm:btn-md">{t("signIn")}</button>
+            <button 
+              className="btn btn-soft rounded-lg btn-sm sm:btn-md"
+              onClick={handleSignIn}
+            >
+              {t("signIn")}
+            </button>
           </div>
         </div>
       </div>

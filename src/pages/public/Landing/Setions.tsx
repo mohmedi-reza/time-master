@@ -43,11 +43,11 @@ const Sections = () => {
           </div>
 
           <div className="mt-3 flex flex-wrap justify-center gap-3">
-            <button className="btn btn-primary btn-sm sm:btn-md">
+            <button className="btn btn-primary btn-sm sm:btn-md" disabled>
               <Icon name="github" className="text-3xl" />
               {t('loginWithGithub')}
             </button>
-            <button className="btn btn-primary btn-outline btn-sm sm:btn-md">
+            <button className="btn btn-primary btn-outline btn-sm sm:btn-md" disabled>
               <Icon name="coffee" className="text-3xl" />
               {t('donateACoffee')}
             </button>

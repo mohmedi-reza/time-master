@@ -32,6 +32,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
             <p className="text-base-content/60 text-xs mt-0.5">{category.description}</p>
           </div>
           <button
+            title="Delete category"
             className="btn btn-ghost btn-xs text-error hover:bg-error/10 hover:text-error transition-colors"
             onClick={() => onDeleteCategory(category.id)}
           >

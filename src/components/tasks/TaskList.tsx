@@ -30,26 +30,30 @@ const TaskList: React.FC<TaskListProps> = ({
           <div className="space-y-1">
             <h2 className="text-lg font-bold flex items-center gap-2">
               <Icon name="taskSquare" className="text-primary text-base" />
-              {t('tasks.list.title')}
+              {t("tasks.list.title")}
             </h2>
-            <p className="text-xs text-base-content/60">{t('tasks.list.subtitle')}</p>
+            <p className="text-xs text-base-content/60">
+              {t("tasks.list.subtitle")}
+            </p>
           </div>
           <div className="flex gap-2">
-            <button 
+            <button
+              type="button"
               className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300"
-              title={t('tasks.actions.filter')}
+              title={t("tasks.actions.filter")}
             >
               <Icon name="filter" className="text-base text-primary" />
             </button>
-            <button 
+            <button
+              type="button"
               className="btn btn-ghost btn-sm hover:bg-primary/10 transition-colors duration-300"
-              title={t('tasks.actions.sort')}
+              title={t("tasks.actions.sort")}
             >
               <Icon name="sort" className="text-base text-primary" />
             </button>
           </div>
         </div>
-        
+
         {/* Task List */}
         <div className="space-y-2">
           {tasks.map((task) => (
@@ -65,14 +69,16 @@ const TaskList: React.FC<TaskListProps> = ({
         {/* Pagination */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
           <p className="text-xs text-base-content/60">
-            {t('tasks.pagination.showing', {
+            {t("tasks.pagination.showing", {
               start: (currentPage - 1) * 4 + 1,
               end: Math.min(currentPage * 4, totalTasks),
-              total: totalTasks
+              total: totalTasks,
             })}
           </p>
           <div className="join">
-            <button 
+            <button
+              type="button"
+              title={t("tasks.pagination.previous")}
               className="join-item btn btn-xs hover:bg-primary/10 transition-colors"
               onClick={() => onPageChange(currentPage - 1)}
               disabled={currentPage === 1}
@@ -81,16 +87,24 @@ const TaskList: React.FC<TaskListProps> = ({
             </button>
             {[...Array(Math.ceil(totalTasks / 4))].map((_, index) => (
               <button
+                title={t("tasks.pagination.page", {
+                  page: index + 1,
+                })}
+                type="button"
                 key={index}
                 className={`join-item btn btn-xs ${
-                  currentPage === index + 1 ? 'btn-primary' : 'hover:bg-primary/10 transition-colors'
+                  currentPage === index + 1
+                    ? "btn-primary"
+                    : "hover:bg-primary/10 transition-colors"
                 }`}
                 onClick={() => onPageChange(index + 1)}
               >
                 {index + 1}
               </button>
             ))}
-            <button 
+            <button
+              type="button"
+              title={t("tasks.pagination.next")}
               className="join-item btn btn-xs hover:bg-primary/10 transition-colors"
               onClick={() => onPageChange(currentPage + 1)}
               disabled={currentPage === Math.ceil(totalTasks / 4)}
@@ -104,4 +118,4 @@ const TaskList: React.FC<TaskListProps> = ({
   );
 };
 
-export default TaskList; 
+export default TaskList;

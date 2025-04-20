@@ -6,15 +6,16 @@ import ErrorBoundary from "./ErrorBoundary";
 import ThemeSelector from "./toolbar/ThemeSelector";
 import LanguageSwitcher from "../../utils/LanguageSwitcher";
 import { Workspace, UserData } from "./toolbar/types";
-import { logoutUser } from "../../services/mock-services/LoginService";
+import { logout } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
+import { useUser } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 interface ToolbarProps {
   workspaces?: Workspace[];
   selectedWorkspace?: string;
-  onWorkspaceChange: (workspaceId: string) => void;
-  onAddWorkspace: () => void;
+  onWorkspaceChange?: (workspaceId: string) => void;
+  onAddWorkspace?: () => void;
   userData?: UserData;
   onProfileClick?: () => void;
   onSettingsClick?: () => void;
@@ -24,17 +25,19 @@ interface ToolbarProps {
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
-  workspaces,
-  selectedWorkspace,
-  onWorkspaceChange,
-  onAddWorkspace,
+  workspaces: externalWorkspaces,
+  selectedWorkspace: externalSelectedWorkspace,
+  onWorkspaceChange: externalOnWorkspaceChange,
+  onAddWorkspace: externalOnAddWorkspace,
   userData,
   onProfileClick,
   onSettingsClick,
   showMenuButton = false,
   onMenuClick,
-  isLoading = false,
+  isLoading: externalIsLoading = false,
 }) => {
+  const { activeWorkspace, workspaces: contextWorkspaces, setActiveWorkspace, refreshWorkspaces, clearWorkspaceCache } = useUser();
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [theme, setTheme] = useState<string>(() => {
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
@@ -46,6 +49,61 @@ const Toolbar: React.FC<ToolbarProps> = ({
   const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
 
+  // Determine if we're using external props or context values
+  const workspaces = externalWorkspaces || contextWorkspaces;
+  const selectedWorkspace = externalSelectedWorkspace || activeWorkspace?.id;
+  const isLoading = externalIsLoading || isRefreshing;
+  
+  // Debug logs
+  useEffect(() => {
+    console.log("Toolbar - External selected workspace:", externalSelectedWorkspace);
+    console.log("Toolbar - Context active workspace:", activeWorkspace?.id);
+    console.log("Toolbar - Final selected workspace:", selectedWorkspace);
+  }, [externalSelectedWorkspace, activeWorkspace, selectedWorkspace]);
+  
+  // Handle refresh workspaces
+  const handleRefreshWorkspaces = async () => {
+    setIsRefreshing(true);
+    try {
+      // Clear any cached workspace selection first
+      clearWorkspaceCache();
+      
+      // Then refresh the workspaces list
+      await refreshWorkspaces();
+      
+      console.log("Toolbar - Workspaces refreshed");
+    } finally {
+      setTimeout(() => setIsRefreshing(false), 500);
+    }
+  };
+  
+  // Handle workspace change
+  const handleWorkspaceChange = (workspaceId: string) => {
+    console.log("Toolbar - Changing workspace to:", workspaceId);
+    
+    if (externalOnWorkspaceChange) {
+      console.log("Toolbar - Using external handler");
+      externalOnWorkspaceChange(workspaceId);
+    } else {
+      console.log("Toolbar - Using context handler");
+      const workspace = workspaces.find(w => w.id === workspaceId);
+      if (workspace) {
+        setActiveWorkspace(workspace);
+      }
+    }
+  };
+  
+  // Handle add workspace
+  const handleAddWorkspace = () => {
+    console.log("Toolbar - Add workspace clicked");
+    if (externalOnAddWorkspace) {
+      externalOnAddWorkspace();
+    } else {
+      // Default behavior - you can customize this
+      navigate("/me/setting/workspaces");
+    }
+  };
+
   const handleThemeChange = (newTheme: string) => {
     document.documentElement.setAttribute("data-theme", newTheme);
     setTheme(newTheme);
@@ -53,7 +111,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
   };
 
   const handleLogout = () => {
-    logoutUser();
+    logout();
     setIsAuthenticated(false);
     navigate("/login");
   };
@@ -91,11 +149,24 @@ const Toolbar: React.FC<ToolbarProps> = ({
             <WorkspaceSelector
               workspaces={workspaces}
               selectedWorkspace={selectedWorkspace}
-              onWorkspaceChange={onWorkspaceChange}
-              onAddWorkspace={onAddWorkspace}
+              onWorkspaceChange={handleWorkspaceChange}
+              onAddWorkspace={handleAddWorkspace}
               isLoading={isLoading}
             />
           </ErrorBoundary>
+          
+          <button
+            type="button"
+            onClick={handleRefreshWorkspaces}
+            title="Refresh workspaces"
+            className="btn btn-ghost btn-sm btn-circle"
+            disabled={isRefreshing}
+          >
+            <Icon 
+              name="refresh" 
+              className={`text-primary text-lg ${isRefreshing ? 'animate-spin' : ''}`} 
+            />
+          </button>
         </div>
 
         <div className="flex items-center gap-4">

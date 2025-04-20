@@ -498,28 +498,29 @@
     }
   },
   "settings": {
+    "workspaceSettings": "Workspace Settings",
     "overview": {
       "title": "Settings",
-      "subtitle": "Customize your workspace preferences",
-      "description": "Manage your account settings and preferences"
+      "description": "Customize your workspace and account preferences"
     },
     "sections": {
       "account": {
-        "title": "Account Settings",
-        "description": "Manage your personal information and account security",
+        "title": "Account",
+        "description": "Manage your account settings",
         "items": {
           "profile": "Profile Information",
-          "security": "Password & Security",
+          "security": "Security & Password",
           "notifications": "Notifications"
         }
       },
       "workspace": {
         "title": "Workspace",
-        "description": "Customize your workspace appearance and preferences",
+        "description": "Customize your workspace environment",
         "items": {
-          "theme": "Theme",
-          "language": "Language",
-          "timezone": "Time Zone"
+          "theme": "Theme & Appearance",
+          "language": "Language & Region",
+          "timezone": "Time Zone",
+          "management": "Workspace Management"
         }
       },
       "integrations": {
@@ -609,6 +610,11 @@
     "optional": "Optional",
     "cancel": "Cancel",
     "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "create": "Create",
+    "all": "All",
+    "active": "Active",
     "colors": {
       "blue": "Blue",
       "purple": "Purple",
@@ -642,5 +648,40 @@
         "gitlab": "Manage your GitLab projects and merge requests"
       }
     }
+  },
+  "workspace": {
+    "management": "Manage your workspaces and team members",
+    "createWorkspace": "Create Workspace",
+    "editWorkspace": "Edit Workspace",
+    "createNew": "Create New Workspace",
+    "myWorkspaces": "My Workspaces",
+    "activeWorkspaces": "Active workspaces on your account",
+    "totalMembers": "Total Members",
+    "acrossAllWorkspaces": "Across all your workspaces",
+    "latestActivity": "Latest Activity",
+    "recentlyModified": "Most recently modified workspace",
+    "yourRole": "Your Role",
+    "manageAllWorkspaces": "You can manage all workspace settings",
+    "members": "Members",
+    "noMembers": "No members yet. Invite team members to collaborate.",
+    "noWorkspaces": "No workspaces yet. Create one to get started!",
+    "inviteMembers": "Invite Members",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "actions": "Actions",
+    "removeMember": "Remove Member",
+    "description": "Description",
+    "namePlaceholder": "Enter workspace name",
+    "descriptionPlaceholder": "Enter workspace description (optional)",
+    "emails": "Email Addresses",
+    "emailsPlaceholder": "Enter email addresses separated by commas",
+    "emailsHelp": "Separate multiple emails with commas",
+    "roleMember": "Member",
+    "roleAdmin": "Admin",
+    "invite": "Send Invitation",
+    "confirmDelete": "Confirm Delete",
+    "deleteWarning": "Are you sure you want to delete the workspace '{{name}}'? This action cannot be undone.",
+    "selectWorkspace": "Select a workspace to see details"
   }
 }

@@ -38,6 +38,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, title, icon, iconColor = "te
                     checked={task.completed}
                     onChange={() => {}}
                     className="checkbox checkbox-primary"
+                    title={task.title}
                   />
                   <span className={task.completed ? 'line-through text-base-content/60' : ''}>
                     {task.title}
